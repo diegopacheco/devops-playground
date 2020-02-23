@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+    
+  config.vm.provider "virtualbox"
+    
+  config.vm.provider "virtualbox" do |vb|
+  end
+
+  config.vm.box = "bento/ubuntu-16.04"
+  config.vm.network "private_network", ip: "55.55.1.1"
+  config.vm.synced_folder ".", "/home/vagrant/shared/"
+  
+  config.vm.provision "shell", inline: <<-SHELL    
+    
+    sudo apt-get update -y     
+    sudo apt-get install -y wget
+    sudo apt-get install -y curl
+    sudo apt-get install -y vim
+    sudo apt-get install -y git    
+    sudo apt-get install -y build-essential
+    sudo apt-get install -y unzip 
+
+    sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+    sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'	    
+    sudo apt-get install -y mysql-server mysql-client
+    sed -i "s/^bind-address/#bind-address/" /etc/mysql/my.cnf
+    mysql -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION; FLUSH PRIVILEGES;"    
+	
+  SHELL
+
+end

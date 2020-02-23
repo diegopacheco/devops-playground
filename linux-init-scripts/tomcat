@@ -1,0 +1,66 @@
+#!/bin/bash
+# chkconfig: 2345 95 20
+# description: This script does some stuff
+# processname: java
+
+start() {
+   echo "Starting tomcat..."
+   export JAVA_HOME=/home/ec2-user/jdk1.8.0_45
+   export JRE_HOME=/home/ec2-user/jdk1.8.0_45/jre
+   export PATH=$PATH:/home/ec2-user/jdk1.8.0_45/bin:/home/ec2-user/jdk1.8.0_45/jre/bin
+   export CATALINA_HOME=/home/ec2-user/apache-tomcat-8.0.35/
+
+   export ASG_NAME="asg_dynomite"
+   export EC2_REGION="us-west-2"
+   export AUTO_SCALE_GROUP="asg_dynomite"
+
+   cd /home/ec2-user/apache-tomcat-8.0.35/ && /home/ec2-user/apache-tomcat-8.0.35/bin/catalina.sh start &
+}
+
+stop() {
+   echo "stoping Tomcat... "
+   PID=`ps -ef | grep tomcat | awk '{print $2}' ORS=' ' | awk '{print $1}'`
+   if [[ "" !=  "$PID" ]]; then
+      echo "killing $PID"
+      sudo kill -9 $PID
+   fi
+}
+
+debug() {
+   
+   export JPDA_OPTS="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+
+   export JAVA_HOME=/home/ec2-user/jdk1.8.0_45
+   export JRE_HOME=/home/ec2-user/jdk1.8.0_45/jre
+   export PATH=$PATH:/home/ec2-user/jdk1.8.0_45/bin:/home/ec2-user/jdk1.8.0_45/jre/bin
+   export CATALINA_HOME=/home/ec2-user/apache-tomcat-8.0.35/
+
+   export ASG_NAME="asg_dynomite"
+   export AUTO_SCALE_GROUP="asg_dynomite"
+   export EC2_REGION="us-west-2"
+   
+   echo "Starting tomcat for Debug on: 8000"
+   cd /home/ec2-user/apache-tomcat-8.0.35/
+   bin/catalina.sh jpda start 
+
+}
+
+case "$1" in
+"start")
+  start
+;;
+"debug")
+  debug
+;;
+ "stop")
+  stop
+;;
+*)
+
+echo $"Usage: $0 {start|stop|debug}"
+RETVAL=1
+esac
+exit 0
+
+
+
