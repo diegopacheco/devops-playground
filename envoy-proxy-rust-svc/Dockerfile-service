@@ -1,0 +1,10 @@
+FROM diegopacheco/sum-rust:v1 as build
+
+FROM envoyproxy/envoy-alpine-dev:latest
+COPY --from=build /main /main
+ADD ./start_service.sh /usr/local/bin/start_service.sh
+ADD ./service-envoy.yaml /etc/service-envoy.yaml
+RUN chmod u+x /usr/local/bin/start_service.sh
+ENTRYPOINT /usr/local/bin/start_service.sh
+EXPOSE 3000
+ENTRYPOINT ["/usr/local/bin/start_service.sh"]
