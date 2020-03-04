@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "columns": 2,
+  "tiles": [
+    {
+      "type": "PING",
+      "label": "Localhost",
+      "params": { "hostname": "127.0.0.1" }
+    },
+    {
+      "type": "PORT",
+      "label": "Dev server",
+      "params": { "hostname": "127.0.0.1", "port": 8080 }
+    },
+    {
+       "type": "GITHUB-COUNT",
+       "label": "Monitoror open issues",
+       "params": {
+         "query": "is:issue is:open repo:diegopacheco/rust-playground"
+       }
+    },
+    {
+      "type": "GITHUB-CHECKS",
+      "params": {
+        "owner": "diegopacheco",
+        "repository": "diegopacheco",
+        "ref": "master"
+      }
+    }
+  ]
+}
+    
