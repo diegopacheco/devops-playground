@@ -1,0 +1,25 @@
+[1;37mFeature:[0m We should have a LB for our control plane and its components and as
+  such we should configure the proper security groups and listeners
+
+  [1;37mScenario:[0m we are using a single LB to route to all control plane components [30m# main.feature:4[0m
+    [32mGiven[0m [32mTerraform[0m                                                           [30m# terraform.go:76 -> *Match[0m
+    [32mAnd[0m [32ma "[0m[1;32maws_instance[0m[32m" of type "[0m[1;32mresource[0m[32m"[0m                                   [30m# terraform.go:242 -> *Match[0m
+    [32mThen[0m [32mattribute "[0m[1;32minstance_type[0m[32m" equals "[0m[1;32mm1.small[0m[32m"[0m                          [30m# terraform.go:351 -> *Match[0m
+    [32mAnd[0m [32mit occurs exactly [0m[1;32m1[0m[32m times[0m                                             [30m# terraform.go:489 -> *Match[0m
+
+  [1;37mScenario Outline:[0m Every component of the control plane which needs a LB [30m# main.feature:10[0m
+    [36mGiven[0m [36mTerraform[0m                                                       [30m# terraform.go:76 -> *Match[0m
+    [36mAnd[0m [36ma "aws_security_group" of type "resource"[0m                         [30m# terraform.go:242 -> *Match[0m
+    [36mAnd[0m [36m"our component is [0m[1;36m<component>[0m[36m"[0m                                    [30m# clarity_test.go:9 -> noopComment[0m
+    [36mWhen[0m [36mattribute "ingress" exists[0m                                       [30m# terraform.go:268 -> *Match[0m
+    [36mThen[0m [36mattribute "ingress" matches regex "from_port.*[0m[1;36m<port>[0m[36m"[0m            [30m# terraform.go:498 -> *Match[0m
+    [36mAnd[0m [36mattribute "ingress" matches regex "to_port.*[0m[1;36m<port>[0m[36m"[0m               [30m# terraform.go:498 -> *Match[0m
+
+    [1;37mExamples:[0m
+      | [36mport[0m | [36mcomponent[0m          |
+      | [32m22[0m   | [32maws_security_group[0m |
+      | [32m80[0m   | [32maws_security_group[0m |
+
+3 scenarios ([32m3 passed[0m)
+16 steps ([32m16 passed[0m)
+2.818515ms
