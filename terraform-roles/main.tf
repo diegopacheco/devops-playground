@@ -12,8 +12,8 @@ provider "aws" {
   }
 }
 
-resource "aws_iam_role" "ec2_role" {
-  name = "ec2_role"
+resource "aws_iam_role" "my_ec2_role" {
+  name = "my_ec2_role"
   assume_role_policy = <<-EOF
   {
     "Version": "2012-10-17",
@@ -35,9 +35,9 @@ resource "aws_iam_role" "ec2_role" {
   EOF
 }
 
-resource "aws_iam_role_policy" "policy" {
-  name = "policy"
-  role = "${aws_iam_role.ec2_role.id}"
+resource "aws_iam_role_policy" "my_policy" {
+  name = "my_policy"
+  role = "${aws_iam_role.my_ec2_role.id}"
   policy = <<-EOF
   {
     "Version": "2012-10-17",
@@ -68,8 +68,8 @@ resource "aws_iam_role_policy" "policy" {
 
 output "aws_iam_role_details" {
     value = [
-            "${aws_iam_role.ec2_role.id}",
-            "${aws_iam_role.ec2_role.create_date}",
-            "${aws_iam_role.ec2_role.arn}",
+            "${aws_iam_role.my_ec2_role.id}",
+            "${aws_iam_role.my_ec2_role.create_date}",
+            "${aws_iam_role.my_ec2_role.arn}",
            ]
 }
