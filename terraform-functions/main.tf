@@ -32,3 +32,6 @@ output "result-bigger" {
 output "RS-RN" {
   value = "${local.r_states}"
 }
+output "db_port" {
+  value = "${local.json_data.config.port}"
+}
