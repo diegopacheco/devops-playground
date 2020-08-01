@@ -1,8 +1,10 @@
 {
- "RS": "Porto Alegre",
- "SC": "Floripa",
- "SP": "Sao Paulo",
- "MG": "Minas",
+ "capitals": {
+  "RS": "Porto Alegre",
+  "SC": "Floripa",
+  "SP": "Sao Paulo",
+  "MG": "Minas"
+ },
  "config": {
     "db": "MySQL",
     "port": "3306",

@@ -1,8 +1,8 @@
 locals{
   json_data = jsondecode(file("${path.module}/data.json"))
-  rs_capital = upper(local.json_data.RS)
-  rj_capital = lookup(local.json_data, "RJ", "Rio de Janeiro")
-  encoded_poa = base64encode(local.json_data.RS)
+  rs_capital = upper(local.json_data.capitals.RS)
+  rj_capital = lookup(local.json_data.capitals, "RJ", "Rio de Janeiro")
+  encoded_poa = base64encode(local.json_data.capitals.RS)
 }
 
 output "json" {
@@ -15,5 +15,5 @@ output "rj-capital" {
   value = "${local.rj_capital}"
 }
 output "all-capitals" {
-  value = "${values(local.json_data)}"
+  value = "${values(local.json_data.capitals)}"
 }
