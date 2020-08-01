@@ -1,7 +1,11 @@
 locals{
-  json_data = jsondecode("{\"RS\": \"Porto Alegre\"}").RS
+  json_data = jsondecode(file("${path.module}/data.json"))
+  rs_capital = upper(local.json_data.RS)
 }
 
-output "result" {
+output "json" {
   value = "${local.json_data}"
+}
+output "rs-capital" {
+  value = "${local.rs_capital}"
 }
