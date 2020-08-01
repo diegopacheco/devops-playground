@@ -4,6 +4,7 @@ locals{
   rj_capital = lookup(local.json_data.capitals, "RJ", "Rio de Janeiro")
   encoded_poa = base64encode(local.json_data.capitals.RS)
   bbq_city = lookup(tomap(local.json_data.capitals),"RS","IDK")
+  bigger = max(10,20) > 10 ? "20 is bigger" : "10 is bigger"
 }
 
 output "json" {
@@ -23,4 +24,7 @@ output "BBQ-city-is" {
 }
 output "password" {
   value = "Your password = secret = ${sha256("secret")}"
+}
+output "result-bigger" {
+  value = "${local.bigger}"
 }
