@@ -19,5 +19,8 @@ output "all-capitals" {
   value = "${values(local.json_data.capitals)}"
 }
 output "BBQ-city-is" {
-  value = "${local.bbq_city}"
+  value = "City is: ${local.bbq_city} date/time is: ${timestamp()}"
+}
+output "password" {
+  value = "Your password = secret = ${sha256("secret")}"
 }
