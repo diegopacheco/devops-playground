@@ -1,5 +1,11 @@
 {
  "RS": "Porto Alegre",
  "SC": "Floripa",
- "SP": "Sao Paulo"
+ "SP": "Sao Paulo",
+ "MG": "Minas",
+ "config": {
+    "db": "MySQL",
+    "port": "3306",
+    "schema": "users"
+ }
 }
