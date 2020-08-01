@@ -3,6 +3,7 @@ locals{
   rs_capital = upper(local.json_data.capitals.RS)
   rj_capital = lookup(local.json_data.capitals, "RJ", "Rio de Janeiro")
   encoded_poa = base64encode(local.json_data.capitals.RS)
+  bbq_city = lookup(tomap(local.json_data.capitals),"RS","IDK")
 }
 
 output "json" {
@@ -16,4 +17,7 @@ output "rj-capital" {
 }
 output "all-capitals" {
   value = "${values(local.json_data.capitals)}"
+}
+output "BBQ-city-is" {
+  value = "${local.bbq_city}"
 }
