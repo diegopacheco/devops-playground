@@ -3,7 +3,9 @@
   "RS": "Porto Alegre",
   "SC": "Floripa",
   "SP": "Sao Paulo",
-  "MG": "Minas"
+  "MG": "Minas",
+  "PR": "Curitiba",
+  "RN": "Natal"
  },
  "config": {
     "db": "MySQL",
