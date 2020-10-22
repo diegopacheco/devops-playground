@@ -1,16 +1,16 @@
  
 provider "aws" {
   region = "us-west-2"
+
+  # In order to Mock with localstack
   access_key = "0"
   secret_key = "0"
   skip_credentials_validation = true
   skip_requesting_account_id = true
   skip_metadata_api_check = true
   s3_force_path_style = true
-  # In order to Mock with localstack
   endpoints {
-    iam = "http://localhost:4566"
-    elasticache = "http://localhost:51492"
+    elasticache = "http://localhost:4566"
   }
 }
 
