@@ -1,0 +1,22 @@
+{
+ "capitals": {
+  "RS": "Porto Alegre",
+  "SC": "Floripa",
+  "SP": "Sao Paulo",
+  "MG": "Minas",
+  "PR": "Curitiba",
+  "RN": "Natal"
+ },
+ "worst_cities": {
+    "RS": "Porto Alegre",
+    "SP": "Sao Paulo",
+    "MG": "Minas",
+    "PR": "Curitiba",
+    "RN": "Natal"
+  },
+ "config": {
+    "db": "MySQL",
+    "port": "3306",
+    "schema": "users"
+ }
+}
