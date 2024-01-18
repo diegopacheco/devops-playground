@@ -76,6 +76,17 @@ mysql>
 * Cross Join
 * Full Join
 
+INNER JOINs are used to fetch only common matching records. The INNER JOIN clause allows retrieving only those records from Table A and Table B, that meet the join condition. It is the most widely used type of JOIN.
+
+LEFT OUTER JOINs allow retrieving all records from Table A, along with those records from Table B for which the join condition is met. For the records from Table A that do not match the condition, the NULL values are displayed.
+
+RIGHT OUTER JOINs allow retrieving all records from Table B, along with those records from Table A for which the join condition is met. For the records from Table B that do not match the condition, the NULL values are displayed.
+
+CROSS JOIN, also known as a cartesian join, retrieves all combinations of rows from each table. In this type of JOIN, the result set is returned by multiplying each row of table A with all rows in table B if no additional condition is introduced.
+
+Unlike SQL Server, MySQL does not support FULL OUTER JOIN as a separate JOIN type. However, to get the results same to FULL OUTER JOIN, you can combine LEFT OUTER JOIN and RIGHT OUTER JOIN.
+
+
 There is a folder `joins` with sh scripts where you can run in the console. i.e
 ```bash
 ❯ ./inner_join.sh
