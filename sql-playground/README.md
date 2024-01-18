@@ -120,6 +120,10 @@ ON u.auid = p.auid;
 2 rows in set, 1 warning (0,00 sec)
 ```
 
+## MySQL Query Execution Path
+
+<img src="images/mysql-query-executioin-path.png" width="400" heigth="400" ></img>
+
 ## ERROR: docker cgroups cgroup mountpoint does not exist unknown
 
 Just run the fix script.
