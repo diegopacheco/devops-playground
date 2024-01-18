@@ -97,3 +97,32 @@ auid    username        password        createdate      isActive        apid    
 1       admin   pswrd123        2024-01-18 00:00:00     1       1       1       Jack    Wolf    bettestroom@gmail.com   600075764216
 1       admin   pswrd123        2024-01-18 00:00:00     1       1       1       Jack    Wolf    bettestroom@gmail.com   600075764216
 ```
+
+## How to know the cost of a query?
+
+EXPLAIN.
+```bash
+EXPLAIN SELECT 
+    u.*,
+    p.*
+FROM 
+    users u
+INNER JOIN userprofile p
+ON u.auid = p.auid;
+```
+```
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | SIMPLE      | u     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    8 |   100.00 | NULL                                               |
+|  1 | SIMPLE      | p     | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    8 |    12.50 | Using where; Using join buffer (Block Nested Loop) |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+2 rows in set, 1 warning (0,00 sec)
+```
+
+## ERROR: docker cgroups cgroup mountpoint does not exist unknown
+
+Just run the fix script.
+```bash
+./fix-docker-cgroups_cgroup_mountpoint_does_not_exist_unknown.sh
+```
