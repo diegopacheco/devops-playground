@@ -124,6 +124,10 @@ ON u.auid = p.auid;
 
 <img src="images/mysql-query-executioin-path.png" width="400" heigth="400" ></img>
 
+## Recipies
+
+In this folder there are common recipes in sql. Like how todo a sub-query.
+
 ## ERROR: docker cgroups cgroup mountpoint does not exist unknown
 
 Just run the fix script.
