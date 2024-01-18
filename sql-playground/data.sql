@@ -1,3 +1,5 @@
+USE sql_playground;
+
 Insert into users (auid, username,password, createdate, isActive)
 values (1,'admin','pswrd123', curdate(), 1);
 

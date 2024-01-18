@@ -1,3 +1,5 @@
+USE sql_playground;
+
 CREATE TABLE `users` (
   `auid` int(10) UNSIGNED NOT NULL,
   `username` varchar(100) NOT NULL,
