@@ -1,5 +1,7 @@
 #!/bin/bash
 
+tiv ../images/inner-join.png
+
 echo "
 USE sql_playground;
 
