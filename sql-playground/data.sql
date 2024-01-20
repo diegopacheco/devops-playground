@@ -24,3 +24,5 @@ values (6, 'lexus1267','98hnfRT6', curdate(), 1);
 Insert into userprofile (apid, auid, firstname, lastname, email, phone)
 values (7, 7, 'Ivan', 'Levchenko', 'ivan_new@outlook.com','878511311054');
 
+Insert into user_json (auid, json, lastname)
+values (1,'[{"name":"Knut", "dept":"Engineering"},{"name":"Catalin","dept":"Engineering"}]', 'Wolf');

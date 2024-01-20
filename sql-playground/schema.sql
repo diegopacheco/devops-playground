@@ -17,3 +17,10 @@ CREATE TABLE `userprofile` (
   `email` varchar(100) NOT NULL,
   `phone` varchar(45) NOT NULL
 );
+
+CREATE TABLE `user_json` (
+  `auid` int(10) UNSIGNED NOT NULL,
+  `json` varchar(250) NOT NULL,
+  `lastname` varchar(50) NOT NULL
+);
+
