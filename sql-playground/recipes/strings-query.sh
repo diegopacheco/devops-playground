@@ -1,5 +1,7 @@
 #/bin/bash
 
+export MYSQL_PWD=pass;
+
 echo "
 USE sql_playground;
 
@@ -8,4 +10,4 @@ SELECT
 FROM 
     userprofile    
 limit 100;" | \
-mysql -uroot -ppass -h127.0.0.1 -P3325
+mysql -uroot -h127.0.0.1 -P3325

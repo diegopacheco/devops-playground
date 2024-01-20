@@ -1,5 +1,7 @@
 #/bin/bash
 
+export MYSQL_PWD=pass;
+
 echo "
 USE sql_playground;
 
@@ -14,4 +16,4 @@ WHERE
             userprofile
         WHERE
             email like 'b%');" | \
-mysql -uroot -ppass -h127.0.0.1 -P3325
+mysql -uroot -h127.0.0.1 -P3325
