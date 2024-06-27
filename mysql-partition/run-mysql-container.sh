@@ -11,14 +11,15 @@ echo "CREATE DATABASE person;" | mysql -uroot -ppass -h127.0.0.1 -P3325
 sleep 3
 echo "Creating person table with paritioning... "
 echo "use person; CREATE TABLE IF NOT EXISTS person (
-          id INT,
-          first_name VARCHAR(255) NOT NULL,
-          last_name VARCHAR(255) NOT NULL,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          created_year int,
-          PRIMARY KEY(first_name),
-          UNIQUE KEY(id,created_year)
-      ) PARTITION BY HASH(created_year);" | mysql -uroot -ppass -h127.0.0.1 -P3325
+    id INT AUTO_INCREMENT,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_year INT,
+    PRIMARY KEY(id),
+    UNIQUE KEY unique_name(first_name, last_name),
+    KEY(created_year)
+) PARTITION BY HASH(created_year);" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
 echo "use person; select * from  person" | mysql -uroot -ppass -h127.0.0.1 -P3325
 

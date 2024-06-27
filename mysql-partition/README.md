@@ -79,3 +79,20 @@ mysql> CREATE TABLE IF NOT EXISTS person (
 Query OK, 0 rows affected (0,03 sec)
 mysql> 
 ```
+
+Does not use parition - use indexing.
+```
+mysql> CREATE TABLE IF NOT EXISTS person (
+    ->     id INT AUTO_INCREMENT,
+    ->     first_name VARCHAR(255) NOT NULL,
+    ->     last_name VARCHAR(255) NOT NULL,
+    ->     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     created_year INT,
+    ->     PRIMARY KEY(id),
+    ->     UNIQUE KEY unique_name(first_name, last_name),
+    ->     KEY(created_year)
+    -> );
+Query OK, 0 rows affected (0,04 sec)
+
+mysql> 
+```
