@@ -30,4 +30,6 @@ echo "use person; insert into person (first_name,last_name,created_year) values 
 
 echo "use person; select * from  person" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
+echo "use person; SHOW CREATE TABLE person;" | mysql -uroot -ppass -h127.0.0.1 -P3325
+
 echo "DONE."
