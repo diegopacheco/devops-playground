@@ -175,3 +175,34 @@ Query OK, 0 rows affected (0,04 sec)
 
 mysql> 
 ```
+
+Works. Guarantee Uniqueness and has partitions.
+```
+mysql> CREATE TABLE IF NOT EXISTS person (
+    ->       id INT,
+    ->       first_name VARCHAR(255) NOT NULL,
+    ->       last_name VARCHAR(255) NOT NULL,
+    ->       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->       created_year INT,
+    ->       PRIMARY KEY(first_name,last_name)
+    ->     ) PARTITION BY KEY() 
+    ->     PARTITIONS 10;
+Query OK, 0 rows affected (0,19 sec)
+
+mysql> insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202406);
+Query OK, 1 row affected (0,01 sec)
+
+mysql> insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202406);
+ERROR 1062 (23000): Duplicate entry 'Diego-Pacheco' for key 'PRIMARY'
+mysql> insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202407);
+ERROR 1062 (23000): Duplicate entry 'Diego-Pacheco' for key 'PRIMARY'
+mysql> select * from person;
++------+------------+-----------+---------------------+--------------+
+| id   | first_name | last_name | created_at          | created_year |
++------+------------+-----------+---------------------+--------------+
+| NULL | Diego      | Pacheco   | 2024-06-27 08:43:10 |       202406 |
++------+------------+-----------+---------------------+--------------+
+1 row in set (0,00 sec)
+
+mysql> 
+```
