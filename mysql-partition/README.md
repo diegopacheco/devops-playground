@@ -42,6 +42,73 @@ ERROR 1503 (HY000): A PRIMARY KEY must include all columns in the table's partit
 mysql>
 ```
 
+```
+mysql> CREATE TABLE person (
+    ->     id INT AUTO_INCREMENT,
+    ->     first_name VARCHAR(255) NOT NULL,
+    ->     last_name VARCHAR(255) NOT NULL,
+    ->     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     created_year INT,
+    ->     PRIMARY KEY(id)
+    -> ) PARTITION BY RANGE (created_year) (
+    ->     PARTITION p2020 VALUES LESS THAN (2021),
+    ->     PARTITION p2021 VALUES LESS THAN (2022),
+    ->     PARTITION p2022 VALUES LESS THAN (2023),
+    ->     PARTITION p2023 VALUES LESS THAN (2024)
+    -> );
+ERROR 1503 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
+mysql> 
+```
+
+```
+mysql> CREATE TABLE person (
+    ->     id INT AUTO_INCREMENT,
+    ->     first_name VARCHAR(255) NOT NULL,
+    ->     last_name VARCHAR(255) NOT NULL,
+    ->     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     created_year INT,
+    ->     PRIMARY KEY(id)
+    -> ) PARTITION BY LIST (created_year) (
+    ->     PARTITION p2020 VALUES IN (2020),
+    ->     PARTITION p2021 VALUES IN (2021),
+    ->     PARTITION p2022 VALUES IN (2022)
+    -> );
+ERROR 1503 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
+mysql> 
+```
+
+```
+mysql> CREATE TABLE person (
+    ->     id INT AUTO_INCREMENT,
+    ->     first_name VARCHAR(255) NOT NULL,
+    ->     last_name VARCHAR(255) NOT NULL,
+    ->     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     birth_month INT,
+    ->     birth_year INT,
+    ->     PRIMARY KEY(id)
+    -> ) PARTITION BY RANGE COLUMNS(birth_year, birth_month) (
+    ->     PARTITION p_before_2000 VALUES LESS THAN (2000, 1),
+    ->     PARTITION p_2000s VALUES LESS THAN (2010, 1),
+    ->     PARTITION p_2010s VALUES LESS THAN (2020, 1),
+    ->     PARTITION p_2020s VALUES LESS THAN (2030, 1)
+    -> );
+ERROR 1503 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
+mysql> 
+```
+
+```
+mysql> CREATE TABLE person (
+    ->     id INT AUTO_INCREMENT,
+    ->     first_name VARCHAR(255) NOT NULL,
+    ->     last_name VARCHAR(255) NOT NULL,
+    ->     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->     created_year INT,
+    ->     PRIMARY KEY(id)
+    -> ) PARTITION BY LINEAR HASH (created_year) PARTITIONS 4;
+ERROR 1503 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
+mysql> 
+```
+
 Partition works but it breaks unique key constraint
 ```
 mysql> CREATE TABLE IF NOT EXISTS person (
@@ -78,6 +145,7 @@ mysql>
 
 ### Works (valid)
 
+Allow duplicates across partitions.
 ```
 mysql> CREATE TABLE IF NOT EXISTS person (
     ->           id INT AUTO_INCREMENT,
@@ -91,7 +159,7 @@ Query OK, 0 rows affected (0,03 sec)
 mysql> 
 ```
 
-Does not use parition - use indexing.
+Does not use parition - use indexing. No Duplicates.
 ```
 mysql> CREATE TABLE IF NOT EXISTS person (
     ->     id INT AUTO_INCREMENT,
