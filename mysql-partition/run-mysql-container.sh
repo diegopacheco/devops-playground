@@ -16,7 +16,8 @@ echo "use person; CREATE TABLE IF NOT EXISTS person (
           last_name VARCHAR(255) NOT NULL,
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           created_year int,
-          PRIMARY KEY(first_name,created_year)
+          PRIMARY KEY(first_name),
+          UNIQUE KEY(id,created_year)
       ) PARTITION BY HASH(created_year);" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
 echo "use person; select * from  person" | mysql -uroot -ppass -h127.0.0.1 -P3325
