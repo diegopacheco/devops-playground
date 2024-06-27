@@ -32,4 +32,6 @@ echo "use person; select * from  person" | mysql -uroot -ppass -h127.0.0.1 -P332
 
 echo "use person; SHOW CREATE TABLE person;" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
+echo "use person; EXPLAIN select * from person;" | mysql -uroot -ppass -h127.0.0.1 -P3325
+
 echo "DONE."
