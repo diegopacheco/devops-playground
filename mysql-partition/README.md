@@ -3,6 +3,17 @@
 ./run-mysql-container.sh
 ```
 
+### Partition Options
+
+**RANGE Partitioning**: This partitions data based on a specified range. It is useful when you want to partition data into groups based on specific intervals of a column's values, such as date ranges or numeric intervals.
+
+**LIST Partitioning**: Similar to RANGE partitioning, but instead of ranges, specific values are used to define partitions. It's useful for categorizing rows into partitions where each partition is defined by one or more specific values.
+
+**COLUMNS Partitioning**: This is an extension of RANGE and LIST partitioning that allows partitioning based on multiple columns. It's useful when partitioning needs to be done based on a combination of column values.
+
+**LINEAR HASH and LINEAR KEY Partitioning**: These are variations of HASH and KEY partitioning that distribute rows using a linear hashing algorithm. They are designed to spread data more evenly across partitions.
+
+
 ### Errors (invalid)
 
 ```
