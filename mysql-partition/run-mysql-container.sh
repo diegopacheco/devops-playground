@@ -4,7 +4,7 @@ docker run --rm -d -e MYSQL_ROOT_PASSWORD=pass -p 3325:3306 --name mysql_test my
 echo "Connect to mysql client: "
 echo "mysql -uroot -ppass -h127.0.0.1 -P3325"
 
-sleep 10
+sleep 15
 echo "Creating person db... "
 echo "CREATE DATABASE person;" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
@@ -21,12 +21,13 @@ echo "use person; CREATE TABLE IF NOT EXISTS person (
       KEY(created_year)
     );" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
+sleep 3
 echo "use person; select * from  person" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
 echo "Inserting data into person table... "
-echo "insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202406);" | mysql -uroot -ppass -h127.0.0.1 -P3325
-echo "insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202406);" | mysql -uroot -ppass -h127.0.0.1 -P3325
-echo "insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202407);" | mysql -uroot -ppass -h127.0.0.1 -P3325
+echo "use person; insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202406);" | mysql -uroot -ppass -h127.0.0.1 -P3325
+echo "use person; insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202406);" | mysql -uroot -ppass -h127.0.0.1 -P3325
+echo "use person; insert into person (first_name,last_name,created_year) values ('Diego','Pacheco',202407);" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
 echo "use person; select * from  person" | mysql -uroot -ppass -h127.0.0.1 -P3325
 
