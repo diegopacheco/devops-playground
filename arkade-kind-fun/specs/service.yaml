@@ -1,0 +1,40 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  containers:
+  - name: app
+    image: hashicorp/http-echo:0.2.3
+    args:
+    - "-text=Hello World! This is a Baeldung Kubernetes with kind App"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service
+spec:
+  selector:
+    app: app
+  ports:
+  # Default port used by the image
+  - port: 5678
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/api"
+        backend:
+          service:
+            name: service
+            port:
+              number: 5678
+---
