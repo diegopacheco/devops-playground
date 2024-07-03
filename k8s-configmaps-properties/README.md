@@ -9,6 +9,6 @@ kind create cluster
 
 ### Play with ConfigMaps and properties
 ```
-kubectl apply -f configmap.yaml
-kubectl apply -f pod.yaml
+kubectl apply -f specs/config.yaml
+kubectl apply -f specs/pod.yaml
 ```
