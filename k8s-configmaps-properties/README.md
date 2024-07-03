@@ -41,3 +41,8 @@ metadata:
   resourceVersion: "512"
   uid: 7e70c9f2-be6c-464f-829b-3f6c81c4f9d7
 ```
+```
+❯ kubectl get po
+NAME                 READY   STATUS    RESTARTS   AGE
+configmap-demo-pod   1/1     Running   0          5s
+```
