@@ -16,5 +16,8 @@ kind create cluster
 ### Using K8s Cluster
 ```bash
 kind get clusters
+docker ps
+kubectl get nodes
+kubectl cluster-info --context kind-kind
 
 ```
