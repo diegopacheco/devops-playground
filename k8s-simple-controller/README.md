@@ -56,3 +56,11 @@ go run ./cmd/main.go
 NAME       READY   STATUS    RESTARTS   AGE   LABELS
 my-nginx   1/1     Running   0          49s   run=my-nginx
 ```
+```
+kubectl annotate pod my-nginx diegopacheco.github.com/add-pod-name-label=true
+```
+```
+❯ kubectl get pod my-nginx --show-labels
+NAME       READY   STATUS    RESTARTS   AGE     LABELS
+my-nginx   1/1     Running   0          2m26s   diegopacheco.github.com/pod-name=my-nginx,run=my-nginx
+```
