@@ -23,7 +23,19 @@ kubectl cluster-info dump --context kind-kind
 kind delete cluster --name kind-kind
 ```
 
-Create Ingress Controller
+Make sure nothing is running on port 80
+```bash
+sudo lsof -i :80
+```
+
+Create/Deploy Ingress Controller
 ```
 kind create cluster --config specs/ingress-controller.yaml
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+```
+
+Check containers
+```bash
+kubectl get all -n ingress-nginx
 ```
