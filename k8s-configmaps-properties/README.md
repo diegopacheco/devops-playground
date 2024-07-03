@@ -46,3 +46,24 @@ metadata:
 NAME                 READY   STATUS    RESTARTS   AGE
 configmap-demo-pod   1/1     Running   0          5s
 ```
+
+ssh to pod
+```
+kubectl exec -it pod/configmap-demo-pod /bin/sh
+```
+```
+/ # ls
+bin           dev           home          media         opt           product_name  root          sbin          sys           usr
+config        etc           lib           mnt           proc          product_uuid  run           srv           tmp           var
+/ # cd config/
+/config # ls
+game.properties            user-interface.properties
+/config # cat game.properties 
+enemy.types=aliens,monsters
+player.maximum-lives=5    
+/config # cat user-interface.properties 
+color.good=purple
+color.bad=yellow
+allow.textmode=true    
+/config # 
+```
