@@ -32,6 +32,11 @@ type PodReconciler struct {
 	Scheme *runtime.Scheme
 }
 
+const (
+	addPodNameLabelAnnotation = "diegopacheco.github.com/add-pod-name-label"
+	podNameLabel              = "diegopacheco.github.com/pod-name"
+)
+
 //+kubebuilder:rbac:groups=core,resources=pods,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=core,resources=pods/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=core,resources=pods/finalizers,verbs=update
@@ -47,8 +52,18 @@ type PodReconciler struct {
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.16.3/pkg/reconcile
 func (r *PodReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
+	log := log.Log.WithValues("pod", req.NamespacedName)
 
 	// TODO(user): your logic here
+
+	/*
+	   Step 0: Fetch the Pod from the Kubernetes API.
+	*/
+	var pod corev1.Pod
+	if err := r.Get(ctx, req.NamespacedName, &pod); err != nil {
+		log.Error(err, "unable to fetch Pod")
+		return ctrl.Result{}, err
+	}
 
 	return ctrl.Result{}, nil
 }
