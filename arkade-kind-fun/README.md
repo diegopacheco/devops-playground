@@ -19,5 +19,11 @@ kind get clusters
 docker ps
 kubectl get nodes
 kubectl cluster-info --context kind-kind
+kubectl cluster-info dump --context kind-kind
+kind delete cluster --name kind-kind
+```
 
+Create Ingress Controller
+```
+kind create cluster --config specs/ingress-controller.yaml
 ```
