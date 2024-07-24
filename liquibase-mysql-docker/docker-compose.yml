@@ -14,6 +14,7 @@ services:
     image: liquibase/liquibase
     volumes:
       - ./scripts:/liquibase/changelog
+      - ./drivers:/liquibase/lib
     depends_on:
       - mysql
     command: ["--defaultsFile=/liquibase/changelog/liquibase.properties", "update"]
