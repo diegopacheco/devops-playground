@@ -22,7 +22,7 @@ services:
       - ./driver:/liquibase/lib/
     depends_on:
       - mysql
-    command: /bin/sh -c "ls -la /liquibase/changelog && sleep 7 && liquibase --classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar --defaultsFile=/liquibase/changelog/liquibase.properties --searchPath=/liquibase/changelog/ --changeLogFile=/liquibase/changelog/changelog-master.xml update"
+    command: /bin/sh -c "sleep 3 && liquibase --classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar --defaultsFile=/liquibase/changelog/liquibase.properties --searchPath=/liquibase/changelog/ --changeLogFile=changelog-master.xml update"
 
 volumes:
   mysql-data: {}
