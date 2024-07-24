@@ -15,6 +15,6 @@
             <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP" />
         </createTable>
     </changeSet>
-    <include file="/liquibase/changelog/create-table-products.sql" relativeToChangelogFile="true"/>
-    <include file="/liquibase/changelog/scripts/insert-products-data.sql" relativeToChangelogFile="true"/>
+    <include file="create-table-products.sql" relativeToChangelogFile="true"/>
+    <include file="insert-products-data.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
