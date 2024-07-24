@@ -15,4 +15,5 @@
             <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP" />
         </createTable>
     </changeSet>
+    <includeAll path="/liquibase/changelog/" relativeToChangelogFile="true"/>
 </databaseChangeLog>
