@@ -24,8 +24,8 @@ services:
       - mysql
     command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", 
               "--defaultsFile=/liquibase/changelog/liquibase.properties", 
-              "--changeLogFile=/liquibase/changelog/changelog-master.xml", 
               "--searchPath=/liquibase/changelog/",
+              "--changeLogFile=/liquibase/changelog/changelog-master.xml", 
               "update"]
 
 volumes:
