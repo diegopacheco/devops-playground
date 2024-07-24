@@ -3,10 +3,8 @@ services:
   mysql:
     image: 'mysql:latest'
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
     volumes:
@@ -18,12 +16,7 @@ services:
       - ./scripts:/liquibase/changelog
     depends_on:
       - mysql
-    environment:
-      LIQUIBASE_URL: jdbc:mysql://mysql/db
-      LIQUIBASE_USERNAME: root
-      LIQUIBASE_PASSWORD: root
-      LIQUIBASE_CHANGELOG: /liquibase/changelog/changelog-master.xml
-    command: ["update"]
+    command: ["--defaultsFile=/liquibase/changelog/liquibase.properties", "update"]
 
 volumes:
   mysql-data: {}
