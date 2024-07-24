@@ -19,11 +19,11 @@ services:
     image: liquibase/liquibase
     volumes:
       - ./changelog:/liquibase/changelog
-      - ./scripts:/liquibase/changelog
+      - ./scripts:/liquibase/scripts
       - ./driver:/liquibase/lib
     depends_on:
       - mysql
-    command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", "--defaultsFile=/liquibase/changelog/liquibase.properties", "update"]
+    command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", "--defaultsFile=/liquibase/scripts/liquibase.properties", "--changeLogFile=/liquibase/changelog/changelog.xml", "update"]
 
 volumes:
   mysql-data: {}
