@@ -12,7 +12,7 @@
                 <constraints nullable="false" />
             </column>
             <column name="description" type="text" />
-            <column name="created_at" type="timestamp" defaultValue="CURRENT_TIMESTAMP" />
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP" />
         </createTable>
     </changeSet>
 </databaseChangeLog>
