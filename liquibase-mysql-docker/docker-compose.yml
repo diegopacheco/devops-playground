@@ -22,7 +22,11 @@ services:
       - ./driver:/liquibase/lib/
     depends_on:
       - mysql
-    command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", "--defaultsFile=/liquibase/changelog/liquibase.properties", "--changeLogFile=/liquibase/changelog/changelog-master.xml", "update"]
+    command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", 
+              "--defaultsFile=/liquibase/changelog/liquibase.properties", 
+              "--changeLogFile=/liquibase/changelog/changelog-master.xml", 
+              "--searchPath=/liquibase/changelog/",
+              "update"]
 
 volumes:
   mysql-data: {}
