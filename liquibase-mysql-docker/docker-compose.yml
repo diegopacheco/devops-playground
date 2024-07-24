@@ -13,6 +13,7 @@ services:
   liquibase:
     image: liquibase/liquibase
     volumes:
+      - ./changelog:/liquibase/changelog
       - ./scripts:/liquibase/changelog
       - ./driver:/liquibase/lib
     depends_on:
