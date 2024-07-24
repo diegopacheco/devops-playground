@@ -9,6 +9,11 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
 
   liquibase:
     image: liquibase/liquibase
@@ -18,7 +23,7 @@ services:
       - ./driver:/liquibase/lib
     depends_on:
       - mysql
-    command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", "--defaultsFile=/liquibase/changelog/liquibase.properties", "update"]
+    command: ["/wait-for-it.sh", "mysql:3306", "--", "--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", "--defaultsFile=/liquibase/changelog/liquibase.properties", "update"]
 
 volumes:
   mysql-data: {}
