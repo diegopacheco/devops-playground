@@ -22,7 +22,8 @@ services:
       - ./driver:/liquibase/lib/
     depends_on:
       - mysql
-    command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", 
+    command: ["/bin/sh -c 'sleep 5'",
+              "--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", 
               "--defaultsFile=/liquibase/changelog/liquibase.properties", 
               "--searchPath=/liquibase/changelog/",
               "--changeLogFile=/liquibase/changelog/changelog-master.xml", 
