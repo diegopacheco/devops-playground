@@ -14,7 +14,7 @@ services:
     image: liquibase/liquibase
     volumes:
       - ./scripts:/liquibase/changelog
-      - ./drivers:/liquibase/lib
+      - ./driver:/liquibase/lib
     depends_on:
       - mysql
     command: ["--classpath=/liquibase/lib/mysql-connector-j-9.0.0.jar", "--defaultsFile=/liquibase/changelog/liquibase.properties", "update"]
