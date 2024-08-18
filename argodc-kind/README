@@ -1,0 +1,127 @@
+### Commands Step by Step
+
+1. Create Kind k8s cluster
+```
+kind create cluster --name cluster --config kind-config.yaml
+
+kubectl cluster-info --context kind-cluster
+```
+
+2. Install ArgoCD
+
+```
+kubectl create namespace argocd
+
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+brew install argocd
+
+kubectl get all -n argocd
+```
+```
+NAME                                                   READY   STATUS    RESTARTS   AGE
+pod/argocd-application-controller-0                    1/1     Running   0          2m41s
+pod/argocd-applicationset-controller-c66b59c7b-jjmtx   1/1     Running   0          2m41s
+pod/argocd-dex-server-6584f99d8b-8ls8g                 1/1     Running   0          2m41s
+pod/argocd-notifications-controller-6f7bdc5db6-4hsg4   1/1     Running   0          2m41s
+pod/argocd-redis-5ccbfd788-885sh                       1/1     Running   0          2m41s
+pod/argocd-repo-server-7b6654b6f-vwhvv                 1/1     Running   0          2m41s
+pod/argocd-server-65965c75-z4c25                       1/1     Running   0          2m41s
+
+NAME                                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+service/argocd-applicationset-controller          ClusterIP   10.96.53.190    <none>        7000/TCP,8080/TCP            2m41s
+service/argocd-dex-server                         ClusterIP   10.96.73.87     <none>        5556/TCP,5557/TCP,5558/TCP   2m41s
+service/argocd-metrics                            ClusterIP   10.96.209.181   <none>        8082/TCP                     2m41s
+service/argocd-notifications-controller-metrics   ClusterIP   10.96.24.119    <none>        9001/TCP                     2m41s
+service/argocd-redis                              ClusterIP   10.96.86.142    <none>        6379/TCP                     2m41s
+service/argocd-repo-server                        ClusterIP   10.96.71.70     <none>        8081/TCP,8084/TCP            2m41s
+service/argocd-server                             ClusterIP   10.96.243.202   <none>        80/TCP,443/TCP               2m41s
+service/argocd-server-metrics                     ClusterIP   10.96.188.180   <none>        8083/TCP                     2m41s
+
+NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/argocd-applicationset-controller   1/1     1            1           2m41s
+deployment.apps/argocd-dex-server                  1/1     1            1           2m41s
+deployment.apps/argocd-notifications-controller    1/1     1            1           2m41s
+deployment.apps/argocd-redis                       1/1     1            1           2m41s
+deployment.apps/argocd-repo-server                 1/1     1            1           2m41s
+deployment.apps/argocd-server                      1/1     1            1           2m41s
+
+NAME                                                         DESIRED   CURRENT   READY   AGE
+replicaset.apps/argocd-applicationset-controller-c66b59c7b   1         1         1       2m41s
+replicaset.apps/argocd-dex-server-6584f99d8b                 1         1         1       2m41s
+replicaset.apps/argocd-notifications-controller-6f7bdc5db6   1         1         1       2m41s
+replicaset.apps/argocd-redis-5ccbfd788                       1         1         1       2m41s
+replicaset.apps/argocd-repo-server-7b6654b6f                 1         1         1       2m41s
+replicaset.apps/argocd-server-65965c75                       1         1         1       2m41s
+
+NAME                                             READY   AGE
+statefulset.apps/argocd-application-controller   1/1     2m41s
+
+```
+
+
+3. Access the UI
+
+```
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+in a new terminal
+```
+argocd admin initial-password -n argocd
+```
+argo will tell you the password.
+
+open http://localhost:8080/
+
+4. Deploy app (not working - using ui)
+
+```
+kubectl config set-context --current --namespace=argocd
+
+ARGO_PASS=$(argocd admin initial-password -n argocd | awk 'NR==1 {print $1}')
+echo "${ARGO_PASS}"
+
+argocd login localhost:8080 --skip-test-tls --grpc-web
+
+argocd login localhost:8080 --skip-test-tls --grpc-web --username admin --password $ARGO_PASS
+
+argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default
+```
+
+4.1 Deploy on UI
+
+Step 1 <br/>
+<img src="images/deploy-step-1.png" width="50%" >
+
+Step 2 <br/>
+<img src="images/deploy-step-2.png" width="50%" >
+
+Step 3 <br/>
+<img src="images/deploy-step-3.png" width="50%" >
+
+5. Open the deploy app on the browser
+
+```
+kubectl port-forward service/guestbook-ui -n default 3000:80
+
+open http://localhost:3000
+```
+
+repository with apps for testing: https://github.com/argoproj/argocd-example-apps/
+
+### Results
+
+After login on argocd ui (http://localhost:8080/)
+
+<img src="images/argocd-ui.png" width="50%" >
+
+After deploying an new app via ui 
+
+<img src="images/argo-app-deployed.png" width="50%" >
+
+Deployed App UI
+
+<img src="images/argo-deployed-app-ui.png" width="50%" >
