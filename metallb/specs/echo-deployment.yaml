@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echo
+  template:
+    metadata:
+      labels:
+        app: echo
+    spec:
+      containers:
+      - name: echo-container
+        image: ealen/echo-server:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "4"
+            memory: "256Mi"
+          requests:
+            cpu: "4"
+            memory: "256Mi"
