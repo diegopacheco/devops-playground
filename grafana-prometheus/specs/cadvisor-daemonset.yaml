@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: cadvisor
-  namespace: monitoring
 spec:
   selector:
     matchLabels:
