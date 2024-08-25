@@ -11,6 +11,8 @@
 target/*
 *.class
 target/
+target
+target/**
 
 # Crash log files
 crash.log
