@@ -2,7 +2,7 @@
 
 docker ps
 
-docker start $(docker ps -a -q --filter "name=kind-grafana")
+docker start $(docker ps -a -q --filter "name=grafana")
 
 docker ps
 
