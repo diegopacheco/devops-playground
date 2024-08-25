@@ -1,6 +1,7 @@
 #!/bin/bash
 
-kind load docker-image sb3-netty:latest
+kubectl cluster-info --context kind-grafana
+kind load docker-image sb3-netty:latest --name grafana
 
 kubectl apply -f specs/sb3-netty-deployment.yaml --force
 kubectl apply -f specs/sb3-netty-service.yaml --force
