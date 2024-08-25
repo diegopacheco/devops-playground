@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -p 8080:8080 app:latest
+docker run -p 8080:8080 sb3-netty:latest

@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-boot-app
+  name: sb3-netty-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-boot-app
+      app: sb3-netty-app
   template:
     metadata:
       labels:
-        app: spring-boot-app
+        app: sb3-netty-app
     spec:
       containers:
-        - name: spring-boot-app
-          image: app:latest
+        - name: sb3-netty-app
+          image: sb3-netty:latest
           imagePullPolicy: IfNotPresent # to avoid pulling the image from the registry
           ports:
             - containerPort: 8080
           env:
             - name: TAG
-              value: "spring-boot-webflux-3x"
+              value: "sb3-netty-app"
           resources:
             limits:
               memory: "4096Mi"

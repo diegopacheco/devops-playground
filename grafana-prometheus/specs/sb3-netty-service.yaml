@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-boot-service
+  name: sb3-netty-service
 spec:
   selector:
-    app: spring-boot-app
+    app: sb3-netty-app
   ports:
     - protocol: TCP
       port: 8080
