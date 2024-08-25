@@ -14,7 +14,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: cadvisor
-          image: google/cadvisor:v0.39.0
+          image: gcr.io/cadvisor/cadvisor:v0.46.0
           imagePullPolicy: IfNotPresent
           args:
             - --logtostderr
@@ -32,6 +32,15 @@ spec:
             - name: docker
               mountPath: /var/lib/docker
               readOnly: true
+            - name: cgroup
+              mountPath: /sys/fs/cgroup
+              readOnly: true
+            - name: dev-disk
+              mountPath: /dev/disk
+              readOnly: true
+            - name: proc
+              mountPath: /proc
+              readOnly: true
       volumes:
         - name: sys
           hostPath:
@@ -42,3 +51,12 @@ spec:
         - name: docker
           hostPath:
             path: /var/lib/docker
+        - name: cgroup
+          hostPath:
+            path: /sys/fs/cgroup
+        - name: dev-disk
+          hostPath:
+            path: /dev/disk
+        - name: proc
+          hostPath:
+            path: /proc
