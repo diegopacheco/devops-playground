@@ -8,6 +8,9 @@
 .clj-kondo/*
 .lsp/*
 
+target/*
+*.class
+
 # Crash log files
 crash.log
 
