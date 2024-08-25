@@ -2,6 +2,6 @@
 
 docker ps
 
-docker stop $(docker ps -q --filter "name=kind-grafana")
+docker stop $(docker ps -q --filter "name=grafana")
 
 docker ps
