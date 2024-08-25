@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: prometheus-config
+  name: prometheus-config-sb
 data:
   prometheus.yml: |
     global:
