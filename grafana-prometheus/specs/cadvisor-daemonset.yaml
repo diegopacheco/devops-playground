@@ -11,9 +11,34 @@ spec:
       labels:
         app: cadvisor
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: cadvisor
-          image: google/cadvisor:latest
+          image: google/cadvisor:v0.39.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - --logtostderr
+            - --v=4
           ports:
             - containerPort: 8080
               name: metrics
+          volumeMounts:
+            - name: sys
+              mountPath: /sys
+              readOnly: true
+            - name: var-run
+              mountPath: /var/run
+              readOnly: true
+            - name: docker
+              mountPath: /var/lib/docker
+              readOnly: true
+      volumes:
+        - name: sys
+          hostPath:
+            path: /sys
+        - name: var-run
+          hostPath:
+            path: /var/run
+        - name: docker
+          hostPath:
+            path: /var/lib/docker
