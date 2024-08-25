@@ -16,4 +16,3 @@ kubectl apply -f specs/cadvisor-daemonset.yaml --force
 kubectl apply -f specs/prometheus-deployment.yaml --force
 kubectl apply -f specs/prometheus-service.yaml --force
 kubectl apply -f specs/prometheus-sb-configmap.yaml --force
-kubectl apply -f specs/prometheus-ne-configmap.yaml --force
