@@ -7,7 +7,6 @@ data:
     global:
       scrape_interval: 2s
     scrape_configs:
-      - job_name: 'sb3-netty-app'
-        metrics_path: '/actuator/prometheus'
+      - job_name: 'node-exporter'
         static_configs:
-          - targets: ['sb3-netty-service:8080']
+          - targets: ['node-exporter-service:9100']
