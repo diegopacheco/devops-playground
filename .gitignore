@@ -5,6 +5,9 @@
 *.tfstate
 *.tfstate.*
 
+.clj-kondo/*
+.lsp/*
+
 # Crash log files
 crash.log
 
