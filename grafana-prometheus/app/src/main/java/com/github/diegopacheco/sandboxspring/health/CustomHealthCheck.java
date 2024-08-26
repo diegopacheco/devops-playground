@@ -4,6 +4,8 @@ import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class CustomHealthCheck extends AbstractHealthIndicator {
 
@@ -11,10 +13,18 @@ public class CustomHealthCheck extends AbstractHealthIndicator {
 
     @Override
     protected void doHealthCheck(Health.Builder bldr) throws Exception {
+        long start = System.currentTimeMillis();
+        String id = UUID.randomUUID().toString();
         if (running) {
-            bldr.up();
+            long end = System.currentTimeMillis();
+            bldr.up()
+                    .withDetail("ID",id)
+                    .withDetail("time", end - start);
         } else {
-            bldr.down();
+            long end = System.currentTimeMillis();
+            bldr.down()
+                    .withDetail("ID",id)
+                    .withDetail("time", end - start);
         }
     }
 
