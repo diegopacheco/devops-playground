@@ -61,3 +61,39 @@ docker context use colima
 colima
 Current context is now "colima"
 ```
+
+Run with docker
+```bash
+docker run --rm grycap/cowsay
+```
+
+```
+❯ docker run --rm grycap/cowsay
+ _______________________________________
+/ Last night the power went out. Good   \
+| thing my camera had a flash.... The   |
+| neighbors thought it was lightning in |
+| my house, so they called the cops.    |
+|                                       |
+\ -- Steven Wright                      /
+ ---------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+```
+
+### Stop Colima
+
+```bash
+colima stop
+```
+```
+❯ colima stop
+INFO[0000] stopping colima                              
+INFO[0000] stopping ...                                  context=docker
+INFO[0001] stopping ...                                  context=vm
+INFO[0002] done                                         
+```
