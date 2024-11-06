@@ -39,6 +39,7 @@ INFO[0000] socket: unix:///home/diego/.colima/default/docker.sock
 
 ### Use with docker
 
+List docker contexts
 ```bash
 docker context list
 ```
@@ -49,4 +50,14 @@ docker context list
 NAME       DESCRIPTION                               DOCKER ENDPOINT                                  ERROR
 colima *   colima                                    unix:///home/diego/.colima/default/docker.sock   
 default    Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   
+```
+
+Switch to Colima
+```bash
+docker context use colima
+```
+```
+❯ docker context use colima
+colima
+Current context is now "colima"
 ```
