@@ -13,3 +13,52 @@
 [2024-12-21T06:34:46.843+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.843+0000] {dag.py:3262} INFO - Creating ORM DAG for example_insert_brkn
 [2024-12-21T06:34:46.856+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.856+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
 [2024-12-21T06:34:46.889+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.366 seconds
+[2024-12-21T06:35:17.712+0000] {processor.py:186} INFO - Started process (PID=123) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:35:17.714+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:35:17.716+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:35:17.715+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:35:17.722+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:35:17.739+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:35:17.738+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:35:17.757+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:35:17.757+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:35:17.783+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.077 seconds
+[2024-12-21T06:35:48.807+0000] {processor.py:186} INFO - Started process (PID=194) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:35:48.808+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:35:48.811+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:35:48.811+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:35:48.820+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:35:48.850+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:35:48.850+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:35:48.889+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:35:48.889+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:35:48.929+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.130 seconds
+[2024-12-21T06:36:19.728+0000] {processor.py:186} INFO - Started process (PID=263) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:36:19.729+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:36:19.732+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:36:19.731+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:36:19.742+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:36:19.768+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:36:19.768+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:36:19.793+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:36:19.793+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:36:19.814+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.092 seconds
+[2024-12-21T06:36:50.259+0000] {processor.py:186} INFO - Started process (PID=328) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:36:50.261+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:36:50.264+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:36:50.263+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:36:50.272+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:36:50.299+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:36:50.298+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:36:50.342+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:36:50.342+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:36:50.386+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.135 seconds
+[2024-12-21T06:37:21.420+0000] {processor.py:186} INFO - Started process (PID=393) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:37:21.422+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:37:21.426+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:37:21.425+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:37:21.436+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:37:21.458+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:37:21.458+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:37:21.482+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:37:21.481+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:37:21.508+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.096 seconds
+[2024-12-21T06:37:52.231+0000] {processor.py:186} INFO - Started process (PID=458) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:37:52.232+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:37:52.234+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:37:52.234+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:37:52.240+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:37:52.256+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:37:52.256+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:37:52.275+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:37:52.275+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:37:52.300+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.074 seconds
+[2024-12-21T06:38:23.052+0000] {processor.py:186} INFO - Started process (PID=523) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:38:23.054+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:38:23.056+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:23.056+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:38:23.062+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:38:23.079+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:23.079+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:38:23.097+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:23.096+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:38:23.113+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.065 seconds
