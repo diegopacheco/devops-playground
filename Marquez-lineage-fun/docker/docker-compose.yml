@@ -9,7 +9,7 @@ services:
     volumes:
       - ./init-users.sql:/docker-entrypoint-initdb.d/01-init-users.sql
       - ./init-databases.sql:/docker-entrypoint-initdb.d/02-init-databases.sql
-      #- postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
@@ -46,8 +46,8 @@ services:
       AIRFLOW__OPENLINEAGE__NAMESPACE: "my-team-airflow-instance"
     volumes:
       - ./dags:/opt/airflow/dags
-      - ./logs:/opt/airflow/logs
-      - ./plugins:/opt/airflow/plugins
+      - airflow-logs:/opt/airflow/logs
+      - airflow-plugins:/opt/airflow/plugins
     depends_on:
       postgres:
         condition: service_healthy
@@ -64,5 +64,7 @@ services:
       retries: 5
       start_period: 30s
 
-#volumes:
-  #postgres-data:
+volumes:
+  postgres-data:
+  airflow-logs:
+  airflow-plugins:
