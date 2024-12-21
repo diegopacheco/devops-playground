@@ -160,3 +160,10 @@
 [2024-12-21T06:38:00.354+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:00.353+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-12-21T06:38:00.383+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:00.383+0000] {dag.py:4180} INFO - Setting next_dagrun for example_passing_params_via_test_command to 2024-12-21 06:37:00+00:00, run_after=2024-12-21 06:38:00+00:00
 [2024-12-21T06:38:00.400+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_passing_params_via_test_command.py took 0.086 seconds
+[2024-12-21T06:38:31.828+0000] {processor.py:186} INFO - Started process (PID=567) to work on /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_passing_params_via_test_command.py
+[2024-12-21T06:38:31.829+0000] {processor.py:914} INFO - Processing file /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_passing_params_via_test_command.py for tasks to queue
+[2024-12-21T06:38:31.831+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:31.831+0000] {dagbag.py:588} INFO - Filling up the DagBag from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_passing_params_via_test_command.py
+[2024-12-21T06:38:31.841+0000] {processor.py:925} INFO - DAG(s) 'example_passing_params_via_test_command' retrieved from /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_passing_params_via_test_command.py
+[2024-12-21T06:38:31.861+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:31.861+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:38:31.886+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:38:31.885+0000] {dag.py:4180} INFO - Setting next_dagrun for example_passing_params_via_test_command to 2024-12-21 06:37:00+00:00, run_after=2024-12-21 06:38:00+00:00
+[2024-12-21T06:38:31.901+0000] {processor.py:208} INFO - Processing /home/airflow/.local/lib/python3.12/site-packages/airflow/example_dags/example_passing_params_via_test_command.py took 0.078 seconds

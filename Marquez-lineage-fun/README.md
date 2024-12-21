@@ -48,8 +48,21 @@ pip install apache-airflow-providers-postgres
 4. Run Airflow
 
 ```bash
-docker run --rm --name airflow apache/airflow:latest webserver
+mkdir airflow/ && cd airflow/
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.10.4/docker-compose.yaml'
+mkdir -p ./dags ./logs ./plugins ./config
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+cp dag1.py dag2.py ./airflow/dags/
+docker compose up airflow-init
+docker compose up
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.10.4/airflow.sh'
+chmod +x airflow.sh
+./airflow.sh info
+./airflow.sh python
 ```
+
+goto: http://localhost:8080/home
+user: airflow pass: airflow
 
 5. Run Postgres
 
