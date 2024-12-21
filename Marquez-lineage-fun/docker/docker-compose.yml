@@ -57,7 +57,7 @@ services:
         condition: service_started
     ports:
       - "8080:8080"
-    command: ["bash", "-c", "airflow db migrate && airflow webserver & airflow scheduler"]
+    command: ["bash", "-c", "airflow db init && airflow webserver & airflow scheduler"]
     restart: always
     healthcheck:
       test: ["CMD", "airflow", "db", "check"]
