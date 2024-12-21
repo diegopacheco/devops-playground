@@ -1,3 +1,6 @@
 [submodule "Marquez-lineage-fun/Marquez-lineage-fun/marquez"]
 	path = Marquez-lineage-fun/Marquez-lineage-fun/marquez
 	url = https://github.com/MarquezProject/marquez
+[submodule "Marquez-lineage-fun/marquez"]
+	path = Marquez-lineage-fun/marquez
+	url = https://github.com/MarquezProject/marquez
