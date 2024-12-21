@@ -44,7 +44,6 @@ services:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql://airflow:airflow@postgres:5432/airflow
       AIRFLOW_CONN_POSTGRES_DEFAULT: postgresql://airflow:airflow@postgres:5432/airflow
-      AIRFLOW__LINEAGE__BACKEND: openlineage.lineage_backend.OpenLineageBackend
       AIRFLOW__OPENLINEAGE__TRANSPORT: '{"type": "http", "url": "http://marquez:5000", "endpoint": "api/v1/lineage"}'
       AIRFLOW__OPENLINEAGE__NAMESPACE: "my-team-airflow-instance"
     volumes:
@@ -58,7 +57,7 @@ services:
         condition: service_started
     ports:
       - "8080:8080"
-    command: ["bash", "-c", "airflow db init && airflow webserver & airflow scheduler"]
+    command: ["bash", "-c", "airflow db migrate && airflow webserver & airflow scheduler"]
     restart: always
     healthcheck:
       test: ["CMD", "airflow", "db", "check"]

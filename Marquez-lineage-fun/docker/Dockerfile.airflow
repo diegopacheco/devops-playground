@@ -1,5 +1,9 @@
 FROM apache/airflow:2.10.4
 USER airflow
+RUN pip install openlineage-python
+RUN pip install openlineage-airflow
+RUN pip install apache-airflow-providers-postgres
+RUN pip install apache-airflow-providers-openlineage
 RUN pip3 install openlineage-python
 RUN pip3 install openlineage-airflow
 RUN pip3 install apache-airflow-providers-postgres
