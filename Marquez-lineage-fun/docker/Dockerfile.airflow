@@ -1,0 +1,10 @@
+FROM apache/airflow:2.10.4
+
+USER root
+
+# Install OpenLineage and its Airflow integration
+RUN pip install openlineage-airflow
+RUN pip install apache-airflow-providers-postgres
+
+# Switch back to the airflow user
+USER airflow

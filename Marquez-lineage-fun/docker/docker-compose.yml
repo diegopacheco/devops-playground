@@ -35,7 +35,10 @@ services:
       - "5000:5000"
 
   airflow:
-    image: apache/airflow:2.10.4
+    #image: apache/airflow:2.10.4
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
     container_name: airflow
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
