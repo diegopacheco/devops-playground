@@ -9,7 +9,8 @@ services:
       POSTGRES_PASSWORD: marquez
       POSTGRES_DB: marquez_db
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      #- postgres-data:/var/lib/postgresql/data
+      - ./init-marquez.sql:/docker-entrypoint-initdb.d/init-marquez.sql
     ports:
       - "5432:5432"
 
@@ -21,7 +22,7 @@ services:
       MARQUEZ_DB_PORT: 5432
       MARQUEZ_DB_USER: marquez
       MARQUEZ_DB_PASSWORD: marquez
-      MARQUEZ_DB: marquez_db
+      MARQUEZ_DB_NAME: marquez_db
       MARQUEZ_PORT: 5000
     depends_on:
       - postgres
@@ -49,5 +50,5 @@ services:
       - "8080:8080"
     command: ["bash", "-c", "airflow db init && airflow webserver & airflow scheduler"]
 
-volumes:
-  postgres-data:
+#volumes:
+#  postgres-data:
