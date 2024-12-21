@@ -67,7 +67,7 @@ user: airflow pass: airflow
 5. Run Postgres
 
 ```bash
-docker run --name postgres -e POSTGRES_PASSWORD=yourpassword postgres
+docker run --rm --network host --name postgres -e POSTGRES_PASSWORD=yourpassword postgres
 ```
 
 6. Add dags to Airflow
