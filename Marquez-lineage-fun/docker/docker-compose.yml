@@ -7,8 +7,9 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - postgres-data:/var/lib/postgresql/data
+      - ./init-users.sql:/docker-entrypoint-initdb.d/01-init-users.sql
+      - ./init-databases.sql:/docker-entrypoint-initdb.d/02-init-databases.sql
+      #- postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
@@ -56,5 +57,5 @@ services:
       - "8080:8080"
     command: ["bash", "-c", "airflow db init && airflow webserver & airflow scheduler"]
 
-volumes:
-  postgres-data:
+#volumes:
+#  postgres-data:
