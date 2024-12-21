@@ -1,0 +1,52 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  marquez:
+    image: marquezproject/marquez:latest
+    container_name: marquez
+    environment:
+      MARQUEZ_DB_HOST: postgres
+      MARQUEZ_DB_PORT: 5432
+      MARQUEZ_DB_USER: airflow
+      MARQUEZ_DB_PASSWORD: airflow
+      MARQUEZ_DB: airflow
+      MARQUEZ_PORT: 5000
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+
+  airflow:
+    image: apache/airflow:2.10.4
+    container_name: airflow
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql://airflow:airflow@postgres:5432/airflow
+      AIRFLOW_CONN_POSTGRES_DEFAULT: postgresql://airflow:airflow@postgres:5432/airflow
+      AIRFLOW__LINEAGE__BACKEND: openlineage.lineage_backend.OpenLineageBackend
+      AIRFLOW__OPENLINEAGE__TRANSPORT: '{"type": "http", "url": "http://marquez:5000", "endpoint": "api/v1/lineage"}'
+      AIRFLOW__OPENLINEAGE__NAMESPACE: "my-team-airflow-instance"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - marquez
+    command: ["bash", "-c", "airflow db init && airflow webserver & airflow scheduler"]
+
+volumes:
+  postgres-data:
