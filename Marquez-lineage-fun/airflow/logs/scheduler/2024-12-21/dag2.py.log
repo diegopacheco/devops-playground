@@ -1,0 +1,15 @@
+[2024-12-21T06:34:46.532+0000] {processor.py:186} INFO - Started process (PID=57) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:34:46.533+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:34:46.538+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.537+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:34:46.552+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:34:46.761+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.760+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG:example_insert_brkn
+[2024-12-21T06:34:46.775+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.774+0000] {override.py:1911} INFO - Created Permission View: can edit on DAG:example_insert_brkn
+[2024-12-21T06:34:46.783+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.783+0000] {override.py:1911} INFO - Created Permission View: can read on DAG:example_insert_brkn
+[2024-12-21T06:34:46.793+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.792+0000] {override.py:1911} INFO - Created Permission View: can create on DAG Run:example_insert_brkn
+[2024-12-21T06:34:46.803+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.802+0000] {override.py:1911} INFO - Created Permission View: menu access on DAG Run:example_insert_brkn
+[2024-12-21T06:34:46.813+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.812+0000] {override.py:1911} INFO - Created Permission View: can delete on DAG Run:example_insert_brkn
+[2024-12-21T06:34:46.823+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.822+0000] {override.py:1911} INFO - Created Permission View: can read on DAG Run:example_insert_brkn
+[2024-12-21T06:34:46.823+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.823+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:34:46.843+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.843+0000] {dag.py:3262} INFO - Creating ORM DAG for example_insert_brkn
+[2024-12-21T06:34:46.856+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:34:46.856+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:34:46.889+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.366 seconds
