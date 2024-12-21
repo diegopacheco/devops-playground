@@ -31,7 +31,7 @@ def example_display_name_brkn():
     sample_task_2 = SQLExecuteQueryOperator(
         task_id="sample_task_3",
         sql=SQL,
-        conn_id="postgres_default",
+        conn_id="AIRFLOW__CELERY__RESULT_BACKEND",
     )
 
     @task(

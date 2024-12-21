@@ -1,0 +1,126 @@
+[2024-12-21T06:52:37.043+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-21T06:52:37.061+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: example_insert_brkn.sample_insert_task_2 manual__2024-12-21T06:52:33.424873+00:00 [queued]>
+[2024-12-21T06:52:37.069+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: example_insert_brkn.sample_insert_task_2 manual__2024-12-21T06:52:33.424873+00:00 [queued]>
+[2024-12-21T06:52:37.069+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2024-12-21T06:52:37.083+0000] {taskinstance.py:2889} INFO - Executing <Task(SQLExecuteQueryOperator): sample_insert_task_2> on 2024-12-21 06:52:33.424873+00:00
+[2024-12-21T06:52:37.091+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=173) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-21T06:52:37.092+0000] {standard_task_runner.py:72} INFO - Started process 175 to run task
+[2024-12-21T06:52:37.093+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'example_insert_brkn', 'sample_insert_task_2', 'manual__2024-12-21T06:52:33.424873+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/dag2.py', '--cfg-path', '/tmp/tmpsblfy8_z']
+[2024-12-21T06:52:37.094+0000] {standard_task_runner.py:105} INFO - Job 14: Subtask sample_insert_task_2
+[2024-12-21T06:52:37.134+0000] {task_command.py:467} INFO - Running <TaskInstance: example_insert_brkn.sample_insert_task_2 manual__2024-12-21T06:52:33.424873+00:00 [running]> on host ba6cd0d3867a
+[2024-12-21T06:52:37.219+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='example_insert_brkn' AIRFLOW_CTX_TASK_ID='sample_insert_task_2' AIRFLOW_CTX_EXECUTION_DATE='2024-12-21T06:52:33.424873+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-21T06:52:33.424873+00:00'
+[2024-12-21T06:52:37.220+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-21T06:52:37.220+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-21T06:52:37.220+0000] {logging_mixin.py:190} INFO - Current task name:sample_insert_task_2 state:running start_date:2024-12-21 06:52:37.061897+00:00
+[2024-12-21T06:52:37.221+0000] {logging_mixin.py:190} INFO - Dag name:example_insert_brkn and current dag run status:running
+[2024-12-21T06:52:37.221+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-21T06:52:37.221+0000] {sql.py:278} INFO - Executing: INSERT INTO ***sample (col1) VALUES ('row')
+[2024-12-21T06:52:37.222+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2024-12-21T06:52:37.223+0000] {base.py:84} INFO - Retrieving connection 'postgres_default'
+[2024-12-21T06:52:37.233+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 422, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 279, in execute
+    hook = self.get_db_hook()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 190, in get_db_hook
+    return self._hook
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/functools.py", line 995, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 166, in _hook
+    hook = self.get_hook(conn_id=conn_id, hook_params=self.hook_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 159, in get_hook
+    return connection.get_hook(hook_params=hook_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 406, in get_hook
+    raise AirflowException(f'Unknown hook type "{self.conn_type}"')
+airflow.exceptions.AirflowException: Unknown hook type "postgresql+psycopg2"
+[2024-12-21T06:52:37.238+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-12-21T06:52:37.238+0000] {logging_mixin.py:190} INFO - Task start:2024-12-21 06:52:37.061897+00:00 end:2024-12-21 06:52:37.238036+00:00 duration:0.176139
+[2024-12-21T06:52:37.239+0000] {logging_mixin.py:190} INFO - Task:<Task(SQLExecuteQueryOperator): sample_insert_task_2> dag:<DAG: example_insert_brkn> dagrun:<DagRun example_insert_brkn @ 2024-12-21 06:52:33.424873+00:00: manual__2024-12-21T06:52:33.424873+00:00, state:running, queued_at: 2024-12-21 06:52:33.432614+00:00. externally triggered: True>
+[2024-12-21T06:52:37.239+0000] {logging_mixin.py:190} INFO - Failure caused by Unknown hook type "postgresql+psycopg2"
+[2024-12-21T06:52:37.239+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=example_insert_brkn, task_id=sample_insert_task_2, run_id=manual__2024-12-21T06:52:33.424873+00:00, execution_date=20241221T065233, start_date=20241221T065237, end_date=20241221T065237
+[2024-12-21T06:52:37.249+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-21T06:52:37.249+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 14 for task sample_insert_task_2 (Unknown hook type "postgresql+psycopg2"; 175)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 422, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 279, in execute
+    hook = self.get_db_hook()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 190, in get_db_hook
+    return self._hook
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/functools.py", line 995, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 166, in _hook
+    hook = self.get_hook(conn_id=conn_id, hook_params=self.hook_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/common/sql/operators/sql.py", line 159, in get_hook
+    return connection.get_hook(hook_params=hook_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/connection.py", line 406, in get_hook
+    raise AirflowException(f'Unknown hook type "{self.conn_type}"')
+airflow.exceptions.AirflowException: Unknown hook type "postgresql+psycopg2"
+[2024-12-21T06:52:37.266+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-21T06:52:37.285+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-21T06:52:37.289+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
