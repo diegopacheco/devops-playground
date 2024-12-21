@@ -293,3 +293,45 @@
 [2024-12-21T06:55:49.634+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:55:49.634+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-12-21T06:55:49.652+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:55:49.651+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
 [2024-12-21T06:55:49.675+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.072 seconds
+[2024-12-21T06:57:16.655+0000] {processor.py:186} INFO - Started process (PID=57) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:57:16.656+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:57:16.658+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:57:16.658+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:57:16.668+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:57:16.828+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:57:16.828+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:57:16.851+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:57:16.850+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:57:16.884+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.236 seconds
+[2024-12-21T06:57:47.512+0000] {processor.py:186} INFO - Started process (PID=128) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:57:47.514+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:57:47.516+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:57:47.515+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:57:47.523+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:57:47.544+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:57:47.543+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:57:47.565+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:57:47.565+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:57:47.594+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.087 seconds
+[2024-12-21T06:58:18.365+0000] {processor.py:186} INFO - Started process (PID=193) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:58:18.366+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:58:18.368+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:58:18.367+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:58:18.375+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:58:18.394+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:58:18.393+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:58:18.415+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:58:18.415+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:58:18.442+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.082 seconds
+[2024-12-21T06:58:48.768+0000] {processor.py:186} INFO - Started process (PID=258) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:58:48.769+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:58:48.771+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:58:48.771+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:58:48.782+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:58:48.805+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:58:48.805+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:58:48.831+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:58:48.831+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:58:48.861+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.102 seconds
+[2024-12-21T06:59:19.776+0000] {processor.py:186} INFO - Started process (PID=323) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:59:19.777+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:59:19.779+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:59:19.778+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:59:19.785+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:59:19.801+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:59:19.801+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:59:19.820+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:59:19.820+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:59:19.844+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.074 seconds
+[2024-12-21T06:59:49.633+0000] {processor.py:186} INFO - Started process (PID=389) to work on /opt/airflow/dags/dag2.py
+[2024-12-21T06:59:49.635+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dag2.py for tasks to queue
+[2024-12-21T06:59:49.637+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:59:49.637+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/dag2.py
+[2024-12-21T06:59:49.649+0000] {processor.py:925} INFO - DAG(s) 'example_insert_brkn' retrieved from /opt/airflow/dags/dag2.py
+[2024-12-21T06:59:49.779+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:59:49.779+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2024-12-21T06:59:49.797+0000] {logging_mixin.py:190} INFO - [2024-12-21T06:59:49.797+0000] {dag.py:4180} INFO - Setting next_dagrun for example_insert_brkn to None, run_after=None
+[2024-12-21T06:59:49.818+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dag2.py took 0.194 seconds

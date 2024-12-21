@@ -30,13 +30,13 @@ def example_insert_brkn():
     sample_task_2 = SQLExecuteQueryOperator(
         task_id="sample_insert_task_2",
         sql=SQL_1,
-        conn_id="AIRFLOW__CELERY__RESULT_BACKEND",
+        conn_id="POSTGRES_DEFAULT",
     )
 
     sample_task_3 = SQLExecuteQueryOperator(
         task_id="sample_insert_task_3",
         sql=SQL_2,
-        conn_id="AIRFLOW__CELERY__RESULT_BACKEND",
+        conn_id="POSTGRES_DEFAULT",
     )
 
     sample_task_1 >> sample_task_2 >> sample_task_3
