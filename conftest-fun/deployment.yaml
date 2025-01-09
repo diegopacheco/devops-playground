@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulnerable-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      # Missing app label
+      tier: backend
+  template:
+    metadata:
+      labels:
+        # Missing app label
+        tier: backend
+    spec:
+      containers:
+      - name: vulnerable-container
+        image: nginx:latest
+        securityContext:
+          runAsUser: 0  # Running as root
+        ports:
+        - containerPort: 80
