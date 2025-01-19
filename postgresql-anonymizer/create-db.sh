@@ -29,4 +29,8 @@ SECURITY LABEL FOR anon ON COLUMN people.lastname
 SECURITY LABEL FOR anon ON COLUMN people.phone
   IS 'MASKED WITH FUNCTION anon.partial(phone,2,$$******$$,2)';
 
+ALTER TABLE people ALTER COLUMN phone TYPE text USING phone::text;
+
+SECURITY LABEL FOR anon ON COLUMN people.phone
+  IS 'MASKED WITH FUNCTION anon.partial(phone::text,2,$$******$$,2)';
 EOF
