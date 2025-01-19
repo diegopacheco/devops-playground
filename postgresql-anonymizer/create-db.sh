@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS people AS
 INSERT INTO people (id, firstname, lastname, phone) VALUES
     (153478, 'Sarah', 'Conor', '0609110911'::text);
 
-CREATE EXTENSION anon;
 ALTER DATABASE demo SET anon.transparent_dynamic_masking TO true;
 
 CREATE ROLE skynet LOGIN;
