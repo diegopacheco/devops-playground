@@ -39,5 +39,16 @@ SECURITY LABEL
 ```
 
 ```bash
+❯ ./run-query.sh
+You are now connected to database "demo" as user "postgres".
+   id   | firstname | lastname |   phone
+--------+-----------+----------+------------
+ 153478 | Sarah     | Conor    | 0609110911
+(1 row)
 
+You are now connected to database "demo" as user "skynet".
+   id   | firstname | lastname | phone
+--------+-----------+----------+-------
+ 153478 | Sarah     | Marks    |
+(1 row)
 ```

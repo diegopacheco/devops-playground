@@ -1,36 +1,39 @@
 #!/bin/bash
 
-# Create the database if it doesn't exist
+docker exec -i anon_quickstart psql -U postgres -c "DROP DATABASE IF EXISTS demo;"
 docker exec -i anon_quickstart psql -U postgres -c "CREATE DATABASE demo;"
 
-# Connect to the demo database and set it up
 docker exec -i anon_quickstart psql -U postgres <<EOF
 \connect demo
 
-CREATE TABLE IF NOT EXISTS people AS
-    SELECT  153478       AS id,
-            'Sarah'      AS firstname,
-            'Conor'      AS lastname,
-            '0609110911' AS phone
-;
+-- Fully drop the anonymizer extension and table
+DROP EXTENSION IF EXISTS anon CASCADE;
+DROP TABLE IF EXISTS people CASCADE;
 
-INSERT INTO people (id, firstname, lastname, phone) VALUES
-    (153478, 'Sarah', 'Conor', '0609110911'::text);
+-- Recreate table with phone as TEXT
+CREATE TABLE people (
+  id INTEGER,
+  firstname TEXT,
+  lastname TEXT,
+  phone TEXT
+);
 
+-- Insert data as TEXT
+INSERT INTO people VALUES (153478, 'Sarah', 'Conor', '0609110911'::text);
+
+-- Reinstall anonymizer extension
+CREATE EXTENSION anon;
 ALTER DATABASE demo SET anon.transparent_dynamic_masking TO true;
 
+-- Create the masked role
+DROP ROLE IF EXISTS skynet;
 CREATE ROLE skynet LOGIN;
 SECURITY LABEL FOR anon ON ROLE skynet IS 'MASKED';
-GRANT pg_read_all_data to skynet;
+GRANT pg_read_all_data TO skynet;
 
+-- Masking rules
 SECURITY LABEL FOR anon ON COLUMN people.lastname
   IS 'MASKED WITH FUNCTION anon.dummy_last_name()';
-
 SECURITY LABEL FOR anon ON COLUMN people.phone
-  IS 'MASKED WITH FUNCTION anon.partial(phone,2,$$******$$,2)';
-
-ALTER TABLE people ALTER COLUMN phone TYPE text USING phone::text;
-
-SECURITY LABEL FOR anon ON COLUMN people.phone
-  IS 'MASKED WITH FUNCTION anon.partial(phone::text,2,$$******$$,2)';
+  IS 'MASKED WITH VALUE NULL';
 EOF
