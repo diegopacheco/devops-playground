@@ -6,12 +6,12 @@ docker exec -i anon_quickstart psql -U postgres -c "CREATE DATABASE demo;"
 # Connect to the demo database and set it up
 docker exec -i anon_quickstart psql -U postgres <<EOF
 \connect demo
-CREATE TABLE IF NOT EXISTS people (
-    id INTEGER,
-    firstname TEXT,
-    lastname TEXT,
-    phone TEXT
-);
+CREATE TABLE IF NOT EXISTS people AS
+    SELECT  153478       AS id,
+            'Sarah'      AS firstname,
+            'Conor'      AS lastname,
+            '0609110911' AS phone
+;
 BEGIN;
 INSERT INTO people (id, firstname, lastname, phone) VALUES
     (153478, 'Sarah', 'Conor', '0609110911'::text);

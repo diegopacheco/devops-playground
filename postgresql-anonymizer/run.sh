@@ -2,4 +2,3 @@
 
 ANON_IMG=registry.gitlab.com/dalibo/postgresql_anonymizer
 docker run --name anon_quickstart --detach -e POSTGRES_PASSWORD=x $ANON_IMG
-docker exec -it anon_quickstart psql -U postgres
