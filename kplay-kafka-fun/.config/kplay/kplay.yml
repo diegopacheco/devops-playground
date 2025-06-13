@@ -1,0 +1,17 @@
+---
+profiles:
+  - name: local-kafka
+    authentication: none
+    encodingFormat: raw
+    brokers:
+      - localhost:9092
+    topic: test-topic
+    consumerGroup: kplay-consumer-group-1
+
+  - name: json-kafka
+    authentication: none
+    encodingFormat: json
+    brokers:
+      - localhost:9092
+    topic: test-topic-json
+    consumerGroup: kplay-consumer-group-1
