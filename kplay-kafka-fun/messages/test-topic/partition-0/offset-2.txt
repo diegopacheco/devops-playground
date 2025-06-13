@@ -1,0 +1,9 @@
+Metadata
+
+- timestamp            2025-06-12 22:29:48.949 -0700 PDT
+- partition            0
+- offset               2
+
+Value
+
+sad
