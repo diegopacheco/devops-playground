@@ -132,35 +132,35 @@ echo "-------------------------------------------------"
 
 echo ""
 echo "2.1.1 Query WITH partition key (partition_key = 150) - SHOULD BE FAST:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_range_v1 WHERE partition_key = 150;
-"
+EOF
 
 echo ""
 echo "2.1.2 Query WITHOUT partition key (username LIKE pattern) - SHOULD BE SLOWER:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_range_v1 WHERE username LIKE 'user_15%';
-"
+EOF
 
 echo ""
 echo "2.1.3 Range query WITH partition key - SHOULD BE FAST:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT COUNT(*) FROM user_range_v1 WHERE partition_key BETWEEN 100 AND 200;
-"
+EOF
 
 echo ""
 echo "2.1.4 Aggregate query WITHOUT partition key - SHOULD BE SLOWER:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT COUNT(*) FROM user_range_v1 WHERE email LIKE '%example.com';
-"
+EOF
 
 echo ""
 echo "2.2 USER_RANGE_V2 TESTS (Derived Partition Key)"
@@ -168,35 +168,35 @@ echo "------------------------------------------------"
 
 echo ""
 echo "2.2.1 Query WITH partition key (user_id = 150) - SHOULD BE FAST:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_range_v2 WHERE user_id = 150;
-"
+EOF
 
 echo ""
 echo "2.2.2 Query WITHOUT partition key (username LIKE pattern) - SHOULD BE SLOWER:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_range_v2 WHERE username LIKE 'user_range_v2_15%';
-"
+EOF
 
 echo ""
 echo "2.2.3 Range query WITH partition key - SHOULD BE FAST:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT COUNT(*) FROM user_range_v2 WHERE user_id BETWEEN 100 AND 200;
-"
+EOF
 
 echo ""
 echo "2.2.4 Aggregate query WITHOUT partition key - SHOULD BE SLOWER:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT COUNT(*) FROM user_range_v2 WHERE email LIKE '%example.com';
-"
+EOF
 
 echo ""
 echo "=========================================="

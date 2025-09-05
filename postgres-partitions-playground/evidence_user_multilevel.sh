@@ -148,37 +148,37 @@ echo "-------------------------------------------------------"
 
 echo ""
 echo "2.1.1 Query WITH both partition keys (date and hash) - SHOULD BE FASTEST:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_multilevel_v1 
 WHERE date_partition = '2025-06-15' AND hash_partition = 150;
-"
+EOF
 
 echo ""
 echo "2.1.2 Query WITH range partition key only - SHOULD BE FAST (prunes main partitions):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_multilevel_v1 
 WHERE date_partition BETWEEN '2025-01-01' AND '2025-12-31';
-"
+EOF
 
 echo ""
 echo "2.1.3 Query WITH hash partition key only - SHOULD BE MODERATE (prunes sub-partitions):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT COUNT(*) FROM user_multilevel_v1 WHERE hash_partition = 555;
-"
+EOF
 
 echo ""
 echo "2.1.4 Query WITHOUT partition keys - SHOULD BE SLOWEST (full table scan):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_multilevel_v1 WHERE username LIKE 'user_multi_15%';
-"
+EOF
 
 echo ""
 echo "2.2 USER_MULTILEVEL_V2 TESTS (Derived Partition Keys)"
@@ -186,37 +186,37 @@ echo "------------------------------------------------------"
 
 echo ""
 echo "2.2.1 Query WITH both partition keys (created_at and user_id) - SHOULD BE FASTEST:"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_multilevel_v2 
 WHERE created_at >= '2025-06-15' AND created_at < '2025-06-16' AND user_id = 150;
-"
+EOF
 
 echo ""
 echo "2.2.2 Query WITH range partition key only - SHOULD BE FAST (prunes main partitions):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT COUNT(*) FROM user_multilevel_v2 
 WHERE created_at BETWEEN '2025-01-01' AND '2025-12-31';
-"
+EOF
 
 echo ""
 echo "2.2.3 Query WITH hash partition key only - SHOULD BE MODERATE (prunes sub-partitions):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_multilevel_v2 WHERE user_id = 555;
-"
+EOF
 
 echo ""
 echo "2.2.4 Query WITHOUT partition keys - SHOULD BE SLOWEST (full table scan):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 EXPLAIN (ANALYZE, BUFFERS) 
 SELECT * FROM user_multilevel_v2 WHERE email LIKE '%multiv2_user%';
-"
+EOF
 
 echo ""
 echo "=========================================="
@@ -333,33 +333,33 @@ WHERE tablename LIKE 'user_multilevel_v2_%_h%';
 echo ""
 echo "4.6 Performance comparison: single-level vs multilevel access patterns:"
 echo "Single partition access (best case):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 SELECT COUNT(*) FROM user_multilevel_v1 
 WHERE date_partition = '2025-03-15' AND hash_partition = 456;
-"
+EOF
 
 echo ""
 echo "Range partition access (good case):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 SELECT COUNT(*) FROM user_multilevel_v1 
 WHERE date_partition BETWEEN '2025-01-01' AND '2025-01-31';
-"
+EOF
 
 echo ""
 echo "Hash-only access (moderate case):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 SELECT COUNT(*) FROM user_multilevel_v1 WHERE hash_partition = 789;
-"
+EOF
 
 echo ""
 echo "Full table access (worst case):"
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME << 'EOF'
 \timing on
 SELECT COUNT(*) FROM user_multilevel_v1 WHERE email LIKE '%example.com';
-"
+EOF
 
 echo ""
 echo "=========================================="
