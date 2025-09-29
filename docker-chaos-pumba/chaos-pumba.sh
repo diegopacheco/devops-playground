@@ -27,8 +27,10 @@ echo "Container status after kill:"
 docker-compose ps
 
 echo ""
-echo "Waiting for recovery..."
-sleep 10
+echo "Manually restarting killed service (simulating orchestrator recovery)..."
+docker-compose up -d web
+
+sleep 5
 
 echo "Container status after recovery:"
 docker-compose ps
