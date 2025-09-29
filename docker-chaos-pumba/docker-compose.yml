@@ -1,0 +1,14 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: web-server
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+
+  api:
+    image: httpd:alpine
+    container_name: api-server
+    ports:
+      - "8082:80"
+    restart: unless-stopped
