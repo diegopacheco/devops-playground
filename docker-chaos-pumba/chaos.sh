@@ -11,8 +11,8 @@ echo "Current container status:"
 docker-compose ps
 
 echo ""
-echo "Killing web-server container..."
-docker-compose kill web-server
+echo "Killing web service container..."
+docker-compose kill web
 
 sleep 3
 
@@ -27,8 +27,8 @@ echo "Container status after recovery:"
 docker-compose ps
 
 echo ""
-echo "Stopping api-server container..."
-docker-compose stop api-server
+echo "Stopping api service container..."
+docker-compose stop api
 
 sleep 5
 
@@ -36,8 +36,8 @@ echo "Testing connectivity during stop:"
 curl -m 5 http://localhost:8082 || echo "Connection failed - container stopped"
 
 echo ""
-echo "Starting api-server container..."
-docker-compose start api-server
+echo "Starting api service container..."
+docker-compose start api
 
 sleep 5
 
