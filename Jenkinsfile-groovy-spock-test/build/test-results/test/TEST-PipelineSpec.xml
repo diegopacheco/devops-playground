@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PipelineSpec" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-09-30T04:05:53.002Z" hostname="4windsmax4.local" time="0.025">
-  <properties/>
-  <testcase name="should execute a shell command" classname="PipelineSpec" time="0.022"/>
-  <testcase name="should execute build" classname="PipelineSpec" time="0.001"/>
-  <testcase name="should execute test" classname="PipelineSpec" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
