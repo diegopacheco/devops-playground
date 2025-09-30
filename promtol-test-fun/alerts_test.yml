@@ -1,0 +1,48 @@
+rule_files:
+  - alerts.yml
+
+evaluation_interval: 1m
+
+tests:
+  - interval: 1m
+    input_series:
+      - series: 'up{job="prometheus", instance="localhost:9090"}'
+        values: '0 0 0 0 0 0 0 0 0 0 0 0'
+      - series: 'process_cpu_seconds_total{job="prometheus", instance="localhost:9090"}'
+        values: '0 55 110 165 220 275 330 385 440 495 550 605'
+      - series: 'process_resident_memory_bytes{job="prometheus", instance="localhost:9090"}'
+        values: '600000000 600000000 600000000 600000000 600000000 600000000 600000000 600000000 600000000 600000000 600000000 600000000'
+
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: InstanceDown
+        exp_alerts:
+          - exp_labels:
+              severity: critical
+              job: prometheus
+              instance: localhost:9090
+            exp_annotations:
+              summary: "Instance is down"
+              description: "Instance localhost:9090 has been down for more than 1 minute"
+
+      - eval_time: 10m
+        alertname: HighCPUUsage
+        exp_alerts:
+          - exp_labels:
+              severity: warning
+              job: prometheus
+              instance: localhost:9090
+            exp_annotations:
+              summary: "High CPU usage detected"
+              description: "CPU usage is above 80% for more than 5 minutes"
+
+      - eval_time: 10m
+        alertname: HighMemoryUsage
+        exp_alerts:
+          - exp_labels:
+              severity: warning
+              job: prometheus
+              instance: localhost:9090
+            exp_annotations:
+              summary: "High memory usage detected"
+              description: "Memory usage is above 500MB for more than 5 minutes"
