@@ -3,6 +3,10 @@
 
 **/marquez/**
 
+# gradle
+build/
+
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
