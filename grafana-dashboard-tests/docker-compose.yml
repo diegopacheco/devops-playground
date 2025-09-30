@@ -1,0 +1,32 @@
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./provisioning:/etc/grafana/provisioning
+    networks:
+      - grafana-net
+
+  grafanactl:
+    image: golang:1.24-alpine
+    container_name: grafanactl
+    networks:
+      - grafana-net
+    depends_on:
+      - grafana
+    working_dir: /app
+    command: sh -c "go install github.com/grafana/grafanactl/cmd/grafanactl@latest && tail -f /dev/null"
+
+volumes:
+  grafana-storage:
+
+networks:
+  grafana-net:
+    driver: bridge
