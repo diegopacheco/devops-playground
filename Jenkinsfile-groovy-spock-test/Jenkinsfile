@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    def logic = load 'src/Pipeline.groovy'
+                    logic.build()
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    def logic = load 'src/Pipeline.groovy'
+                    logic.test()
+                }
+            }
+        }
+    }
+}
