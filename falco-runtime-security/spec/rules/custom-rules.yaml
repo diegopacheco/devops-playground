@@ -1,0 +1,6 @@
+- rule: Notice Container Started
+  desc: Notice when any container is started
+  condition: container
+  output: "Container started (user=%user.name container=%container.name image=%container.image.repository)"
+  priority: INFO
+  tags: [container]

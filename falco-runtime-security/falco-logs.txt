@@ -1,0 +1,8 @@
+Defaulted container "falco" out of: falco, falcoctl-artifact-follow, falcoctl-artifact-install (init)
+Thu Oct  2 06:01:13 2025: Falco version: 0.41.3 (aarch64)
+Thu Oct  2 06:01:13 2025: Falco initialized with configuration files:
+Thu Oct  2 06:01:13 2025:    /etc/falco/falco.yaml | schema validation: failed for <root>: Object contains a property that could not be validated using 'properties' or 'additionalProperties' constraints: 'jsonOutput'.
+Thu Oct  2 06:01:13 2025: System info: Linux version 6.15.9-201.fc42.aarch64 (mockbuild@483b62b99aa7461b9af25cf0a54aec17) (gcc (GCC) 15.1.1 20250521 (Red Hat 15.1.1-2), GNU ld version 2.44-6.fc42) #1 SMP PREEMPT_DYNAMIC Sat Aug  2 18:15:03 UTC 2025
+Thu Oct  2 06:01:13 2025: [libs]: Cannot read host init process proc root: 13
+Thu Oct  2 06:01:13 2025: [libs]: Cannot read host init process proc root: 13
+Error: Must enable at least one event source

@@ -1,0 +1,23 @@
+driver:
+  enabled: false
+
+tty: true
+
+collectors:
+  kubernetes:
+    enabled: true
+
+falco:
+  json_output: true
+  json_include_output_property: true
+
+  rules_file:
+    - /etc/falco/falco_rules.yaml
+    - /etc/falco/rules.d
+
+falcoctl:
+  artifact:
+    install:
+      enabled: false
+    follow:
+      enabled: false
