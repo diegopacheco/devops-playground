@@ -1,0 +1,20 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-registries
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: validate-registries
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    validate:
+      message: "Images must come from approved registries: docker.io, gcr.io, or quay.io"
+      pattern:
+        spec:
+          containers:
+          - image: "docker.io/* | gcr.io/* | quay.io/* | nginx:* | redis:* | postgres:*"
