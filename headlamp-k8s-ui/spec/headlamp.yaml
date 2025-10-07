@@ -9,6 +9,15 @@ metadata:
   name: headlamp-admin
   namespace: headlamp
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: headlamp-admin-token
+  namespace: headlamp
+  annotations:
+    kubernetes.io/service-account.name: headlamp-admin
+type: kubernetes.io/service-account-token
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -38,16 +47,56 @@ spec:
         app: headlamp
     spec:
       serviceAccountName: headlamp-admin
+      initContainers:
+      - name: setup-kubeconfig
+        image: bitnami/kubectl:latest
+        command:
+        - sh
+        - -c
+        - |
+          TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+          CA_CERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          KUBERNETES_SERVICE_HOST=${KUBERNETES_SERVICE_HOST}
+          KUBERNETES_SERVICE_PORT=${KUBERNETES_SERVICE_PORT}
+          mkdir -p /headlamp-config/.kube
+          cat > /headlamp-config/.kube/config <<EOF
+          apiVersion: v1
+          kind: Config
+          clusters:
+          - cluster:
+              certificate-authority: ${CA_CERT}
+              server: https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}
+            name: kind-cluster
+          contexts:
+          - context:
+              cluster: kind-cluster
+              user: headlamp-admin
+            name: kind-cluster
+          current-context: kind-cluster
+          users:
+          - name: headlamp-admin
+            user:
+              token: ${TOKEN}
+          EOF
+        volumeMounts:
+        - name: kubeconfig
+          mountPath: /headlamp-config
       containers:
       - name: headlamp
         image: ghcr.io/headlamp-k8s/headlamp:latest
         ports:
         - containerPort: 4466
         env:
-        - name: HEADLAMP_CONFIG_IN_CLUSTER
-          value: "true"
+        - name: KUBECONFIG
+          value: /headlamp-config/.kube/config
         - name: HEADLAMP_CONFIG_BASE_URL
           value: ""
+        volumeMounts:
+        - name: kubeconfig
+          mountPath: /headlamp-config
+      volumes:
+      - name: kubeconfig
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
