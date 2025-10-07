@@ -6,6 +6,8 @@
 # gradle
 build/
 
+# MacOS
+.DS_Store
 
 # .tfstate files
 *.tfstate
