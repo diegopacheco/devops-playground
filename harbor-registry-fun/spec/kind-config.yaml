@@ -1,0 +1,18 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: harbor-cluster
+networking:
+  apiServerAddress: "127.0.0.1"
+  apiServerPort: 6443
+  podSubnet: "10.244.0.0/16"
+  serviceSubnet: "10.96.0.0/12"
+nodes:
+- role: control-plane
+  image: kindest/node:v1.29.2
+  extraPortMappings:
+  - containerPort: 30500
+    hostPort: 30500
+    protocol: TCP
+  - containerPort: 30080
+    hostPort: 30080
+    protocol: TCP

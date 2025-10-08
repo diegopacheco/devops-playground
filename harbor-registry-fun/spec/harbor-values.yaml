@@ -1,0 +1,24 @@
+expose:
+  type: nodePort
+  tls:
+    enabled: false
+  nodePort:
+    ports:
+      http:
+        nodePort: 30080
+externalURL: http://localhost:30080
+persistence:
+  enabled: false
+harborAdminPassword: "Harbor12345"
+database:
+  internal:
+    password: "changeit"
+redis:
+  internal:
+    password: "changeit"
+trivy:
+  enabled: false
+notary:
+  enabled: false
+chartmuseum:
+  enabled: false

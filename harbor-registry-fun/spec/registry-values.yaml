@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: registry
+  tag: 2.8.3
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 5000
+  nodePort: 30500
+
+persistence:
+  enabled: true
+  storageClass: "standard"
+  size: 5Gi
+
+secrets:
+  htpasswd: "admin:$2y$05$VjkZBvRfNfYnGqzj6d3tWOd9LkLXPSA/2/JqKq8fQC2KpVFKVJfXe"
