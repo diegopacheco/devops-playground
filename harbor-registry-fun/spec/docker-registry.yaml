@@ -31,6 +31,12 @@ data:
       addr: :5000
       headers:
         X-Content-Type-Options: [nosniff]
+        Access-Control-Allow-Origin: ['*']
+        Access-Control-Allow-Methods: ['HEAD', 'GET', 'OPTIONS', 'DELETE']
+        Access-Control-Allow-Headers: ['Authorization', 'Accept', 'Cache-Control']
+        Access-Control-Max-Age: [1728000]
+        Access-Control-Allow-Credentials: [true]
+        Access-Control-Expose-Headers: ['Docker-Content-Digest']
     health:
       storagedriver:
         enabled: true
@@ -114,14 +120,16 @@ spec:
         env:
         - name: REGISTRY_TITLE
           value: "Docker Registry"
-        - name: REGISTRY_URL
-          value: "http://localhost:30500"
+        - name: NGINX_PROXY_PASS_URL
+          value: "http://docker-registry:5000"
         - name: SINGLE_REGISTRY
           value: "true"
         - name: DELETE_IMAGES
           value: "true"
-        - name: NGINX_PROXY_PASS_URL
-          value: "http://docker-registry:5000"
+        - name: SHOW_CONTENT_DIGEST
+          value: "true"
+        - name: CATALOG_ELEMENTS_LIMIT
+          value: "1000"
         resources:
           requests:
             memory: 64Mi
