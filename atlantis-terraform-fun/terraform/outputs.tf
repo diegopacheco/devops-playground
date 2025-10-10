@@ -4,7 +4,7 @@ output "namespace_name" {
 }
 
 output "deployment_name" {
-  description = "The name of the nginx deployment"
+  description = "The name of the nginx deployment."
   value       = kubernetes_deployment.app.metadata[0].name
 }
 
