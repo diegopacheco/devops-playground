@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlantis
+  namespace: atlantis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: atlantis
+  template:
+    metadata:
+      labels:
+        app: atlantis
+    spec:
+      serviceAccountName: atlantis
+      containers:
+      - name: atlantis
+        image: ghcr.io/runatlantis/atlantis:latest
+        ports:
+        - name: http
+          containerPort: 4141
+        env:
+        - name: ATLANTIS_REPO_ALLOWLIST
+          value: "*"
+        - name: ATLANTIS_PORT
+          value: "4141"
+        - name: ATLANTIS_ATLANTIS_URL
+          value: "http://localhost:4141"
+        - name: ATLANTIS_REPO_CONFIG
+          value: "/etc/atlantis/repos.yaml"
+        - name: ATLANTIS_DATA_DIR
+          value: "/atlantis-data"
+        - name: ATLANTIS_ENABLE_POLICY_CHECKS
+          value: "false"
+        - name: ATLANTIS_GH_USER
+          value: "atlantis"
+        - name: ATLANTIS_GH_TOKEN
+          value: "local-token"
+        - name: ATLANTIS_WRITE_GIT_CREDS
+          value: "false"
+        volumeMounts:
+        - name: config
+          mountPath: /etc/atlantis
+          readOnly: true
+        - name: data
+          mountPath: /atlantis-data
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: config
+        configMap:
+          name: atlantis-config
+      - name: data
+        emptyDir: {}

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: atlantis-config
+  namespace: atlantis
+data:
+  repos.yaml: |
+    repos:
+    - id: /.*/
+      allow_custom_workflows: true
+      allowed_overrides:
+      - workflow
+      workflow: default
+    workflows:
+      default:
+        plan:
+          steps:
+          - init
+          - plan
+        apply:
+          steps:
+          - apply

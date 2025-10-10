@@ -1,0 +1,20 @@
+version: 3
+projects:
+- name: k8s-infrastructure
+  dir: terraform
+  workspace: default
+  terraform_version: v1.10.0
+  autoplan:
+    when_modified: ["*.tf", "*.tfvars"]
+    enabled: true
+  apply_requirements: []
+  workflow: default
+workflows:
+  default:
+    plan:
+      steps:
+      - init
+      - plan
+    apply:
+      steps:
+      - apply
