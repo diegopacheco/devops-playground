@@ -1,0 +1,32 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: rust-webservice-scaler
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: rust-webservice
+  minReplicaCount: 1
+  maxReplicaCount: 3
+  pollingInterval: 1
+  cooldownPeriod: 0
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleUp:
+          stabilizationWindowSeconds: 0
+          policies:
+          - type: Percent
+            value: 100
+            periodSeconds: 1
+          - type: Pods
+            value: 2
+            periodSeconds: 1
+          selectPolicy: Max
+        scaleDown:
+          stabilizationWindowSeconds: 10
+  triggers:
+  - type: cpu
+    metricType: Utilization
+    metadata:
+      value: "5"
