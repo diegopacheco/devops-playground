@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-app
+  labels:
+    app: otel-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: otel-app
+  template:
+    metadata:
+      labels:
+        app: otel-app
+    spec:
+      containers:
+      - name: otel-app
+        image: localhost/otel-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
+          value: "http://otel-collector:4318/v1/traces"
+        - name: MANAGEMENT_METRICS_EXPORT_OTLP_URL
+          value: "http://otel-collector:4318/v1/metrics"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-app
+spec:
+  type: ClusterIP
+  selector:
+    app: otel-app
+  ports:
+  - port: 8080
+    targetPort: 8080
