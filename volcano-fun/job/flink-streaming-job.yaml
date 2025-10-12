@@ -1,0 +1,31 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: flink-streaming-wordcount
+  namespace: flink
+spec:
+  schedulerName: volcano
+  minAvailable: 1
+  tasks:
+  - replicas: 1
+    name: streaming-job
+    template:
+      spec:
+        restartPolicy: OnFailure
+        containers:
+        - name: flink-job
+          image: flink:1.18
+          command:
+          - /bin/bash
+          - -c
+          - |
+            /opt/flink/bin/flink run \
+            -m flink-jobmanager:8081 \
+            -d \
+            /opt/flink/examples/streaming/WordCount.jar \
+            --input /opt/flink/README.txt
+          env:
+          - name: FLINK_PROPERTIES
+            value: |
+              jobmanager.rpc.address: flink-jobmanager
+              jobmanager.rpc.port: 6123

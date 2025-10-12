@@ -1,0 +1,34 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: flink-batch-wordcount
+  namespace: flink
+spec:
+  schedulerName: volcano
+  minAvailable: 1
+  tasks:
+  - replicas: 1
+    name: wordcount
+    policies:
+    - event: TaskCompleted
+      action: CompleteJob
+    template:
+      spec:
+        restartPolicy: Never
+        containers:
+        - name: flink-job
+          image: flink:1.18
+          command:
+          - /bin/bash
+          - -c
+          - |
+            /opt/flink/bin/flink run \
+            -m flink-jobmanager:8081 \
+            /opt/flink/examples/batch/WordCount.jar \
+            --input /opt/flink/README.txt \
+            --output /tmp/wordcount-output.txt
+          env:
+          - name: FLINK_PROPERTIES
+            value: |
+              jobmanager.rpc.address: flink-jobmanager
+              jobmanager.rpc.port: 6123

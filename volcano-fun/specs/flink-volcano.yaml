@@ -1,0 +1,114 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flink
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flink
+  namespace: flink
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: flink
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+- kind: ServiceAccount
+  name: flink
+  namespace: flink
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flink-jobmanager
+  namespace: flink
+spec:
+  type: NodePort
+  ports:
+  - name: rpc
+    port: 6123
+  - name: ui
+    port: 8081
+    nodePort: 30080
+  - name: blob
+    port: 6124
+  selector:
+    app: flink
+    component: jobmanager
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flink-jobmanager
+  namespace: flink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flink
+      component: jobmanager
+  template:
+    metadata:
+      labels:
+        app: flink
+        component: jobmanager
+    spec:
+      schedulerName: volcano
+      serviceAccountName: flink
+      containers:
+      - name: jobmanager
+        image: flink:1.18
+        args: ["jobmanager"]
+        ports:
+        - containerPort: 6123
+          name: rpc
+        - containerPort: 8081
+          name: ui
+        - containerPort: 6124
+          name: blob
+        env:
+        - name: FLINK_PROPERTIES
+          value: |
+            jobmanager.rpc.address: flink-jobmanager
+            jobmanager.rpc.port: 6123
+            jobmanager.memory.process.size: 1600m
+            taskmanager.memory.process.size: 1728m
+            taskmanager.numberOfTaskSlots: 2
+---
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: flink-taskmanager
+  namespace: flink
+spec:
+  schedulerName: volcano
+  minAvailable: 2
+  tasks:
+  - replicas: 2
+    name: taskmanager
+    template:
+      metadata:
+        labels:
+          app: flink
+          component: taskmanager
+      spec:
+        serviceAccountName: flink
+        containers:
+        - name: taskmanager
+          image: flink:1.18
+          args: ["taskmanager"]
+          ports:
+          - containerPort: 6122
+            name: rpc
+          env:
+          - name: FLINK_PROPERTIES
+            value: |
+              jobmanager.rpc.address: flink-jobmanager
+              jobmanager.rpc.port: 6123
+              taskmanager.memory.process.size: 1728m
+              taskmanager.numberOfTaskSlots: 2
