@@ -46,6 +46,9 @@ while [ $RETRY -lt 30 ]; do
   sleep 1
 done
 
+echo "Creating Volcano queues..."
+kubectl apply -f specs/volcano-queues.yaml
+
 echo "Deploying Flink with Volcano scheduler..."
 kubectl apply -f specs/flink-volcano.yaml
 
@@ -68,5 +71,20 @@ while true; do
 done
 
 echo "Cluster is ready!"
+echo ""
+echo "Available Volcano queues:"
+kubectl get queue
+echo ""
+echo "====================================="
+echo "UI Access:"
+echo "====================================="
 echo "Flink UI: http://localhost:30080"
-echo "Run ./ui.sh to access Volcano UI"
+echo "Spark UI: ./spark-ui.sh (after submitting Spark job)"
+echo "Volcano: ./ui.sh (status dashboard)"
+echo ""
+echo "====================================="
+echo "Submit Jobs:"
+echo "====================================="
+echo "Spark: ./job/submit-spark.sh"
+echo "Flink batch: ./job/submit-batch.sh"
+echo "Flink streaming: ./job/submit-streaming.sh"

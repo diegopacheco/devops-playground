@@ -1,0 +1,33 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: spark-long-running
+  namespace: default
+spec:
+  schedulerName: volcano
+  queue: spark-queue
+  minAvailable: 1
+  tasks:
+  - replicas: 1
+    name: spark-long
+    template:
+      spec:
+        restartPolicy: OnFailure
+        containers:
+        - name: spark
+          image: apache/spark:3.5.0
+          command:
+          - /opt/spark/bin/spark-submit
+          - --master
+          - local[4]
+          - --class
+          - org.apache.spark.examples.SparkPi
+          - /opt/spark/examples/jars/spark-examples_2.12-3.5.0.jar
+          - "100000"
+          resources:
+            requests:
+              cpu: "2"
+              memory: "2Gi"
+            limits:
+              cpu: "3"
+              memory: "3Gi"

@@ -2,6 +2,13 @@
 set -e
 
 echo "Submitting Flink streaming WordCount job via Volcano..."
+
+if kubectl get vcjob -n flink flink-streaming-wordcount >/dev/null 2>&1; then
+  echo "Deleting existing job..."
+  kubectl delete vcjob -n flink flink-streaming-wordcount
+  sleep 2
+fi
+
 kubectl apply -f job/flink-streaming-job.yaml
 
 echo ""

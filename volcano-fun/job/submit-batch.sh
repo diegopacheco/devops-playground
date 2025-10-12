@@ -2,6 +2,13 @@
 set -e
 
 echo "Submitting Flink batch WordCount job via Volcano..."
+
+if kubectl get vcjob -n flink flink-batch-wordcount >/dev/null 2>&1; then
+  echo "Deleting existing job..."
+  kubectl delete vcjob -n flink flink-batch-wordcount
+  sleep 2
+fi
+
 kubectl apply -f job/flink-wordcount-job.yaml
 
 echo ""

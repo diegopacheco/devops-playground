@@ -1,0 +1,36 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: spark-pi-simple
+  namespace: default
+spec:
+  schedulerName: volcano
+  queue: spark-queue
+  minAvailable: 1
+  tasks:
+  - replicas: 1
+    name: spark-pi
+    policies:
+    - event: TaskCompleted
+      action: CompleteJob
+    template:
+      spec:
+        restartPolicy: Never
+        containers:
+        - name: spark
+          image: apache/spark:3.5.0
+          command:
+          - /opt/spark/bin/spark-submit
+          - --master
+          - local[4]
+          - --class
+          - org.apache.spark.examples.SparkPi
+          - /opt/spark/examples/jars/spark-examples_2.12-3.5.0.jar
+          - "1000"
+          resources:
+            requests:
+              cpu: "2"
+              memory: "2Gi"
+            limits:
+              cpu: "3"
+              memory: "3Gi"

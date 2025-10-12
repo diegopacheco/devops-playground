@@ -1,0 +1,43 @@
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: Queue
+metadata:
+  name: default
+spec:
+  weight: 1
+  reclaimable: true
+  capability:
+    cpu: "2"
+    memory: "2Gi"
+---
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: Queue
+metadata:
+  name: high-priority
+spec:
+  weight: 3
+  reclaimable: false
+  capability:
+    cpu: "4"
+    memory: "4Gi"
+---
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: Queue
+metadata:
+  name: low-priority
+spec:
+  weight: 1
+  reclaimable: true
+  capability:
+    cpu: "1"
+    memory: "1Gi"
+---
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: Queue
+metadata:
+  name: spark-queue
+spec:
+  weight: 2
+  reclaimable: true
+  capability:
+    cpu: "4"
+    memory: "4Gi"

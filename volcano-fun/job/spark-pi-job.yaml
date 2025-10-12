@@ -1,0 +1,66 @@
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: spark-pi
+  namespace: default
+spec:
+  schedulerName: volcano
+  queue: spark-queue
+  minAvailable: 3
+  tasks:
+  - replicas: 1
+    name: driver
+    policies:
+    - event: TaskCompleted
+      action: CompleteJob
+    template:
+      metadata:
+        labels:
+          spark-role: driver
+      spec:
+        restartPolicy: OnFailure
+        containers:
+        - name: spark-driver
+          image: apache/spark:3.5.0
+          command:
+          - /bin/bash
+          - -c
+          - |
+            /opt/spark/bin/spark-submit \
+            --master spark://spark-master:7077 \
+            --deploy-mode client \
+            --class org.apache.spark.examples.SparkPi \
+            --conf spark.executor.instances=2 \
+            --conf spark.kubernetes.namespace=default \
+            --conf spark.kubernetes.container.image=apache/spark:3.5.0 \
+            local:///opt/spark/examples/jars/spark-examples_2.12-3.5.0.jar 1000
+          resources:
+            requests:
+              cpu: "1"
+              memory: "1Gi"
+            limits:
+              cpu: "2"
+              memory: "2Gi"
+  - replicas: 2
+    name: executor
+    template:
+      metadata:
+        labels:
+          spark-role: executor
+      spec:
+        restartPolicy: OnFailure
+        containers:
+        - name: spark-executor
+          image: apache/spark:3.5.0
+          command:
+          - /bin/bash
+          - -c
+          - |
+            /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+          resources:
+            requests:
+              cpu: "1"
+              memory: "1Gi"
+            limits:
+              cpu: "2"
+              memory: "2Gi"
