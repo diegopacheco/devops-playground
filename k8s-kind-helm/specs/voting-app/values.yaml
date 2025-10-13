@@ -1,0 +1,11 @@
+app:
+  name: voting-app
+  replicas: 1
+  image: localhost/voting-app:latest
+  port: 8080
+
+redis:
+  name: redis
+  replicas: 1
+  image: redis:latest
+  port: 6379

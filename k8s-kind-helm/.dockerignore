@@ -1,0 +1,6 @@
+target
+.git
+.gitignore
+*.sh
+specs
+README.md
