@@ -75,5 +75,28 @@ if [ $attempt -eq $max_attempts ]; then
   echo "Warning: Services did not become ready in time"
 fi
 
+echo "Installing Kubernetes Dashboard..."
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+echo "Creating dashboard admin user..."
+kubectl create serviceaccount dashboard-admin -n kubernetes-dashboard 2>/dev/null || true
+kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:dashboard-admin 2>/dev/null || true
+
+echo "Waiting for dashboard to be ready..."
+max_wait=60
+elapsed=0
+while [ $elapsed -lt $max_wait ]; do
+  pod_count=$(kubectl get pods -n kubernetes-dashboard --no-headers 2>/dev/null | wc -l || echo "0")
+  if [ "$pod_count" -gt 0 ]; then
+    if kubectl wait --for=condition=ready pod --all -n kubernetes-dashboard --timeout=1s >/dev/null 2>&1; then
+      echo "Dashboard is ready!"
+      break
+    fi
+  fi
+  elapsed=$((elapsed + 1))
+  sleep 1
+done
+
 echo "KIND cluster with Knative is ready!"
 echo "Use kubectl get ksvc to see your services"
+echo "Use ./ui.sh to access the Kubernetes Dashboard"
