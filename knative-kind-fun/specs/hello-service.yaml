@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - image: hashicorp/http-echo:latest
+        args:
+        - "-text=Hello from Knative Function! Request processed successfully."
+        ports:
+        - containerPort: 5678
