@@ -12,33 +12,16 @@ public class SedonaQueryJob {
 
         SedonaContext.create(env, tableEnv);
 
-        System.out.println("=== Apache Sedona Spatial Query Tests ===");
+        System.out.println("=== Apache Sedona Simple Spatial Query Test ===");
 
         Table result = tableEnv.sqlQuery(
             "SELECT " +
-            "  'Test 1: Geometries' as test_name, " +
-            "  ST_AsText(ST_GeomFromText('POINT(1 2)')) as point, " +
-            "  ST_AsText(ST_GeomFromText('POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))')) as polygon " +
-            "UNION ALL SELECT " +
-            "  'Test 2: Area' as test_name, " +
-            "  CAST(ST_Area(ST_GeomFromText('POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))')) AS STRING) as point, " +
-            "  'Area = 100.0' as polygon " +
-            "UNION ALL SELECT " +
-            "  'Test 3: Distance' as test_name, " +
-            "  CAST(ST_Distance(ST_GeomFromText('POINT(0 0)'), ST_GeomFromText('POINT(3 4)')) AS STRING) as point, " +
-            "  'Distance = 5.0' as polygon " +
-            "UNION ALL SELECT " +
-            "  'Test 4: Contains' as test_name, " +
-            "  CAST(ST_Contains(ST_GeomFromText('POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))'), ST_GeomFromText('POINT(5 5)')) AS STRING) as point, " +
-            "  'Contains = true' as polygon " +
-            "UNION ALL SELECT " +
-            "  'Test 5: Buffer' as test_name, " +
-            "  SUBSTRING(ST_AsText(ST_Buffer(ST_GeomFromText('POINT(0 0)'), 5.0)), 1, 20) as point, " +
-            "  'Buffer created' as polygon"
+            "  ST_AsText(ST_GeomFromText('POINT(1 2)')) as point_wkt, " +
+            "  ST_Area(ST_GeomFromText('POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))')) as polygon_area, " +
+            "  ST_Distance(ST_GeomFromText('POINT(0 0)'), ST_GeomFromText('POINT(3 4)')) as point_distance"
         );
 
         result.execute().print();
-
-        System.out.println("=== All Sedona spatial query tests completed! ===");
+        System.out.println("=== Sedona spatial query test completed successfully! ===");
     }
 }
