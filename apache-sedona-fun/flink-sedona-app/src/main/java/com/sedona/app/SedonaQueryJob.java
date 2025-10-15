@@ -19,7 +19,7 @@ public class SedonaQueryJob {
         long startTime = System.currentTimeMillis();
 
         Table result = tableEnv.sqlQuery(
-            "SELECT ST_AsText(ST_Point(1.0, 2.0)) as result"
+            "SELECT ST_AsText(ST_Point(1.0, 2.0)) as point_text"
         );
 
         result.execute().print();
