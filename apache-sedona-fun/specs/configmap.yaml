@@ -10,9 +10,17 @@ data:
     taskmanager.numberOfTaskSlots: 4
     taskmanager.memory.process.size: 1728m
     taskmanager.memory.flink.size: 1280m
-    parallelism.default: 2
+    parallelism.default: 1
     taskmanager.registration.timeout: 5min
     taskmanager.rpc.bind-policy: ip
+    # Performance optimizations for fast execution
+    execution.buffer-timeout: 0
+    taskmanager.network.memory.fraction: 0.1
+    taskmanager.network.memory.min: 64mb
+    taskmanager.network.memory.max: 128mb
+    # Faster scheduling
+    jobmanager.scheduler: default
+    restart-strategy: none
   log4j-console.properties: |
     rootLogger.level = INFO
     rootLogger.appenderRef.console.ref = ConsoleAppender
