@@ -1,0 +1,15 @@
+{
+  "name": "cdk8s-nginx-deployment",
+  "version": "1.0.0",
+  "description": "CDK8s deployment for nginx",
+  "main": "main.js",
+  "scripts": {
+    "synth": "node main.js",
+    "deploy": "kubectl apply -f dist/"
+  },
+  "dependencies": {
+    "cdk8s": "^2.68.0",
+    "cdk8s-plus-27": "^2.7.0",
+    "constructs": "^10.3.0"
+  }
+}
