@@ -16,9 +16,12 @@ podman save -o /tmp/flink-sedona.tar localhost/flink-sedona:latest
 kind load image-archive /tmp/flink-sedona.tar --name flink-sedona-cluster 2>/dev/null
 rm -f /tmp/flink-sedona.tar
 
-echo "4. Restarting JobManager only..."
+echo "4. Restarting Flink cluster..."
 kubectl delete pod -n flink-sedona -l component=jobmanager 2>/dev/null
+kubectl delete pod -n flink-sedona -l component=taskmanager 2>/dev/null
+echo "Waiting for pods to restart..."
 kubectl wait --for=condition=ready pod -l component=jobmanager -n flink-sedona --timeout=60s 2>/dev/null
+kubectl wait --for=condition=ready pod -l component=taskmanager -n flink-sedona --timeout=60s 2>/dev/null
 
 echo "5. Submitting ultra-simple job..."
 sleep 3

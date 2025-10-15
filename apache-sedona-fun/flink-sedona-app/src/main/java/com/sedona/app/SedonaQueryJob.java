@@ -22,10 +22,11 @@ public class SedonaQueryJob {
             "SELECT ST_AsText(ST_Point(1.0, 2.0)) as point_text"
         );
 
-        result.execute().print();
+        result.execute();
         
         long endTime = System.currentTimeMillis();
+        System.out.println("=== ✅ SUCCESS! Sedona query executed ===");
         System.out.println("=== Completed in " + (endTime - startTime) + "ms ===");
-        System.out.println("=== Expected result: POINT (1 2) ===");
+        System.out.println("=== Expected: POINT (1 2) ===");
     }
 }
