@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flink-taskmanager
+  namespace: flink-sedona
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flink
+      component: taskmanager
+  template:
+    metadata:
+      labels:
+        app: flink
+        component: taskmanager
+    spec:
+      hostname: flink-taskmanager
+      subdomain: flink-taskmanager-svc
+      containers:
+      - name: taskmanager
+        image: localhost/flink-sedona:latest
+        imagePullPolicy: Never
+        args: ["taskmanager"]
+        ports:
+        - containerPort: 6122
+          name: rpc
+        - containerPort: 6125
+          name: query-state
+        env:
+        - name: FLINK_PROPERTIES
+          value: |
+            jobmanager.rpc.address: flink-jobmanager
+            taskmanager.numberOfTaskSlots: 4
+            parallelism.default: 2
+            taskmanager.host: $(POD_NAME).flink-taskmanager-svc.flink-sedona.svc.cluster.local
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - name: flink-config-volume
+          mountPath: /opt/flink/conf
+      volumes:
+      - name: flink-config-volume
+        configMap:
+          name: flink-config
+          items:
+          - key: flink-conf.yaml
+            path: flink-conf.yaml
+          - key: log4j-console.properties
+            path: log4j-console.properties
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flink-taskmanager-svc
+  namespace: flink-sedona
+spec:
+  clusterIP: None
+  selector:
+    app: flink
+    component: taskmanager
+  ports:
+  - name: rpc
+    port: 6122
+    targetPort: 6122
+  - name: query-state
+    port: 6125
+    targetPort: 6125
