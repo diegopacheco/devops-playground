@@ -1,0 +1,10 @@
+id |  user_name  |  product   | amount  |  status  
+---+-------------+------------+---------+----------
+1  | Alice Smith | Laptop     | 1200.00 | completed
+2  | Alice Smith | Mouse      | 25.00   | completed
+3  | Bob Jones   | Keyboard   | 75.00   | pending
+4  | Carol White | Monitor    | 350.00  | completed
+5  | David Brown | Headphones | 150.00  | shipped
+6  | Eve Black   | Webcam     | 80.00   | pending
+7  | Alice Smith | USB Hub    | 45.00   | completed
+8  | Carol White | Desk Chair | 299.00  | completed

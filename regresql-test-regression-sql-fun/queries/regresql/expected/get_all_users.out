@@ -1,0 +1,7 @@
+id |    name     |     email      | age
+---+-------------+----------------+----
+1  | Alice Smith | alice@test.com | 30
+2  | Bob Jones   | bob@test.com   | 25
+3  | Carol White | carol@test.com | 35
+4  | David Brown | david@test.com | 28
+5  | Eve Black   | eve@test.com   | 32

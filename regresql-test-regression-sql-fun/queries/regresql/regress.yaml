@@ -1,0 +1,2 @@
+pguri: postgres://testuser:testpass@localhost:5432/testdb?sslmode=disable
+root: queries

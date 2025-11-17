@@ -1,0 +1,7 @@
+id |  user_name  |  product   | amount 
+---+-------------+------------+--------
+1  | Alice Smith | Laptop     | 1200.00
+2  | Alice Smith | Mouse      | 25.00
+4  | Carol White | Monitor    | 350.00
+7  | Alice Smith | USB Hub    | 45.00
+8  | Carol White | Desk Chair | 299.00
