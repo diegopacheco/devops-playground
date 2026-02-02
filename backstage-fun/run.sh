@@ -42,6 +42,8 @@ podman run -it --rm \
   -v "$SCRIPT_DIR/catalog:/app/catalog:ro" \
   -v "$SCRIPT_DIR/templates:/app/templates:ro" \
   -v "$SCRIPT_DIR/app-config.yaml:/app/app-config.yaml:ro" \
+  -e APP_CONFIG_app_baseUrl="http://localhost:$PORT" \
+  -e APP_CONFIG_backend_baseUrl="http://localhost:$PORT" \
   -e K8S_URL="${K8S_URL/127.0.0.1/host.docker.internal}" \
   -e K8S_TOKEN="$K8S_TOKEN" \
   roadiehq/community-backstage-image:latest
