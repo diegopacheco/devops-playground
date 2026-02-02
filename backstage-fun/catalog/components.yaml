@@ -10,10 +10,11 @@ metadata:
     github.com/project-slug: acme/orders-service
     backstage.io/kubernetes-id: orders-service
     backstage.io/kubernetes-namespace: default
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   lifecycle: production
-  owner: backend-team
+  owner: group:default/backend-team
   system: ecommerce
   providesApis:
     - orders-api
@@ -36,7 +37,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: backend-team
+  owner: group:default/backend-team
   system: ecommerce
   providesApis:
     - inventory-api
@@ -55,7 +56,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: payments-team
+  owner: group:default/payments-team
   system: ecommerce
   providesApis:
     - payments-api
@@ -75,7 +76,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: platform-team
+  owner: group:default/platform-team
   system: identity
   providesApis:
     - users-api
@@ -95,7 +96,7 @@ metadata:
 spec:
   type: website
   lifecycle: production
-  owner: frontend-team
+  owner: group:default/frontend-team
   system: ecommerce
   consumesApis:
     - orders-api

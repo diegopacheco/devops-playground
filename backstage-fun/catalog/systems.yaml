@@ -4,7 +4,7 @@ metadata:
   name: ecommerce
   description: E-commerce platform for online sales
 spec:
-  owner: backend-team
+  owner: group:default/backend-team
   domain: retail
 ---
 apiVersion: backstage.io/v1alpha1
@@ -13,7 +13,7 @@ metadata:
   name: identity
   description: Identity and access management system
 spec:
-  owner: platform-team
+  owner: group:default/platform-team
   domain: platform
 ---
 apiVersion: backstage.io/v1alpha1
@@ -22,7 +22,7 @@ metadata:
   name: retail
   description: Retail business domain
 spec:
-  owner: backend-team
+  owner: group:default/backend-team
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Domain
@@ -30,4 +30,4 @@ metadata:
   name: platform
   description: Platform services domain
 spec:
-  owner: platform-team
+  owner: group:default/platform-team

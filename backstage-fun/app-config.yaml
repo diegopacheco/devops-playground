@@ -6,7 +6,7 @@ organization:
 backend:
   baseUrl: http://localhost:3000
   listen:
-    port: 3000
+    port: 7000
   database:
     client: better-sqlite3
     connection: ':memory:'
@@ -21,7 +21,15 @@ catalog:
     - allow: [Component, System, API, Resource, Location, Domain, Group, User, Template]
   locations:
     - type: file
-      target: /app/catalog/all.yaml
+      target: /app/catalog/components.yaml
+    - type: file
+      target: /app/catalog/apis.yaml
+    - type: file
+      target: /app/catalog/systems.yaml
+    - type: file
+      target: /app/catalog/groups.yaml
+    - type: file
+      target: /app/templates/java-service/template.yaml
 kubernetes:
   serviceLocatorMethod:
     type: multiTenant

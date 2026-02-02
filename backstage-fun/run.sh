@@ -32,13 +32,16 @@ K8S_TOKEN=$(kubectl get secret backstage-token -n backstage -o jsonpath='{.data.
 
 echo "K8S_URL: $K8S_URL"
 
-echo "Starting Backstage on port 3000..."
+echo "Opening Backstage in browser..."
+sleep 2 && open "http://localhost:$PORT" &
+
+echo "Starting Backstage on port $PORT..."
 podman run -it --rm \
-  -p 3000:3000 \
+  -p $PORT:7000 \
   --add-host=host.docker.internal:host-gateway \
   -v "$SCRIPT_DIR/catalog:/app/catalog:ro" \
   -v "$SCRIPT_DIR/templates:/app/templates:ro" \
-  -v "$SCRIPT_DIR/app-config.yaml:/app/app-config.local.yaml:ro" \
+  -v "$SCRIPT_DIR/app-config.yaml:/app/app-config.yaml:ro" \
   -e K8S_URL="${K8S_URL/127.0.0.1/host.docker.internal}" \
   -e K8S_TOKEN="$K8S_TOKEN" \
   roadiehq/community-backstage-image:latest

@@ -5,8 +5,8 @@ metadata:
   description: All catalog entities
 spec:
   targets:
-    - ./components.yaml
-    - ./apis.yaml
-    - ./systems.yaml
-    - ./groups.yaml
-    - ../templates/java-service/template.yaml
+    - /app/catalog/components.yaml
+    - /app/catalog/apis.yaml
+    - /app/catalog/systems.yaml
+    - /app/catalog/groups.yaml
+    - /app/templates/java-service/template.yaml

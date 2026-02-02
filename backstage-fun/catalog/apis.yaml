@@ -8,7 +8,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: backend-team
+  owner: group:default/backend-team
   system: ecommerce
   definition: |
     openapi: 3.0.0
@@ -50,7 +50,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: backend-team
+  owner: group:default/backend-team
   system: ecommerce
   definition: |
     openapi: 3.0.0
@@ -87,7 +87,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: payments-team
+  owner: group:default/payments-team
   system: ecommerce
   definition: |
     openapi: 3.0.0
@@ -124,7 +124,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: platform-team
+  owner: group:default/platform-team
   system: identity
   definition: |
     openapi: 3.0.0

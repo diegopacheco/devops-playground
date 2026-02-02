@@ -7,27 +7,26 @@ Running Backstage locally using podman with Kind Kubernetes cluster integration.
 * podman installed
 * kind installed
 * kubectl installed
-* Port 7007 available
+* Port 3000 available
 
 ## Structure
 
 ```
-├── catalog/           # Backstage catalog entities
-│   ├── all.yaml       # Location file pointing to all entities
-│   ├── apis.yaml      # API definitions
-│   ├── components.yaml # Service components
-│   ├── groups.yaml    # Team groups
-│   └── systems.yaml   # Systems and domains
-├── k8s/               # Kubernetes manifests
-│   ├── backstage-sa.yaml  # Service account for Backstage
-│   └── services.yaml      # Sample service deployments
-├── templates/         # Software templates
-│   └── java-service/  # Java Spring Boot template
-├── app-config.yaml    # Backstage configuration
-├── kind-config.yaml   # Kind cluster configuration
-├── run.sh             # Start everything
-├── stop.sh            # Stop and cleanup
-└── test.sh            # Verify setup
+├── catalog/           
+│   ├── apis.yaml         # 4 API definitions (orders, inventory, payments, users)
+│   ├── components.yaml   # 5 service components with K8s annotations
+│   ├── groups.yaml       # 4 team groups
+│   └── systems.yaml      # 2 systems and 2 domains
+├── k8s/               
+│   ├── backstage-sa.yaml # Service account for K8s integration
+│   └── services.yaml     # 5 deployments matching catalog components
+├── templates/         
+│   └── java-service/     # Java Spring Boot software template
+├── app-config.yaml       # Backstage configuration
+├── kind-config.yaml      # Kind cluster configuration
+├── run.sh                # Start everything and open browser
+├── stop.sh               # Stop and cleanup
+└── test.sh               # Verify setup
 ```
 
 ## How to Run
@@ -37,26 +36,39 @@ Running Backstage locally using podman with Kind Kubernetes cluster integration.
 ```
 
 This will:
-1. Create a Kind cluster named `backstage-cluster`
-2. Deploy sample services to the cluster
-3. Start kubectl proxy for Kubernetes API access
-4. Run Backstage with catalog and Kubernetes integration
+1. Create a Kind cluster named backstage-cluster
+2. Deploy 5 sample services to the cluster
+3. Start Backstage with catalog preloaded
+4. Open browser at http://localhost:3000
+
+## Catalog Contents
+
+Components:
+* orders-service - Order processing (Java/Spring Boot)
+* inventory-service - Inventory management (Java/Spring Boot)
+* payments-service - Payment processing (Go)
+* users-service - User management (Python/FastAPI)
+* web-frontend - Web application (React/TypeScript)
+
+APIs:
+* orders-api - Order management REST API
+* inventory-api - Inventory REST API
+* payments-api - Payment processing REST API
+* users-api - User management REST API
+
+Systems:
+* ecommerce - E-commerce platform
+* identity - Identity and access management
+
+Templates:
+* Java Spring Boot Service - Create new Java microservices
 
 ## Access
 
-* Backstage UI: http://localhost:7007
-* Software Catalog: http://localhost:7007/catalog
-* Create from Template: http://localhost:7007/create
-* Kubernetes view: Click on any component and go to the Kubernetes tab
-
-## Components
-
-The catalog includes:
-* **orders-service** - Order processing (Java/Spring Boot)
-* **inventory-service** - Inventory management (Java/Spring Boot)
-* **payments-service** - Payment processing (Go)
-* **users-service** - User management (Python/FastAPI)
-* **web-frontend** - Web application (React/TypeScript)
+* Catalog: http://localhost:3000/catalog
+* APIs: http://localhost:3000/api-docs
+* Create: http://localhost:3000/create
+* Kubernetes: Click any component > Kubernetes tab
 
 ## Test
 
@@ -69,5 +81,3 @@ The catalog includes:
 ```bash
 ./stop.sh
 ```
-
-This will delete the Kind cluster and stop the kubectl proxy.
