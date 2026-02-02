@@ -2,6 +2,10 @@
 
 Running Backstage locally using podman with Kind Kubernetes cluster integration.
 
+| Catalog | APIs | Docs | Tech Radar | Cost | GraphQL |
+|---------|------|------|------------|------|---------|
+| <img src="1.backstage-catalog.png" width="150"/> | <img src="2.backstage-api.png" width="150"/> | <img src="3.backstage-docs.png" width="150"/> | <img src="4-tech-radar.png" width="150"/> | <img src="5-cost.png" width="150"/> | <img src="6-graphql.png" width="150"/> |
+
 ## Prerequisites
 
 * podman installed
