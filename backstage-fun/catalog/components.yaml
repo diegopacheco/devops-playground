@@ -101,3 +101,21 @@ spec:
   consumesApis:
     - orders-api
     - users-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sample-java-service
+  description: Sample Java Spring Boot microservice created from template
+  tags:
+    - java
+    - spring-boot
+  annotations:
+    github.com/project-slug: acme/sample-java-service
+    backstage.io/kubernetes-id: sample-java-service
+    backstage.io/kubernetes-namespace: default
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/backend-team
+  system: ecommerce

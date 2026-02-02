@@ -22,6 +22,12 @@ auth:
   providers:
     guest:
       dangerouslyAllowOutsideDevelopment: true
+techdocs:
+  builder: local
+  generator:
+    runIn: local
+  publisher:
+    type: local
 catalog:
   import:
     entityFilename: catalog-info.yaml
