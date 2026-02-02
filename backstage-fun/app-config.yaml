@@ -1,60 +1,12 @@
-app:
-  title: Backstage
-  baseUrl: http://localhost:3000
-organization:
-  name: Acme Corp
-backend:
-  baseUrl: http://localhost:3000
-  listen:
-    port: 7000
-    host: 0.0.0.0
-  cors:
-    origin: http://localhost:3000
-    methods: [GET, POST, PUT, DELETE]
-    credentials: true
-  database:
-    client: better-sqlite3
-    connection: ':memory:'
-  reading:
-    allow:
-      - host: '*'
-auth:
-  providers:
-    guest:
-      dangerouslyAllowOutsideDevelopment: true
-techdocs:
-  builder: local
-  generator:
-    runIn: local
-  publisher:
-    type: local
 catalog:
-  import:
-    entityFilename: catalog-info.yaml
-  rules:
-    - allow: [Component, System, API, Resource, Location, Domain, Group, User, Template]
   locations:
-    - type: url
-      target: file:///app/catalog/components.yaml
-    - type: url
-      target: file:///app/catalog/apis.yaml
-    - type: url
-      target: file:///app/catalog/systems.yaml
-    - type: url
-      target: file:///app/catalog/groups.yaml
-    - type: url
-      target: file:///app/templates/java-service/template.yaml
-    - type: url
-      target: file:///app/sample-java-service/catalog-info.yaml
-kubernetes:
-  serviceLocatorMethod:
-    type: multiTenant
-  clusterLocatorMethods:
-    - type: config
-      clusters:
-        - url: ${K8S_URL}
-          name: kind-backstage
-          authProvider: serviceAccount
-          skipTLSVerify: true
-          skipMetricsLookup: true
-          serviceAccountToken: ${K8S_TOKEN}
+    - type: file
+      target: /usr/src/app/catalog/components.yaml
+    - type: file
+      target: /usr/src/app/catalog/apis.yaml
+    - type: file
+      target: /usr/src/app/catalog/systems.yaml
+    - type: file
+      target: /usr/src/app/catalog/groups.yaml
+    - type: file
+      target: /usr/src/app/templates/java-service/template.yaml

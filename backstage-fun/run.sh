@@ -39,12 +39,13 @@ echo "Starting Backstage on port $PORT..."
 podman run -it --rm \
   -p $PORT:7000 \
   --add-host=host.docker.internal:host-gateway \
-  -v "$SCRIPT_DIR/catalog:/app/catalog:ro" \
-  -v "$SCRIPT_DIR/templates:/app/templates:ro" \
-  -v "$SCRIPT_DIR/sample-java-service:/app/sample-java-service:ro" \
-  -v "$SCRIPT_DIR/app-config.yaml:/app/app-config.yaml:ro" \
+  -v "$SCRIPT_DIR/catalog:/usr/src/app/catalog:ro" \
+  -v "$SCRIPT_DIR/templates:/usr/src/app/templates:ro" \
+  -v "$SCRIPT_DIR/sample-java-service:/usr/src/app/sample-java-service:ro" \
+  -v "$SCRIPT_DIR/app-config.yaml:/usr/src/app/app-config.production.yaml:ro" \
   -e APP_CONFIG_app_baseUrl="http://localhost:$PORT" \
   -e APP_CONFIG_backend_baseUrl="http://localhost:$PORT" \
   -e K8S_URL="${K8S_URL/127.0.0.1/host.docker.internal}" \
   -e K8S_TOKEN="$K8S_TOKEN" \
-  roadiehq/community-backstage-image:latest
+  roadiehq/community-backstage-image:latest \
+  node packages/backend --config app-config.yaml --config app-config.production.yaml
