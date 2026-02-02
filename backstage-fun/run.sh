@@ -19,19 +19,19 @@ while [ "$(kubectl get pods -n default -o jsonpath='{.items[*].status.phase}' | 
   sleep 1
 done
 
-echo "Starting kubectl proxy..."
-kubectl proxy --port=8001 &
-PROXY_PID=$!
+echo "Getting K8s credentials..."
+K8S_URL=$(kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}')
+K8S_TOKEN=$(kubectl get secret backstage-token -n backstage -o jsonpath='{.data.token}' | base64 --decode)
 
-echo "Starting Backstage..."
+echo "K8S_URL: $K8S_URL"
+
+echo "Starting Backstage on port 7000..."
 podman run -it --rm \
-  -p 7007:7007 \
-  --network host \
+  -p 7000:7000 \
+  --add-host=host.docker.internal:host-gateway \
   -v "$SCRIPT_DIR/catalog:/app/catalog:ro" \
   -v "$SCRIPT_DIR/templates:/app/templates:ro" \
   -v "$SCRIPT_DIR/app-config.yaml:/app/app-config.local.yaml:ro" \
-  -e APP_CONFIG_app_baseUrl=http://localhost:7007 \
-  -e APP_CONFIG_backend_baseUrl=http://localhost:7007 \
+  -e K8S_URL="${K8S_URL/127.0.0.1/host.docker.internal}" \
+  -e K8S_TOKEN="$K8S_TOKEN" \
   roadiehq/community-backstage-image:latest
-
-kill $PROXY_PID 2>/dev/null

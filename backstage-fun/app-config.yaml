@@ -1,15 +1,19 @@
 app:
   title: Backstage
-  baseUrl: http://localhost:7007
+  baseUrl: http://localhost:7000
 organization:
   name: Acme Corp
 backend:
-  baseUrl: http://localhost:7007
+  baseUrl: http://localhost:7000
   listen:
-    port: 7007
+    port: 7000
   database:
     client: better-sqlite3
     connection: ':memory:'
+auth:
+  providers:
+    guest:
+      dangerouslyAllowOutsideDevelopment: true
 catalog:
   import:
     entityFilename: catalog-info.yaml
@@ -22,4 +26,11 @@ kubernetes:
   serviceLocatorMethod:
     type: multiTenant
   clusterLocatorMethods:
-    - type: localKubectlProxy
+    - type: config
+      clusters:
+        - url: ${K8S_URL}
+          name: kind-backstage
+          authProvider: serviceAccount
+          skipTLSVerify: true
+          skipMetricsLookup: true
+          serviceAccountToken: ${K8S_TOKEN}

@@ -13,7 +13,7 @@ kubectl get svc -A
 
 echo ""
 echo "Testing Backstage..."
-curl -s http://localhost:7007/api/catalog/entities?filter=kind=component | head -c 500
+curl -s http://localhost:7000/api/catalog/entities?filter=kind=component | head -c 500
 
 echo ""
 echo "Done."
