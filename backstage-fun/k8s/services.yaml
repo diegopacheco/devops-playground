@@ -1,0 +1,194 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-service
+  namespace: default
+  labels:
+    app: orders-service
+    backstage.io/kubernetes-id: orders-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-service
+  template:
+    metadata:
+      labels:
+        app: orders-service
+        backstage.io/kubernetes-id: orders-service
+    spec:
+      containers:
+        - name: orders-service
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-service
+  namespace: default
+  labels:
+    backstage.io/kubernetes-id: orders-service
+spec:
+  selector:
+    app: orders-service
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+  namespace: default
+  labels:
+    app: inventory-service
+    backstage.io/kubernetes-id: inventory-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  template:
+    metadata:
+      labels:
+        app: inventory-service
+        backstage.io/kubernetes-id: inventory-service
+    spec:
+      containers:
+        - name: inventory-service
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+  namespace: default
+  labels:
+    backstage.io/kubernetes-id: inventory-service
+spec:
+  selector:
+    app: inventory-service
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-service
+  namespace: default
+  labels:
+    app: payments-service
+    backstage.io/kubernetes-id: payments-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments-service
+  template:
+    metadata:
+      labels:
+        app: payments-service
+        backstage.io/kubernetes-id: payments-service
+    spec:
+      containers:
+        - name: payments-service
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-service
+  namespace: default
+  labels:
+    backstage.io/kubernetes-id: payments-service
+spec:
+  selector:
+    app: payments-service
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-service
+  namespace: default
+  labels:
+    app: users-service
+    backstage.io/kubernetes-id: users-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-service
+  template:
+    metadata:
+      labels:
+        app: users-service
+        backstage.io/kubernetes-id: users-service
+    spec:
+      containers:
+        - name: users-service
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+  namespace: default
+  labels:
+    backstage.io/kubernetes-id: users-service
+spec:
+  selector:
+    app: users-service
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+  namespace: default
+  labels:
+    app: web-frontend
+    backstage.io/kubernetes-id: web-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+        backstage.io/kubernetes-id: web-frontend
+    spec:
+      containers:
+        - name: web-frontend
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-frontend
+  namespace: default
+  labels:
+    backstage.io/kubernetes-id: web-frontend
+spec:
+  selector:
+    app: web-frontend
+  ports:
+    - port: 80
+      targetPort: 80

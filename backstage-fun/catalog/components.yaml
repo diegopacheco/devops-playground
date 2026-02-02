@@ -1,0 +1,102 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: orders-service
+  description: Handles order processing and management
+  tags:
+    - java
+    - spring-boot
+  annotations:
+    github.com/project-slug: acme/orders-service
+    backstage.io/kubernetes-id: orders-service
+    backstage.io/kubernetes-namespace: default
+spec:
+  type: service
+  lifecycle: production
+  owner: backend-team
+  system: ecommerce
+  providesApis:
+    - orders-api
+  consumesApis:
+    - inventory-api
+    - payments-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: inventory-service
+  description: Manages product inventory and stock levels
+  tags:
+    - java
+    - spring-boot
+  annotations:
+    github.com/project-slug: acme/inventory-service
+    backstage.io/kubernetes-id: inventory-service
+    backstage.io/kubernetes-namespace: default
+spec:
+  type: service
+  lifecycle: production
+  owner: backend-team
+  system: ecommerce
+  providesApis:
+    - inventory-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: payments-service
+  description: Processes payments and transactions
+  tags:
+    - go
+  annotations:
+    github.com/project-slug: acme/payments-service
+    backstage.io/kubernetes-id: payments-service
+    backstage.io/kubernetes-namespace: default
+spec:
+  type: service
+  lifecycle: production
+  owner: payments-team
+  system: ecommerce
+  providesApis:
+    - payments-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: users-service
+  description: User authentication and profile management
+  tags:
+    - python
+    - fastapi
+  annotations:
+    github.com/project-slug: acme/users-service
+    backstage.io/kubernetes-id: users-service
+    backstage.io/kubernetes-namespace: default
+spec:
+  type: service
+  lifecycle: production
+  owner: platform-team
+  system: identity
+  providesApis:
+    - users-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: web-frontend
+  description: Customer facing web application
+  tags:
+    - react
+    - typescript
+  annotations:
+    github.com/project-slug: acme/web-frontend
+    backstage.io/kubernetes-id: web-frontend
+    backstage.io/kubernetes-namespace: default
+spec:
+  type: website
+  lifecycle: production
+  owner: frontend-team
+  system: ecommerce
+  consumesApis:
+    - orders-api
+    - users-api

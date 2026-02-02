@@ -1,0 +1,157 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: orders-api
+  description: API for order management
+  tags:
+    - rest
+spec:
+  type: openapi
+  lifecycle: production
+  owner: backend-team
+  system: ecommerce
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Orders API
+      version: 1.0.0
+    paths:
+      /orders:
+        get:
+          summary: List orders
+          responses:
+            '200':
+              description: List of orders
+        post:
+          summary: Create order
+          responses:
+            '201':
+              description: Order created
+      /orders/{id}:
+        get:
+          summary: Get order by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+          responses:
+            '200':
+              description: Order details
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: inventory-api
+  description: API for inventory management
+  tags:
+    - rest
+spec:
+  type: openapi
+  lifecycle: production
+  owner: backend-team
+  system: ecommerce
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Inventory API
+      version: 1.0.0
+    paths:
+      /products:
+        get:
+          summary: List products
+          responses:
+            '200':
+              description: List of products
+      /products/{id}/stock:
+        get:
+          summary: Get stock level
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+          responses:
+            '200':
+              description: Stock level
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: payments-api
+  description: API for payment processing
+  tags:
+    - rest
+spec:
+  type: openapi
+  lifecycle: production
+  owner: payments-team
+  system: ecommerce
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Payments API
+      version: 1.0.0
+    paths:
+      /payments:
+        post:
+          summary: Process payment
+          responses:
+            '200':
+              description: Payment processed
+      /payments/{id}:
+        get:
+          summary: Get payment status
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+          responses:
+            '200':
+              description: Payment status
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: users-api
+  description: API for user management
+  tags:
+    - rest
+spec:
+  type: openapi
+  lifecycle: production
+  owner: platform-team
+  system: identity
+  definition: |
+    openapi: 3.0.0
+    info:
+      title: Users API
+      version: 1.0.0
+    paths:
+      /users:
+        get:
+          summary: List users
+          responses:
+            '200':
+              description: List of users
+        post:
+          summary: Create user
+          responses:
+            '201':
+              description: User created
+      /users/{id}:
+        get:
+          summary: Get user by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+          responses:
+            '200':
+              description: User details

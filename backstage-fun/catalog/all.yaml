@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: all-catalog
+  description: All catalog entities
+spec:
+  targets:
+    - ./components.yaml
+    - ./apis.yaml
+    - ./systems.yaml
+    - ./groups.yaml
+    - ../templates/java-service/template.yaml
