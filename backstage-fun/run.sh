@@ -41,6 +41,7 @@ podman run -it --rm \
   --add-host=host.docker.internal:host-gateway \
   -v "$SCRIPT_DIR/catalog:/app/catalog:ro" \
   -v "$SCRIPT_DIR/templates:/app/templates:ro" \
+  -v "$SCRIPT_DIR/sample-java-service:/app/sample-java-service:ro" \
   -v "$SCRIPT_DIR/app-config.yaml:/app/app-config.yaml:ro" \
   -e APP_CONFIG_app_baseUrl="http://localhost:$PORT" \
   -e APP_CONFIG_backend_baseUrl="http://localhost:$PORT" \

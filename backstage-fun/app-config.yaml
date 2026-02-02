@@ -38,6 +38,8 @@ catalog:
       target: file:///app/catalog/groups.yaml
     - type: url
       target: file:///app/templates/java-service/template.yaml
+    - type: url
+      target: file:///app/sample-java-service/catalog-info.yaml
 kubernetes:
   serviceLocatorMethod:
     type: multiTenant
