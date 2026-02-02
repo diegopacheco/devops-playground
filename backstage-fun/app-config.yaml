@@ -1,12 +1,12 @@
 app:
   title: Backstage
-  baseUrl: http://localhost:7000
+  baseUrl: http://localhost:3000
 organization:
   name: Acme Corp
 backend:
-  baseUrl: http://localhost:7000
+  baseUrl: http://localhost:3000
   listen:
-    port: 7000
+    port: 3000
   database:
     client: better-sqlite3
     connection: ':memory:'

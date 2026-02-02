@@ -1,6 +1,13 @@
 #!/bin/bash
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PORT=3000
+
+if lsof -ti :$PORT > /dev/null 2>&1; then
+  echo "Port $PORT in use, stopping existing processes..."
+  lsof -ti :$PORT | xargs kill -9 2>/dev/null
+  sleep 1
+fi
 
 if ! kind get clusters 2>/dev/null | grep -q backstage-cluster; then
   echo "Creating Kind cluster..."
@@ -25,9 +32,9 @@ K8S_TOKEN=$(kubectl get secret backstage-token -n backstage -o jsonpath='{.data.
 
 echo "K8S_URL: $K8S_URL"
 
-echo "Starting Backstage on port 7000..."
+echo "Starting Backstage on port 3000..."
 podman run -it --rm \
-  -p 7000:7000 \
+  -p 3000:3000 \
   --add-host=host.docker.internal:host-gateway \
   -v "$SCRIPT_DIR/catalog:/app/catalog:ro" \
   -v "$SCRIPT_DIR/templates:/app/templates:ro" \
