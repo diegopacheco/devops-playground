@@ -2,6 +2,7 @@
 **/.terraform/*
 
 **/marquez/**
+.omc/
 
 # gradle
 build/
