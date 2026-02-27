@@ -1,0 +1,4 @@
+FROM alpine:3.21
+RUN apk add --no-cache curl bash
+RUN echo "Hello from BuildKit POC!" > /hello.txt
+ENTRYPOINT ["/bin/bash", "-c", "cat /hello.txt"]
