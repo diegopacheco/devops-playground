@@ -3,7 +3,7 @@
 ```bash
 mkdir -p mydb && cd mydb
 dolt init
-dolt config --local --add user.email "diegopacheco@gmail.com"
+dolt config --local --add user.email "diego.pacheco@gmail.com"
 dolt config --local --add user.name "Diego Pacheco"
 ```
 
