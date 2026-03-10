@@ -1,0 +1,24 @@
+dolt-git-for-data-fun/README.md
+  e8d49627a8df2d2c 6,10-16,18,20-21,24,26-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.9",
+  "base_commit_sha": "d27b701ae61cc0d84d56f3fea1ea4da187cb7e0f",
+  "prompts": {
+    "e8d49627a8df2d2c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6aea87c4-2952-4353-9e98-58730161ff9e",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 31,
+      "total_deletions": 60,
+      "accepted_lines": 31,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/1413009f032ba7f045c8a219e06a05474eba2a45bcbf854c8992648b3d5f830f"
+    }
+  }
+}
