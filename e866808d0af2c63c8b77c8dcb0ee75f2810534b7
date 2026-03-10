@@ -1,0 +1,28 @@
+dolt-git-for-data-fun/undoall.md
+  e8d49627a8df2d2c 1-16
+dolt-git-for-data-fun/run-sql.sh
+  e8d49627a8df2d2c 1-56
+dolt-git-for-data-fun/run-dolt-commands.md
+  e8d49627a8df2d2c 1-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.9",
+  "base_commit_sha": "e866808d0af2c63c8b77c8dcb0ee75f2810534b7",
+  "prompts": {
+    "e8d49627a8df2d2c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6aea87c4-2952-4353-9e98-58730161ff9e",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 119,
+      "total_deletions": 0,
+      "accepted_lines": 119,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/9e805182a082a970655a4caa1314d385468adb949c95222607c7e5fc9646f9f8"
+    }
+  }
+}
