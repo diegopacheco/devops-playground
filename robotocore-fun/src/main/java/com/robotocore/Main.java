@@ -42,17 +42,33 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("=== Robotocore Java 25 POC ===\n");
-        testS3();
-        testSQS();
-        testSNS();
-        testLambda();
-        testOpenSearch();
-        testSecretsManager();
-        System.out.println("\n=== All services tested successfully! ===");
+
+        int passed = 0;
+        int failed = 0;
+
+        if (runTest("S3", Main::testS3)) passed++; else failed++;
+        if (runTest("SQS", Main::testSQS)) passed++; else failed++;
+        if (runTest("SNS", Main::testSNS)) passed++; else failed++;
+        if (runTest("Lambda", Main::testLambda)) passed++; else failed++;
+        if (runTest("OpenSearch", Main::testOpenSearch)) passed++; else failed++;
+        if (runTest("Secrets Manager", Main::testSecretsManager)) passed++; else failed++;
+
+        System.out.println("\n=== Results: " + passed + " passed, " + failed + " failed ===");
+    }
+
+    private static boolean runTest(String name, Runnable test) {
+        System.out.println("--- " + name + " ---");
+        try {
+            test.run();
+            System.out.println("PASS\n");
+            return true;
+        } catch (Exception e) {
+            System.out.println("FAIL: " + e.getMessage() + "\n");
+            return false;
+        }
     }
 
     private static void testS3() {
-        System.out.println("--- S3 ---");
         try (S3Client s3 = S3Client.builder()
                 .endpointOverride(ENDPOINT)
                 .region(REGION)
@@ -74,11 +90,9 @@ public class Main {
             ).asByteArray();
             System.out.println("GET object: " + new String(data, StandardCharsets.UTF_8));
         }
-        System.out.println();
     }
 
     private static void testSQS() {
-        System.out.println("--- SQS ---");
         try (SqsClient sqs = SqsClient.builder()
                 .endpointOverride(ENDPOINT)
                 .region(REGION)
@@ -101,11 +115,9 @@ public class Main {
             );
             response.messages().forEach(m -> System.out.println("Received: " + m.body()));
         }
-        System.out.println();
     }
 
     private static void testSNS() {
-        System.out.println("--- SNS ---");
         try (SnsClient sns = SnsClient.builder()
                 .endpointOverride(ENDPOINT)
                 .region(REGION)
@@ -126,11 +138,9 @@ public class Main {
                     .build());
             System.out.println("Published message ID: " + pub.messageId());
         }
-        System.out.println();
     }
 
     private static void testLambda() {
-        System.out.println("--- Lambda ---");
         try (LambdaClient lambda = LambdaClient.builder()
                 .endpointOverride(ENDPOINT)
                 .region(REGION)
@@ -143,11 +153,9 @@ public class Main {
                     .build());
             System.out.println("Lambda response: " + response.payload().asUtf8String());
         }
-        System.out.println();
     }
 
     private static void testOpenSearch() {
-        System.out.println("--- OpenSearch ---");
         try (OpenSearchClient opensearch = OpenSearchClient.builder()
                 .endpointOverride(ENDPOINT)
                 .region(REGION)
@@ -161,11 +169,9 @@ public class Main {
             System.out.println("Engine: " + domain.domainStatus().engineVersion());
             System.out.println("Endpoint: " + domain.domainStatus().endpoint());
         }
-        System.out.println();
     }
 
     private static void testSecretsManager() {
-        System.out.println("--- Secrets Manager ---");
         try (SecretsManagerClient sm = SecretsManagerClient.builder()
                 .endpointOverride(ENDPOINT)
                 .region(REGION)
@@ -178,6 +184,5 @@ public class Main {
             System.out.println("Secret name: " + secret.name());
             System.out.println("Secret value: " + secret.secretString());
         }
-        System.out.println();
     }
 }

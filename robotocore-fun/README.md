@@ -73,3 +73,43 @@ This project uses Java 25 with AWS SDK v2 to interact with AWS services running 
 └── src/main/java/com/robotocore/
     └── Main.java           # Java app testing all 6 services
 ```
+
+## Output
+
+```
+=== Robotocore Java 25 POC ===
+
+--- S3 ---
+Buckets: [my-data-bucket]
+PUT object: hello.txt
+GET object: Hello from Java 25!
+PASS
+
+--- SQS ---
+Queue URL: http://sqs.us-east-1.localhost.robotocore.cloud:4566/123456789012/my-queue
+Sent message to queue
+Received: Hello from Java 25 via SQS!
+PASS
+
+--- SNS ---
+Topic ARN: arn:aws:sns:us-east-1:123456789012:my-topic
+Published message ID: 25c368fe-bb55-40c8-8edb-92652838db6c
+PASS
+
+--- Lambda ---
+Lambda response: {"statusCode": 200, "body": "Hello from robotocore Lambda!"}
+PASS
+
+--- OpenSearch ---
+Domain: my-search-domain
+Engine: OpenSearch_2.11
+Endpoint: my-search-domain.us-east-1.es.amazonaws.com
+PASS
+
+--- Secrets Manager ---
+Secret name: my-secret
+Secret value: {"password":"change-me","username":"admin"}
+PASS
+
+=== Results: 6 passed, 0 failed ===
+```

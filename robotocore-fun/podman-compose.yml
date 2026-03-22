@@ -5,7 +5,7 @@ services:
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=s3,sqs,sns,lambda,opensearch,secretsmanager
+      - SERVICES=s3,sqs,sns,lambda,opensearch,secretsmanager,iam,sts
     volumes:
       - robotocore-data:/var/lib/robotocore
 volumes:
