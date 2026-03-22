@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  robotocore:
+    image: ghcr.io/robotocore/robotocore:latest
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,sqs,sns,lambda,opensearch,secretsmanager
+    volumes:
+      - robotocore-data:/var/lib/robotocore
+volumes:
+  robotocore-data:
