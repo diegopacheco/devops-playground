@@ -1,0 +1,30 @@
+robotocore-fun/infra/outputs.tf
+  44509e6185f34478 13-14
+robotocore-fun/infra/sm.tf
+  44509e6185f34478 2-3
+robotocore-fun/create-infra.sh
+  44509e6185f34478 3-5,17-28
+robotocore-fun/destroy-infra.sh
+  44509e6185f34478 3-5,7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "b833367639ea6a018d758e6a34548b96bca0c9cb",
+  "prompts": {
+    "44509e6185f34478": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ccb35eb6-49e7-4a10-86b4-423761b41edf",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 26,
+      "total_deletions": 16,
+      "accepted_lines": 26,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/b811c8e0f73468505e164490705978743dd5f8c35ed1fc8e3dd028a1d7f50c38"
+    }
+  }
+}
