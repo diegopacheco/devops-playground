@@ -1,0 +1,58 @@
+robotocore-fun/infra/providers.tf
+  44509e6185f34478 1-30
+robotocore-fun/lambda/index.py
+  44509e6185f34478 1-5
+robotocore-fun/run.sh
+  44509e6185f34478 1-3
+robotocore-fun/pom.xml
+  44509e6185f34478 1-91
+robotocore-fun/infra/sns.tf
+  44509e6185f34478 1-3
+robotocore-fun/create-infra.sh
+  44509e6185f34478 1-12
+robotocore-fun/stop.sh
+  44509e6185f34478 1-2
+robotocore-fun/src/main/java/com/robotocore/Main.java
+  44509e6185f34478 1-183
+robotocore-fun/infra/opensearch.tf
+  44509e6185f34478 1-14
+robotocore-fun/start.sh
+  44509e6185f34478 1-7
+robotocore-fun/test.sh
+  44509e6185f34478 1-27
+robotocore-fun/podman-compose.yml
+  44509e6185f34478 1-12
+robotocore-fun/infra/sm.tf
+  44509e6185f34478 1-11
+robotocore-fun/infra/s3.tf
+  44509e6185f34478 1-3
+robotocore-fun/infra/sqs.tf
+  44509e6185f34478 1-3
+robotocore-fun/README.md
+  44509e6185f34478 1-75
+robotocore-fun/infra/outputs.tf
+  44509e6185f34478 1-23
+robotocore-fun/infra/lambda.tf
+  44509e6185f34478 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "3d7af5a6db6c4b49b44f87a88efc85f1b49ddfe2",
+  "prompts": {
+    "44509e6185f34478": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ccb35eb6-49e7-4a10-86b4-423761b41edf",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 527,
+      "total_deletions": 16,
+      "accepted_lines": 511,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/51159b7f01ea79747a506c5cc20d96ecb6a7b7959675a4daaf35c243399dd8b3"
+    }
+  }
+}
