@@ -1,0 +1,48 @@
+ministack-fun/stop-infra.sh
+  341defe00dba01e9 1-7
+ministack-fun/infra/main.tf
+  341defe00dba01e9 1-102
+ministack-fun/app/pom.xml
+  341defe00dba01e9 1-64
+ministack-fun/app/src/main/java/com/ministack/App.java
+  341defe00dba01e9 1-11
+ministack-fun/test.sh
+  341defe00dba01e9 1-6
+ministack-fun/README.md
+  341defe00dba01e9 1-86
+ministack-fun/app/src/main/java/com/ministack/StatusController.java
+  341defe00dba01e9 1-213
+ministack-fun/app/src/main/resources/application.properties
+  341defe00dba01e9 1
+ministack-fun/stop.sh
+  341defe00dba01e9 1-14
+ministack-fun/start-infra.sh
+  341defe00dba01e9 1-12
+ministack-fun/run.sh
+  341defe00dba01e9 1-13
+ministack-fun/app/src/main/java/com/ministack/AwsConfig.java
+  341defe00dba01e9 1-86
+ministack-fun/provision.sh
+  341defe00dba01e9 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.3",
+  "base_commit_sha": "55a1c6cbd6127668cc4ec38fbce5ccc42bbac6fc",
+  "prompts": {
+    "341defe00dba01e9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b00f7b9d-11c3-4411-b4c2-05d2815960a9",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco",
+      "messages": [],
+      "total_additions": 1358,
+      "total_deletions": 720,
+      "accepted_lines": 631,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/18a4a9eeffd5e0e3e2240a583ed41c7b8abcec4da897415de8a1cebd26aec4d1"
+    }
+  }
+}
