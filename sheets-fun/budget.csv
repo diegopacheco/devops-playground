@@ -1,0 +1,6 @@
+food,200
+streaming,100
+gaz,30
+,
+,
+TOTAL,=sum(B1:B3)
