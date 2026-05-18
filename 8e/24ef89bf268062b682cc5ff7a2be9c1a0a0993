@@ -1,0 +1,25 @@
+argocd-k8s-canary/start.sh
+  s_8c9daab660ce95::t_84b7fa20f3c4ba 18
+argocd-k8s-canary/spec/rollout.yaml
+  s_8c9daab660ce95::t_9e6015b52ac890 19-20
+argocd-k8s-canary/ui-rollouts.sh
+  s_8c9daab660ce95::t_245e421daac999 4-7
+argocd-k8s-canary/canary.sh
+  s_8c9daab660ce95::t_58ef91394b2a78 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "8e24ef89bf268062b682cc5ff7a2be9c1a0a0993",
+  "prompts": {},
+  "sessions": {
+    "s_8c9daab660ce95": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4601f96-533b-4a00-ba2d-e8e583eb2b1c",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
