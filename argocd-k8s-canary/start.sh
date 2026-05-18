@@ -32,12 +32,24 @@ until kubectl -n argo-rollouts get deploy argo-rollouts-dashboard -o jsonpath='{
 echo "registering argocd Application..."
 kubectl apply -f "$HERE/spec/argocd-app.yaml"
 
+echo "triggering initial sync (retries on first-clone timeout)..."
+kubectl -n argocd patch app canary-app --type=merge -p '{"operation":{"sync":{}}}' >/dev/null
+STATUS=""
+for i in $(seq 1 120); do
+  STATUS=$(kubectl -n argocd get app canary-app -o jsonpath='{.status.sync.status}' 2>/dev/null || echo "")
+  if [ "$STATUS" = "Synced" ]; then break; fi
+  if [ $((i % 30)) -eq 0 ]; then
+    kubectl -n argocd patch app canary-app --type=merge -p '{"operation":{"sync":{}}}' >/dev/null 2>&1 || true
+  fi
+  sleep 1
+done
+echo "argocd app status: $STATUS"
+
 echo ""
 echo "cluster ready"
 echo ""
-echo "argocd Application registered. for it to sync you must:"
-echo "  git add spec/ && git commit -m 'spec' && git push"
-echo "  (argocd reads from github.com/diegopacheco/devops-playground master argocd-k8s-canary/spec)"
+echo "argocd reads from: github.com/diegopacheco/devops-playground @ master, path argocd-k8s-canary/spec"
+echo "if status above is not Synced, push your latest spec/ changes and rerun ./start.sh"
 echo ""
 echo "next: ./canary.sh         build java app, kind-load, trigger canary"
 echo "      ./ui.sh             argocd UI on https://localhost:8080"
