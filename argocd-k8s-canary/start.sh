@@ -18,9 +18,7 @@ kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubuse
 
 kubectl create namespace argo-rollouts --dry-run=client -o yaml | kubectl apply -f -
 kubectl apply -n argo-rollouts --server-side --force-conflicts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
-
-kubectl apply -f "$HERE/spec/namespace.yaml"
-kubectl apply -f "$HERE/spec/service.yaml"
+kubectl apply -n argo-rollouts --server-side --force-conflicts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/dashboard-install.yaml
 
 echo "waiting for argocd-server..."
 until kubectl -n argocd get deploy argocd-server -o jsonpath='{.status.availableReplicas}' 2>/dev/null | grep -q '^[1-9]'; do sleep 1; done
@@ -28,7 +26,19 @@ until kubectl -n argocd get deploy argocd-server -o jsonpath='{.status.available
 echo "waiting for argo-rollouts controller..."
 until kubectl -n argo-rollouts get deploy argo-rollouts -o jsonpath='{.status.availableReplicas}' 2>/dev/null | grep -q '^[1-9]'; do sleep 1; done
 
+echo "waiting for argo-rollouts dashboard..."
+until kubectl -n argo-rollouts get deploy argo-rollouts-dashboard -o jsonpath='{.status.availableReplicas}' 2>/dev/null | grep -q '^[1-9]'; do sleep 1; done
+
+echo "registering argocd Application..."
+kubectl apply -f "$HERE/spec/argocd-app.yaml"
+
 echo ""
 echo "cluster ready"
-echo "next: ./canary.sh   (builds java app, kind-loads it, deploys rollout)"
-echo "then: ./ui.sh       (port-forward argocd + rollouts dashboard)"
+echo ""
+echo "argocd Application registered. for it to sync you must:"
+echo "  git add spec/ && git commit -m 'spec' && git push"
+echo "  (argocd reads from github.com/diegopacheco/devops-playground master argocd-k8s-canary/spec)"
+echo ""
+echo "next: ./canary.sh         build java app, kind-load, trigger canary"
+echo "      ./ui.sh             argocd UI on https://localhost:8080"
+echo "      ./ui-rollouts.sh    argo-rollouts dashboard on http://localhost:3100"

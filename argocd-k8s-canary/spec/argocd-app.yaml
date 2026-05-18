@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: canary-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/diegopacheco/devops-playground.git
+    targetRevision: master
+    path: argocd-k8s-canary/spec
+    directory:
+      recurse: false
+      include: '{namespace.yaml,service.yaml,rollout.yaml}'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: canary-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    - RespectIgnoreDifferences=true
+  ignoreDifferences:
+  - group: argoproj.io
+    kind: Rollout
+    jsonPointers:
+    - /spec/template/spec/containers/0/image
+    - /spec/template/spec/containers/0/env
