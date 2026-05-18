@@ -16,23 +16,17 @@ podman save $IMG -o $TAR
 kind load image-archive $TAR --name $CLUSTER
 rm -f $TAR
 
-if ! kubectl -n canary-app get rollout canary-app >/dev/null 2>&1; then
-  echo ">>> first deploy - applying rollout spec"
-  kubectl apply -f "$HERE/spec/rollout.yaml"
-  until kubectl -n canary-app get rollout canary-app >/dev/null 2>&1; do sleep 1; done
-fi
-
-echo ">>> patching rollout to $IMG (this triggers canary)"
-kubectl -n canary-app set image rollout/canary-app app=$IMG
-kubectl -n canary-app set env rollout/canary-app APP_VERSION=$VER
+echo ">>> applying rollout with image=$IMG"
+sed -e "s|image: canary-app:v1|image: $IMG|" \
+    -e "s|value: v1|value: $VER|" \
+    "$HERE/spec/rollout.yaml" | kubectl apply -f -
 
 echo ""
-echo "canary started for $VER"
-echo "  steps: 20% -> pause 30s -> 50% -> pause 30s -> 100%"
+echo "deployed $VER"
+echo "  first run = baseline (no canary)"
+echo "  re-run    = triggers canary: 20% -> pause 30s -> 50% -> pause 30s -> 100%"
 echo ""
 echo "watch progression:"
 echo "  kubectl argo rollouts get rollout canary-app -n canary-app --watch"
 echo ""
-echo "evidence in argocd UI:"
-echo "  open https://localhost:8080 (run ./ui.sh)"
-echo "  navigate to canary-app rollout - you will see stable + canary ReplicaSets"
+echo "evidence in argocd UI:  run ./ui.sh and open https://localhost:8080"
