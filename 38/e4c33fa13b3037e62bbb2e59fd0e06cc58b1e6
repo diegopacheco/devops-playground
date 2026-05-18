@@ -1,0 +1,42 @@
+argocd-k8s-canary/app/pom.xml
+  s_8c9daab660ce95::t_23d901a1caddf6 1-37
+argocd-k8s-canary/app/Containerfile
+  s_8c9daab660ce95::t_5794cacaef1f4d 1-14
+argocd-k8s-canary/spec/kind-config.yaml
+  s_8c9daab660ce95::t_56706866c2bdc1 1-5
+argocd-k8s-canary/README.md
+  s_8c9daab660ce95::t_7fd7901e9a5ccc 1-248
+argocd-k8s-canary/stop.sh
+  s_8c9daab660ce95::t_92cc7f865a2b86 1-4
+argocd-k8s-canary/spec/service.yaml
+  s_8c9daab660ce95::t_6fa1db8ccfa341 1-12
+argocd-k8s-canary/app/src/main/java/com/example/App.java
+  s_8c9daab660ce95::t_4295921c62664e 1-22
+argocd-k8s-canary/spec/namespace.yaml
+  s_8c9daab660ce95::t_b386d63b68be27 1-4
+argocd-k8s-canary/ui.sh
+  s_8c9daab660ce95::t_49d195b492344d 1-30
+argocd-k8s-canary/start.sh
+  s_8c9daab660ce95::t_3c334ec15fbce1 1-16,18-19,21-34
+  s_8c9daab660ce95::t_589ef3093012ec 17,20
+argocd-k8s-canary/canary.sh
+  s_8c9daab660ce95::t_ffb8aebfddafbf 1-38
+argocd-k8s-canary/spec/rollout.yaml
+  s_8c9daab660ce95::t_10e642e0f7b66b 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "38e4c33fa13b3037e62bbb2e59fd0e06cc58b1e6",
+  "prompts": {},
+  "sessions": {
+    "s_8c9daab660ce95": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4601f96-533b-4a00-ba2d-e8e583eb2b1c",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
