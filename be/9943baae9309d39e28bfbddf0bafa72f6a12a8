@@ -1,0 +1,19 @@
+argocd-k8s-canary/canary.sh
+  s_8c9daab660ce95::t_948539d178ccc9 19-22,25-27,32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "be9943baae9309d39e28bfbddf0bafa72f6a12a8",
+  "prompts": {},
+  "sessions": {
+    "s_8c9daab660ce95": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4601f96-533b-4a00-ba2d-e8e583eb2b1c",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
