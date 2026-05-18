@@ -3,7 +3,7 @@ set -e
 CLUSTER=argocd-canary
 HERE=$(cd "$(dirname "$0")" && pwd)
 VER=v$(date +%s)
-IMG=canary-app:$VER
+IMG=localhost/canary-app:$VER
 
 export KIND_EXPERIMENTAL_PROVIDER=podman
 

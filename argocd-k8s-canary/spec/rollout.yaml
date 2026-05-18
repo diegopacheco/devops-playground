@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: app
-        image: canary-app:v1
-        imagePullPolicy: IfNotPresent
+        image: localhost/canary-app:v1
+        imagePullPolicy: Never
         ports:
         - name: http
           containerPort: 8080
