@@ -1,0 +1,14 @@
+FROM maven:3-eclipse-temurin-25 AS build
+WORKDIR /src
+COPY pom.xml .
+RUN mvn -B -q -e dependency:go-offline
+COPY src ./src
+ARG APP_VERSION=v1
+RUN mvn -B -q -DskipTests package
+FROM eclipse-temurin:25-jre
+WORKDIR /app
+ARG APP_VERSION=v1
+ENV APP_VERSION=${APP_VERSION}
+COPY --from=build /src/target/canary-app.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app/app.jar"]

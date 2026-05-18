@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: canary-app
+  namespace: canary-app
+spec:
+  replicas: 5
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: canary-app
+  template:
+    metadata:
+      labels:
+        app: canary-app
+    spec:
+      containers:
+      - name: app
+        image: canary-app:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+        - name: APP_VERSION
+          value: v1
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 6
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {duration: 30s}
+      - setWeight: 50
+      - pause: {duration: 30s}
+      - setWeight: 100
