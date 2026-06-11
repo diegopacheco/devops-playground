@@ -1,0 +1,28 @@
+apple-macos-container-machine-poc/stop.sh
+  s_204d6b456498bd::t_1fa94c65400643 1-21
+apple-macos-container-machine-poc/start.sh
+  s_204d6b456498bd::t_6918f0821df48c 1-23,25-54
+  s_204d6b456498bd::t_c628599522d346 24
+apple-macos-container-machine-poc/README.md
+  s_204d6b456498bd::t_af3a47ea1adfdb 1-172
+apple-macos-container-machine-poc/test.sh
+  s_204d6b456498bd::t_97073f0802e083 1-40
+apple-macos-container-machine-poc/architecture.svg
+  s_204d6b456498bd::t_9c639245c1d0ba 1-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "3d7253e4783b42acc167a53e7ac5ecec8bd6f0e7",
+  "prompts": {},
+  "sessions": {
+    "s_204d6b456498bd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "58e6caef-6934-4045-b10f-cd0f8dce5d85",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
