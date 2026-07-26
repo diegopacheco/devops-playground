@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A local AWS IAM learning playground powered by Floci and Podman.">
+  <title>IAM Forge · Local policy lab</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="#learn" aria-label="IAM Forge home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M7.8 23.9h15.7a5.1 5.1 0 0 0 .4-10.2 8.3 8.3 0 0 0-15.8-1.6 6 6 0 0 0-.3 11.8Z"/><path d="M11.5 18.5h9M14.3 15.7l-2.8 2.8 2.8 2.8"/></svg>
+      </span>
+      <span>flocus</span>
+      <span class="product-label">IAM playground</span>
+    </a>
+    <div class="topbar-center">
+      <span>workspace</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>
+      <strong>local-access</strong>
+    </div>
+    <div class="runtime-pill" id="runtime-pill">
+      <span class="runtime-dot"></span>
+      <span id="runtime-text">Connecting to Floci</span>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <nav class="rail" aria-label="Playground sections" role="tablist">
+      <button class="rail-tab is-active" role="tab" aria-selected="true" aria-controls="panel-learn" id="tab-learn" data-tab="learn">
+        <span>01</span>
+        <strong>Learn</strong>
+        <small>IAM field notes</small>
+      </button>
+      <button class="rail-tab" role="tab" aria-selected="false" aria-controls="panel-drills" id="tab-drills" data-tab="drills" tabindex="-1">
+        <span>02</span>
+        <strong>Run</strong>
+        <small>Three field drills</small>
+      </button>
+      <button class="rail-tab" role="tab" aria-selected="false" aria-controls="panel-editor" id="tab-editor" data-tab="editor" tabindex="-1">
+        <span>03</span>
+        <strong>Author</strong>
+        <small>Live policy editor</small>
+      </button>
+      <button class="rail-tab" role="tab" aria-selected="false" aria-controls="panel-assistant" id="tab-assistant" data-tab="assistant" tabindex="-1">
+        <span>04</span>
+        <strong>Ask</strong>
+        <small>Local AI bridge</small>
+      </button>
+      <div class="rail-note">
+        <span>ZERO CLOUD BILL</span>
+        <p>Everything stays on your machine.</p>
+      </div>
+    </nav>
+
+    <main>
+      <section class="tab-panel is-active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn" data-panel="learn">
+        <div class="learn-hero">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">IAM CRASH COURSE · 12 MIN</p>
+            <h1>Permissions should feel <em>less mysterious.</em></h1>
+            <p class="hero-lead">AWS Identity and Access Management answers one sharp question: who can do what, to which resource, under which conditions?</p>
+            <div class="hero-actions">
+              <button class="button button-dark" data-go="drills">Start the drills <span>↗</span></button>
+              <button class="text-button ask-context" data-context="Explain the IAM mental model from this crash course."><span>✦</span> Ask AI about this</button>
+            </div>
+          </div>
+          <div class="identity-card reveal delay-one">
+            <div class="identity-head">
+              <span>IDENTITY CARD</span>
+              <span>LOCAL</span>
+            </div>
+            <div class="avatar">DP</div>
+            <div>
+              <small>PRINCIPAL</small>
+              <strong>policy-author</strong>
+            </div>
+            <div>
+              <small>ACCOUNT</small>
+              <strong>000000000000</strong>
+            </div>
+            <div class="clearance">
+              <small>EFFECTIVE ACCESS</small>
+              <strong>DENY UNTIL ALLOWED</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-strip reveal delay-two">
+          <span>THE ROUTE</span>
+          <ol>
+            <li><b>01</b> Identity</li>
+            <li><b>02</b> Policy</li>
+            <li><b>03</b> Evaluation</li>
+            <li><b>04</b> Least privilege</li>
+          </ol>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson-card reveal">
+            <div class="lesson-number">01</div>
+            <p class="eyebrow">WHO</p>
+            <h2>Start with the principal</h2>
+            <p>A principal is the actor making a request: a user, role, service, or federated identity. Roles are the normal choice for workloads because their credentials are temporary.</p>
+            <dl>
+              <div><dt>User</dt><dd>A person or legacy workload</dd></div>
+              <div><dt>Role</dt><dd>Assumed, temporary access</dd></div>
+              <div><dt>Service</dt><dd>AWS acting on your behalf</dd></div>
+            </dl>
+            <button class="mini-ask ask-context" data-context="Explain IAM principals, especially the difference between users and roles."><span>✦</span> Ask about principals</button>
+          </article>
+
+          <article class="lesson-card lesson-card-ink reveal delay-one">
+            <div class="lesson-number">02</div>
+            <p class="eyebrow">WHAT + WHERE</p>
+            <h2>Read a policy as a sentence</h2>
+            <div class="policy-sentence">
+              <span class="sentence-effect">Allow</span>
+              <span>the action</span>
+              <span class="sentence-action">s3:GetObject</span>
+              <span>on</span>
+              <span class="sentence-resource">arn:aws:s3:::reports/*</span>
+            </div>
+            <p>Every statement combines an effect, one or more actions, and resources. A narrow ARN is usually safer than a wildcard.</p>
+            <button class="mini-ask ask-context" data-context="Teach me how to read an IAM JSON policy statement as a sentence."><span>✦</span> Ask about statements</button>
+          </article>
+
+          <article class="lesson-card lesson-wide reveal">
+            <div class="lesson-number">03</div>
+            <div class="evaluation-copy">
+              <p class="eyebrow">THE DECISION</p>
+              <h2>Explicit deny always wins</h2>
+              <p>A request begins denied. A matching allow can open the door. Any matching explicit deny closes it again, regardless of another allow.</p>
+            </div>
+            <div class="decision-track" aria-label="IAM policy evaluation sequence">
+              <div><span>1</span><strong>Default</strong><small>Implicit deny</small></div>
+              <i>→</i>
+              <div><span>2</span><strong>Matching allow?</strong><small>Move to allowed</small></div>
+              <i>→</i>
+              <div class="deny-step"><span>3</span><strong>Explicit deny?</strong><small>Final deny</small></div>
+            </div>
+            <button class="mini-ask ask-context" data-context="Explain IAM evaluation order and why explicit deny overrides allow."><span>✦</span> Ask about evaluation</button>
+          </article>
+
+          <article class="principle-card reveal">
+            <p class="eyebrow">THE HABIT</p>
+            <h2>Least privilege is a loop, not a checkbox.</h2>
+            <p>Grant only what the task needs, observe real usage, remove unused access, and repeat as the workload changes.</p>
+            <div class="loop">
+              <span>GRANT</span><span>OBSERVE</span><span>TRIM</span><span>REPEAT</span>
+            </div>
+          </article>
+
+          <aside class="vocab-card reveal delay-one">
+            <p class="eyebrow">POCKET GLOSSARY</p>
+            <dl>
+              <div><dt>ARN</dt><dd>Unique resource address</dd></div>
+              <div><dt>Action</dt><dd>API operation being requested</dd></div>
+              <div><dt>Resource</dt><dd>Target of the action</dd></div>
+              <div><dt>Condition</dt><dd>Extra context required to match</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="panel-drills" role="tabpanel" aria-labelledby="tab-drills" data-panel="drills" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FLOCI-BACKED FIELD DRILLS</p>
+            <h1>Turn policy theory into <em>evidence.</em></h1>
+            <p>Each run creates an S3 bucket, an IAM user, and a verified inline policy inside Floci.</p>
+          </div>
+          <button class="text-button ask-context" data-context="Guide me through the three Floci-backed IAM field drills."><span>✦</span> Ask AI for a guide</button>
+        </div>
+
+        <div class="boundary-note">
+          <strong>HONEST LOCAL BOUNDARY</strong>
+          <p>Floci stores the real IAM and S3 infrastructure. The decision checks run through this playground’s focused Action and Resource evaluator because local Floci S3 accepts credentials independently of identity policies.</p>
+        </div>
+
+        <div class="drill-list">
+          <article class="drill-card">
+            <div class="drill-index">01</div>
+            <div class="drill-body">
+              <span class="difficulty">FOUNDATION · 2 MIN</span>
+              <h2>Read-only archive</h2>
+              <p>Allow listing the bucket and reading its objects. Leave writes out, then observe implicit deny.</p>
+              <div class="expected-row">
+                <span><i class="allow-dot"></i> GetObject allowed</span>
+                <span><i class="deny-dot"></i> PutObject implicit deny</span>
+              </div>
+              <button class="button button-accent run-lab" data-lab="archive">Run on Floci <span>↗</span></button>
+            </div>
+            <div class="drill-result" id="result-archive" aria-live="polite">
+              <span class="result-idle">READY FOR RUN</span>
+            </div>
+          </article>
+
+          <article class="drill-card">
+            <div class="drill-index">02</div>
+            <div class="drill-body">
+              <span class="difficulty">CORE · 3 MIN</span>
+              <h2>Explicit deny guardrail</h2>
+              <p>Allow broad work in one bucket, then carve out object deletion with a deny that cannot be overridden.</p>
+              <div class="expected-row">
+                <span><i class="allow-dot"></i> GetObject allowed</span>
+                <span><i class="hard-deny-dot"></i> DeleteObject explicit deny</span>
+              </div>
+              <button class="button button-accent run-lab" data-lab="guardrail">Run on Floci <span>↗</span></button>
+            </div>
+            <div class="drill-result" id="result-guardrail" aria-live="polite">
+              <span class="result-idle">READY FOR RUN</span>
+            </div>
+          </article>
+
+          <article class="drill-card">
+            <div class="drill-index">03</div>
+            <div class="drill-body">
+              <span class="difficulty">PRECISION · 3 MIN</span>
+              <h2>Scoped upload lane</h2>
+              <p>Permit uploads only beneath one object prefix. The same action outside that ARN stays denied.</p>
+              <div class="expected-row">
+                <span><i class="allow-dot"></i> incoming/* allowed</span>
+                <span><i class="deny-dot"></i> private/* implicit deny</span>
+              </div>
+              <button class="button button-accent run-lab" data-lab="upload">Run on Floci <span>↗</span></button>
+            </div>
+            <div class="drill-result" id="result-upload" aria-live="polite">
+              <span class="result-idle">READY FOR RUN</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel editor-panel" id="panel-editor" role="tabpanel" aria-labelledby="tab-editor" data-panel="editor" hidden>
+        <div class="section-heading editor-heading">
+          <div>
+            <p class="eyebrow">LIVE IAM AUTHORING DESK</p>
+            <h1>Write the rule. <em>Apply the rule.</em></h1>
+          </div>
+          <button class="text-button ask-context" data-context="Review the IAM policy currently open in the authoring desk."><span>✦</span> Ask AI to review</button>
+        </div>
+
+        <div class="editor-workbench">
+          <div class="editor-column">
+            <div class="resource-fields">
+              <label>Bucket name<input id="bucket-name" value="iam-forge-workbench" maxlength="48" autocomplete="off"></label>
+              <label>IAM user<input id="user-name" value="policy-author" maxlength="48" autocomplete="off"></label>
+            </div>
+            <div class="editor-frame">
+              <div class="editor-toolbar">
+                <div class="file-tab"><span class="json-mark">{ }</span> policy.json <i id="dirty-dot"></i></div>
+                <label class="template-select">STARTING POINT
+                  <select id="policy-template">
+                    <option value="read">Read only</option>
+                    <option value="upload">Upload lane</option>
+                    <option value="guardrail">Delete guardrail</option>
+                  </select>
+                </label>
+              </div>
+              <div class="code-shell">
+                <div class="line-numbers" id="line-numbers">1</div>
+                <div class="editor-stack">
+                  <pre id="highlight-layer" aria-hidden="true"></pre>
+                  <textarea id="policy-editor" aria-label="IAM policy JSON editor" spellcheck="false"></textarea>
+                </div>
+              </div>
+              <div class="editor-status">
+                <span id="syntax-status"><i></i> Valid JSON</span>
+                <span>UTF-8</span>
+                <span>Spaces: 2</span>
+              </div>
+            </div>
+            <div class="editor-actions">
+              <button class="button button-dark" id="apply-policy">Apply to Floci <span>↗</span></button>
+              <span>Creates minimum IAM + S3 infrastructure</span>
+            </div>
+          </div>
+
+          <aside class="evidence-panel" aria-live="polite">
+            <div class="evidence-head">
+              <div><span>LIVE EVIDENCE</span><strong id="evidence-state">WAITING</strong></div>
+              <span class="pulse-ring"></span>
+            </div>
+            <div id="evidence-content" class="evidence-empty">
+              <div class="evidence-glyph">↳</div>
+              <h2>No policy applied yet</h2>
+              <p>Your Floci resource trail and decision matrix will appear here.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="panel-assistant" role="tabpanel" aria-labelledby="tab-assistant" data-panel="assistant" hidden>
+        <div class="assistant-layout">
+          <div class="assistant-intro">
+            <p class="eyebrow">LOCAL CLI BRIDGE</p>
+            <h1>Bring your own <em>thinking partner.</em></h1>
+            <p>Choose a CLI already authenticated on your machine. Your preference stays in this browser.</p>
+            <div class="privacy-stamp">
+              <span>LOCAL ROUTE</span>
+              <p>Browser → playground → host CLI</p>
+            </div>
+          </div>
+
+          <div class="assistant-console">
+            <div class="provider-heading">
+              <span>01 / CHOOSE A PROVIDER</span>
+              <span id="provider-status">Checking host commands</span>
+            </div>
+            <div class="provider-grid" id="provider-grid">
+              <label class="provider-card">
+                <input type="radio" name="provider" value="codex">
+                <span class="provider-monogram">CX</span>
+                <strong>Codex Exec</strong>
+                <small>codex exec</small>
+                <i data-availability="codex">CHECKING</i>
+              </label>
+              <label class="provider-card">
+                <input type="radio" name="provider" value="claude">
+                <span class="provider-monogram">CL</span>
+                <strong>Claude</strong>
+                <small>claude -p</small>
+                <i data-availability="claude">CHECKING</i>
+              </label>
+              <label class="provider-card">
+                <input type="radio" name="provider" value="agy">
+                <span class="provider-monogram">AG</span>
+                <strong>Agy</strong>
+                <small>agy -p</small>
+                <i data-availability="agy">CHECKING</i>
+              </label>
+            </div>
+
+            <div class="prompt-box">
+              <div class="prompt-label"><span>02 / ASK ABOUT IAM</span><span id="prompt-count">0 / 4000</span></div>
+              <textarea id="assistant-prompt" maxlength="4000" placeholder="Why does explicit deny override allow?"></textarea>
+              <button class="button button-accent" id="send-question"><span>✦</span> Ask selected AI</button>
+            </div>
+            <div class="assistant-answer" id="assistant-answer" aria-live="polite">
+              <span>THE RESPONSE WILL APPEAR HERE</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button class="floating-ai ask-context" id="floating-ai" data-context="Help me understand the current IAM topic." aria-label="Ask AI about this page">
+    <span>✦</span>
+    <strong>ASK AI</strong>
+  </button>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="ai-drawer" id="ai-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+    <div class="drawer-head">
+      <div><span>✦ IAM GUIDE</span><h2 id="drawer-title">Ask in context</h2></div>
+      <button id="close-drawer" aria-label="Close AI guide">×</button>
+    </div>
+    <p id="drawer-context">Help me understand the current IAM topic.</p>
+    <textarea id="drawer-prompt" maxlength="4000" placeholder="Ask a focused question…"></textarea>
+    <button class="button button-dark" id="drawer-send">Ask AI <span>↗</span></button>
+    <div class="drawer-answer" id="drawer-answer" aria-live="polite">Your answer will appear here.</div>
+  </aside>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
