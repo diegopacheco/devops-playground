@@ -1,0 +1,31 @@
+services:
+  floci:
+    image: floci/floci:latest
+    ports:
+      - "${FLOCI_PORT:-4567}:4566"
+    volumes:
+      - ${PODMAN_SOCKET_PATH}:/var/run/docker.sock
+      - ./data:/app/data
+    security_opt:
+      - label=disable
+    environment:
+      FLOCI_HOSTNAME: floci
+      FLOCI_STORAGE_MODE: hybrid
+      FLOCI_STORAGE_PERSISTENT_PATH: /app/data
+  app:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - "${APP_PORT:-8081}:3000"
+    depends_on:
+      - floci
+    environment:
+      AWS_ENDPOINT_URL: http://floci:4566
+      AWS_ACCESS_KEY_ID: flociadmin
+      AWS_SECRET_ACCESS_KEY: flociadmin
+      AWS_DEFAULT_REGION: us-east-1
+      ATHENA_DATABASE: analytics
+      DATA_BUCKET: athena-playground-lake
+      AI_BRIDGE_URL: http://host.containers.internal:${AI_BRIDGE_PORT:-3031}
+      AI_BRIDGE_TOKEN: ${AI_BRIDGE_TOKEN:-}
