@@ -1,0 +1,62 @@
+aws-floci-iam-lab/public/index.html
+  s_4f7c2bfaccc1b7::t_3c834837d53410 1-12,18,24-370
+  s_4f7c2bfaccc1b7::t_f7641839cdc57d 13-17,19-23
+aws-floci-iam-lab/start.sh
+  s_4f7c2bfaccc1b7::t_696c1a9128e596 24,37
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-23,25-36,38-47
+aws-floci-iam-lab/data/.gitkeep
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1
+aws-floci-iam-lab/lib/playground.js
+  s_4f7c2bfaccc1b7::t_c8ea7d14311b06 1-160
+aws-floci-iam-lab/public/styles.css
+  s_4f7c2bfaccc1b7::t_109fbf1626ff0a 1-1915,1919-2106
+  s_4f7c2bfaccc1b7::t_5c45bf527120a5 1916-1918
+aws-floci-iam-lab/test/iam.test.js
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-80
+aws-floci-iam-lab/public/app.js
+  s_4f7c2bfaccc1b7::t_dffc40397d6274 1-384
+aws-floci-iam-lab/README.md
+  s_4f7c2bfaccc1b7::t_5cc575ea59b573 73,102
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-72,74-101,103-121
+aws-floci-iam-lab/lib/aws.js
+  s_4f7c2bfaccc1b7::t_c8ea7d14311b06 1-143
+aws-floci-iam-lab/package.json
+  s_4f7c2bfaccc1b7::t_c8ea7d14311b06 1-13
+aws-floci-iam-lab/stop.sh
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-12
+aws-floci-iam-lab/compose.yaml
+  s_4f7c2bfaccc1b7::t_5cc575ea59b573 21
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-20,22-28
+aws-floci-iam-lab/.gitignore
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-2
+aws-floci-iam-lab/lib/iam.js
+  s_4f7c2bfaccc1b7::t_c8ea7d14311b06 1-50
+aws-floci-iam-lab/Containerfile
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-6
+aws-floci-iam-lab/ai-bridge.js
+  s_4f7c2bfaccc1b7::t_5cc575ea59b573 7
+  s_4f7c2bfaccc1b7::t_f3b3379c0dd70b 1-6,8-158
+aws-floci-iam-lab/server.js
+  s_4f7c2bfaccc1b7::t_f3b3379c0dd70b 1-10,12-162
+  s_4f7c2bfaccc1b7::t_5cc575ea59b573 11
+aws-floci-iam-lab/test.sh
+  s_4f7c2bfaccc1b7::t_04c1a8ad47b97f 18
+  s_4f7c2bfaccc1b7::t_e15264e094a797 11,13,15,17
+  s_4f7c2bfaccc1b7::t_5d48d71ffe8b1a 1-10,12,14,16,19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "e3ff65ca2dc4a497e7960f094fdabd1daafd2bf0",
+  "prompts": {},
+  "sessions": {
+    "s_4f7c2bfaccc1b7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9fdf-f9f5-7002-95b1-04561e92dfb7",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
