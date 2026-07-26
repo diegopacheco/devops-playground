@@ -1,0 +1,85 @@
+aws-floci-athena-playground/src/ai.js
+  s_4bc1c7da67de92::t_23363a99226844 1-3,30-38,49-50,57,65-66,68-78,85-86,89-97,99,101-103,105,107-108,110,112-113,115-116,131,135
+  s_4bc1c7da67de92::t_d08cd522742f3a 4-27,29,39-48,51-56,58-64,67,79-84,87-88,98,100,104,106,109,111,114,117-130,132-134
+  s_4bc1c7da67de92::t_1e223777b377ce 28
+aws-floci-athena-playground/public/app.js
+  s_4bc1c7da67de92::t_9cbc6a4a6c75b5 1-48,51-417,419-451
+  s_4bc1c7da67de92::t_b80f2f4277bdff 49-50
+  s_4bc1c7da67de92::t_2e9a6e695520eb 418
+aws-floci-athena-playground/stop.sh
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-2
+  s_4bc1c7da67de92::t_8beac7b1f0c7a9 30
+  s_4bc1c7da67de92::t_b9d511126c7dbe 3-4,9-10,24-28
+  s_4bc1c7da67de92::t_a5c0bff881acd6 11,22-23
+  s_4bc1c7da67de92::t_803030ea558216 12-21
+  s_4bc1c7da67de92::t_046845feb1d57b 5-8,29
+aws-floci-athena-playground/public/styles.css
+  s_4bc1c7da67de92::t_b80f2f4277bdff 26-29
+  s_4bc1c7da67de92::t_9cbc6a4a6c75b5 1-25,30-1444
+aws-floci-athena-playground/podman-compose.yml
+  s_4bc1c7da67de92::t_b53057c441ab9c 5,20
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-4,6,8,11-19,21-29
+  s_4bc1c7da67de92::t_046845feb1d57b 7,9-10
+  s_4bc1c7da67de92::t_37ece23aec8a4c 30-31
+aws-floci-athena-playground/.gitignore
+  s_4bc1c7da67de92::t_35c5d8b7c369c8 1-3
+aws-floci-athena-playground/test.sh
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-2,10-11
+  s_4bc1c7da67de92::t_b9d511126c7dbe 3-4
+  s_4bc1c7da67de92::t_8beac7b1f0c7a9 5-9
+aws-floci-athena-playground/README.md
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-21,23-24,26-34,36-39,41-42,44-82,84-85,89-90,92-99,101-105,109-118,120-130
+  s_4bc1c7da67de92::t_b53057c441ab9c 35,106-107
+  s_4bc1c7da67de92::t_58983bd2d4fc4e 22,25,40,43,83,86-88,91,100,108,119
+aws-floci-athena-playground/Containerfile
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-10
+aws-floci-athena-playground/src/ai-bridge.js
+  s_4bc1c7da67de92::t_d08cd522742f3a 1-53
+aws-floci-athena-playground/package.json
+  s_4bc1c7da67de92::t_23363a99226844 1-15
+aws-floci-athena-playground/src/aws.js
+  s_4bc1c7da67de92::t_8d16ccbeb25f47 37-43,45-56,59,70,75-93,125-130,137-143,188-192
+  s_4bc1c7da67de92::t_23363a99226844 1-36,44,57-58,60-69,71-74,94-124,131-136,144-160,163,185-187,193,195-238
+  s_4bc1c7da67de92::t_b9d511126c7dbe 194
+  s_4bc1c7da67de92::t_7e8e2ffc54adf2 161-162,164-184
+aws-floci-athena-playground/start.sh
+  s_4bc1c7da67de92::t_b53057c441ab9c 11-12,61-62
+  s_4bc1c7da67de92::t_046845feb1d57b 6-10
+  s_4bc1c7da67de92::t_46ed6fd6978c7f 54,68-69
+  s_4bc1c7da67de92::t_803030ea558216 16-18,20-31,34-41
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-2,5,60,63-67,70
+  s_4bc1c7da67de92::t_a5c0bff881acd6 13-15,19,32-33,42-53
+  s_4bc1c7da67de92::t_b9d511126c7dbe 3-4
+  s_4bc1c7da67de92::t_d4cccbfa11d529 55-59
+aws-floci-athena-playground/test/api.test.js
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-19,21-24,26,28,31-32,34-36,38-42,57-64
+  s_4bc1c7da67de92::t_c6ed7be2e38dfb 20,25,27,29-30,43-56
+  s_4bc1c7da67de92::t_b9d511126c7dbe 33,37
+aws-floci-athena-playground/public/index.html
+  s_4bc1c7da67de92::t_439ff59b7ec902 97
+  s_4bc1c7da67de92::t_9cbc6a4a6c75b5 1-89,98-222
+  s_4bc1c7da67de92::t_c6ed7be2e38dfb 90-96
+aws-floci-athena-playground/.containerignore
+  s_4bc1c7da67de92::t_37ece23aec8a4c 5
+  s_4bc1c7da67de92::t_2e9a6e695520eb 1-4
+aws-floci-athena-playground/src/server.js
+  s_4bc1c7da67de92::t_23363a99226844 1-122
+aws-floci-athena-playground/package-lock.json
+  s_4bc1c7da67de92::t_8f8d6fcd923f33 1-456
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "67957cca07f0dce7e3e79b8526da4fcc21701278",
+  "prompts": {},
+  "sessions": {
+    "s_4bc1c7da67de92": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9fe3-cfee-7613-828c-af7d9438996b",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
