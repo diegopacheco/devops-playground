@@ -82,6 +82,21 @@ Logs and metrics share one table and are told apart only by `item_type`, which i
 
 Sentry's first-run wizard is also completed programmatically: it is gated on the `sentry:version-configured` option plus every `FLAG_REQUIRED` option being set, so `complete_setup()` sets them through `sentry django shell` instead of leaving you a form to fill in.
 
+## Prerequisites
+
+Tested on macOS 15 / Apple Silicon with rootless podman. The upstream patches below target that combination specifically; on Linux x86 the stock `install.sh` already works and this POC's app half still applies.
+
+| Requirement | Why |
+| --- | --- |
+| Homebrew | `build.sh` installs bash 5 through it. Sentry's installer needs bash >= 4.4 and macOS ships 3.2. |
+| podman 5.x + podman-compose 1.5+ | The engine and the compose implementation. `podman compose` is deliberately not used — see the patch table. |
+| An existing podman machine | Default name `podman-machine-default`, override with `MACHINE_NAME`. `build.sh` resizes it, it does not create one. |
+| 16 GB free RAM for the machine | The installer hard-fails below 14000 MB on the `feature-complete` profile. |
+| ~35 GB free disk | About 12 GB of images plus about 20 GB of ClickHouse, Kafka and Postgres volumes. |
+| git, python3, curl | Used by the scripts for cloning, parsing podman JSON and health checks. |
+
+Everything else — bash 5, machine sizing, the superuser, the setup wizard and the DSN — the scripts handle.
+
 ## How to run
 
 ```bash
@@ -91,7 +106,7 @@ Sentry's first-run wizard is also completed programmatically: it is gated on the
 ./stop.sh    # tear both down
 ```
 
-`build.sh` is the slow one — it pulls tens of gigabytes of images and runs the full database migration. `start.sh` and `test.sh` take a couple of minutes each. `build.sh` also resizes the podman machine to 16 GB / 6 CPU and installs Homebrew bash if either is below what the installer requires.
+`build.sh` is the slow one — it pulls about 12 GB of images and runs the full database migration. `start.sh` and `test.sh` take a couple of minutes each. `build.sh` also resizes the podman machine to 16 GB / 6 CPU and installs Homebrew bash if either is below what the installer requires.
 
 Sentry UI: <http://localhost:9000> · login `admin@sentry.local` / `sentry-fun-poc`
 
