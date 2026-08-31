@@ -1,0 +1,19 @@
+sentry-fun-poc/README.md
+  s_0040b83c74ab8c::t_163cf5c3181f55 85-99,109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "e3e2fb0096875cec4e0141e9c798a0e4178a3087",
+  "prompts": {},
+  "sessions": {
+    "s_0040b83c74ab8c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7fbde19b-3b3a-471c-964d-10bf543a1061",
+        "model": "claude-opus-5"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
