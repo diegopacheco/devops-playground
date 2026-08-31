@@ -1,0 +1,4 @@
+self-hosted/
+__pycache__/
+*.pyc
+.venv/

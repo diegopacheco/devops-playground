@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Containerfile
+    image: sentry-fun-poc-app:latest
+    container_name: sentry-fun-poc-app
+    environment:
+      SENTRY_DSN: "${SENTRY_DSN}"
+      SENTRY_ENVIRONMENT: "${SENTRY_ENVIRONMENT:-poc}"
+      SENTRY_RELEASE: "${SENTRY_RELEASE:-sentry-fun-poc@1.0.0}"
+      RUNS: "${RUNS:-5}"
+    networks:
+      - sentry
+networks:
+  sentry:
+    external: true
+    name: "${SENTRY_NETWORK:-self-hosted_default}"
