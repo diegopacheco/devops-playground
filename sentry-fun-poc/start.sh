@@ -16,13 +16,13 @@ complete_setup
 export SENTRY_NETWORK="$(sentry_network)"
 export SENTRY_DSN="$(resolve_dsn)"
 
-log "sentry ui       $SENTRY_URL"
-log "sentry login    $SENTRY_EMAIL / $SENTRY_PASSWORD"
 log "app network     $SENTRY_NETWORK"
 log "app dsn         http://***@nginx/${SENTRY_DSN##*/}"
+print_access
 
 log "running the python app"
 podman-compose -f "$ROOT/podman-compose.yml" up --abort-on-container-exit app
 podman-compose -f "$ROOT/podman-compose.yml" down >/dev/null 2>&1 || true
 
-log "done, open $SENTRY_URL to see errors, logs and metrics"
+log "done, errors, logs, metrics and traces are in the ui"
+print_access

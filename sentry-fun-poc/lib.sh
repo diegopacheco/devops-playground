@@ -106,6 +106,19 @@ wait_sentry_ready() {
   log "sentry is healthy on $SENTRY_URL"
 }
 
+print_access() {
+  echo ""
+  echo "  ---------------------------------------------------------------"
+  echo "  sentry ui    $SENTRY_URL/auth/login/sentry/"
+  echo "  user         $SENTRY_EMAIL"
+  echo "  password     $SENTRY_PASSWORD"
+  echo ""
+  echo "  type the http:// yourself, browsers upgrade a bare"
+  echo "  localhost:$SENTRY_PORT to https and this stack has no tls"
+  echo "  ---------------------------------------------------------------"
+  echo ""
+}
+
 ensure_user() {
   local existing
   existing="$(psql_query "select count(*) from auth_user where email = '$SENTRY_EMAIL'")"
@@ -117,10 +130,12 @@ ensure_user() {
   fi
 }
 
+setup_needed() {
+  curl -s -m 10 "$SENTRY_URL/auth/login/sentry/" 2>/dev/null | grep -q '"needsUpgrade":true'
+}
+
 complete_setup() {
-  local configured
-  configured="$(psql_query "select count(*) from sentry_option where key = 'sentry:version-configured'")"
-  if [ "${configured:-0}" != "0" ]; then
+  if ! setup_needed; then
     log "sentry setup already completed"
     return 0
   fi
@@ -140,6 +155,13 @@ for key in options.filter(flag=options.FLAG_REQUIRED):
         print('skipped %s: %s' % (key.name, error))
 options.set('sentry:version-configured', sentry.get_version())
 "
+  local waited=0
+  while setup_needed; do
+    waited=$((waited + 1))
+    [ "$waited" -gt 120 ] && fail "sentry is still serving the setup wizard"
+    sleep 1
+  done
+  log "sentry setup completed"
 }
 
 resolve_dsn() {

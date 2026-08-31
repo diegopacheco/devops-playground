@@ -80,7 +80,7 @@ Logs and metrics share one table and are told apart only by `item_type`, which i
 | `install/dc-detect-version.sh` | podman-compose reads only `--profile` and ignores the `COMPOSE_PROFILES` env var, so every `feature-complete` service is invisible and the install dies on a missing `vroom`. | Pass `--profile` explicitly. |
 | `install/dc-detect-version.sh` | Upstream runs one-off containers with `--in-pod=false` while `up` puts services in a pod; podman refuses cross-pod dependencies (`container dependency … is part of a pod, but container is not`). | Run the whole project pod-free. |
 
-Sentry's first-run wizard is also completed programmatically: it is gated on the `sentry:version-configured` option plus every `FLAG_REQUIRED` option being set, so `complete_setup()` sets them through `sentry django shell` instead of leaving you a form to fill in.
+**The setup wizard is waited on, not just triggered.** `/_health/` returns `200` before the UI is really usable, and on a cold start Sentry can serve its first-run wizard for a while even though the database is fine. `complete_setup()` therefore keys off what the server actually serves — `"needsUpgrade":true` in the page bootstrap — rather than off a database row, sets every `FLAG_REQUIRED` option through `sentry django shell`, and then blocks until the wizard stops being served. Without that wait, `start.sh` can report success while the browser still shows *Welcome to Sentry*.
 
 ## Prerequisites
 
@@ -108,7 +108,9 @@ Everything else — bash 5, machine sizing, the superuser, the setup wizard and 
 
 `build.sh` is the slow one — it pulls about 12 GB of images and runs the full database migration. `start.sh` and `test.sh` take a couple of minutes each. `build.sh` also resizes the podman machine to 16 GB / 6 CPU and installs Homebrew bash if either is below what the installer requires.
 
-Sentry UI: <http://localhost:9000> · login `admin@sentry.local` / `sentry-fun-poc`
+Sentry UI: <http://localhost:9000/auth/login/sentry/> · login `admin@sentry.local` / `sentry-fun-poc`
+
+`start.sh` prints that block when it finishes. Type the `http://` yourself — Chrome and Safari upgrade a bare `localhost:9000` to HTTPS, and this stack terminates plain HTTP only.
 
 Useful knobs, all environment variables:
 
