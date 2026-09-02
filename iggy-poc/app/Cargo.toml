@@ -1,0 +1,25 @@
+[package]
+name = "iggy-poc"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.98"
+
+[lib]
+name = "iggy_poc"
+path = "src/lib.rs"
+
+[[bin]]
+name = "producer"
+path = "src/producer.rs"
+
+[[bin]]
+name = "consumer"
+path = "src/consumer.rs"
+
+[dependencies]
+iggy = "0.10.0"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+futures-util = "0.3"
+
+[profile.release]
+strip = true

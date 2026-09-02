@@ -1,0 +1,10 @@
+FROM docker.io/library/rust:1.98-bookworm AS build
+WORKDIR /src
+COPY Cargo.toml Cargo.lock ./
+COPY src ./src
+RUN cargo build --release --locked
+
+FROM docker.io/library/debian:bookworm-slim
+COPY --from=build /src/target/release/producer /usr/local/bin/producer
+COPY --from=build /src/target/release/consumer /usr/local/bin/consumer
+CMD ["producer"]

@@ -1,0 +1,53 @@
+services:
+  iggy:
+    image: docker.io/apache/iggy:0.8.0
+    container_name: iggy
+    security_opt:
+      - seccomp=unconfined
+      - label=disable
+    environment:
+      IGGY_ROOT_USERNAME: iggy
+      IGGY_ROOT_PASSWORD: iggy
+      IGGY_TCP_ADDRESS: 0.0.0.0:8090
+      IGGY_HTTP_ADDRESS: 0.0.0.0:3000
+      IGGY_QUIC_ENABLED: "false"
+      IGGY_WEBSOCKET_ENABLED: "false"
+    ports:
+      - "8090:8090"
+      - "3000:3000"
+    volumes:
+      - iggy-data:/app/local_data
+
+  ui:
+    image: docker.io/apache/iggy-web-ui:0.3.0
+    container_name: iggy-ui
+    environment:
+      PUBLIC_IGGY_API_URL: http://localhost:3000
+    ports:
+      - "3050:3050"
+    depends_on:
+      - iggy
+
+  consumer:
+    build: ./app
+    image: localhost/iggy-poc:latest
+    container_name: iggy-consumer
+    command: consumer
+    environment:
+      IGGY_CONNECTION_STRING: iggy://iggy:iggy@iggy:8090
+      IGGY_MESSAGE_COUNT: "${IGGY_MESSAGE_COUNT:-20}"
+    depends_on:
+      - iggy
+
+  producer:
+    image: localhost/iggy-poc:latest
+    container_name: iggy-producer
+    command: producer
+    environment:
+      IGGY_CONNECTION_STRING: iggy://iggy:iggy@iggy:8090
+      IGGY_MESSAGE_COUNT: "${IGGY_MESSAGE_COUNT:-20}"
+    depends_on:
+      - iggy
+
+volumes:
+  iggy-data:
