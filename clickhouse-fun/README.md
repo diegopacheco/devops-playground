@@ -138,6 +138,45 @@ rows per metric
 
 The integration part of `test-all.sh` inserts one extra hour of samples (3,050 rows) each time it runs.
 
+## Query ClickHouse in the browser
+
+`start-all.sh` prints a link to ClickHouse's built-in Play UI with the credentials already filled in:
+
+```
+http://localhost:8123/play?user=app&password=app&database=observability
+```
+
+Opening `http://localhost:8123/play` without them fails with `Code: 516 ... Authentication failed`. The empty user field falls back to the `default` user, which this setup does not allow. The user is `app`, the password is `app`, and the database is `observability`.
+
+List all tables in the current database:
+
+```sql
+SHOW TABLES
+```
+
+List all tables in every database, with row counts and size:
+
+```sql
+SELECT database, name, engine, total_rows, formatReadableSize(total_bytes) AS size
+FROM system.tables
+WHERE database NOT IN ('system', 'INFORMATION_SCHEMA', 'information_schema')
+ORDER BY database, name
+```
+
+p95 latency per service:
+
+```sql
+SELECT service, round(quantile(0.95)(value), 2) AS p95_latency_ms
+FROM metrics
+WHERE metric = 'latency_ms'
+GROUP BY service
+ORDER BY p95_latency_ms DESC
+```
+
+![clickhouse play](printscreens/05-clickhouse-play.png)
+
+The Play UI opened from the `start-all.sh` link with `app` / `app` already filled in, listing every non-system table from `system.tables`. The same queries work in `./scripts/sql-console.sh`.
+
 ## Printscreens
 
 ### Overview

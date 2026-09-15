@@ -49,6 +49,7 @@ service_url() {
   port="$(service_port "$1")"
   case "$1" in
     backend) printf "http://localhost:%s/api\n" "$port" ;;
+    clickhouse) printf "http://localhost:%s/play?user=%s&password=%s&database=%s\n" "$port" "$CH_USER" "$CH_PASSWORD" "$CH_DB" ;;
     *) printf "http://localhost:%s\n" "$port" ;;
   esac
 }
