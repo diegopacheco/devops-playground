@@ -8,7 +8,7 @@ require podman-compose
 podman-compose up -d
 wait_port_up "$CLICKHOUSE_PORT" 60 || fail "clickhouse did not open port $CLICKHOUSE_PORT"
 wait_clickhouse 60 || fail "clickhouse did not create the metrics table, see podman logs clickhouse-fun"
-log "clickhouse up on $CLICKHOUSE_PORT"
+log "clickhouse up on $(service_url clickhouse)"
 
 require go
 ( cd "$ROOT/backend" && go build -o "$RUN/backend" . ) || fail "backend build failed"
@@ -17,12 +17,17 @@ PORT="$BACKEND_PORT" CLICKHOUSE_URL="http://localhost:$CLICKHOUSE_PORT" CLICKHOU
   CLICKHOUSE_USER="$CH_USER" CLICKHOUSE_PASSWORD="$CH_PASSWORD" \
   start_bg backend "$ROOT/backend" "$RUN/backend"
 wait_port_up "$BACKEND_PORT" 60 || fail "backend did not open port $BACKEND_PORT, see $LOGS/backend.log"
-log "backend up on $BACKEND_PORT"
+log "backend up on $(service_url backend)"
 
 FRONTEND_PORT="$(service_port frontend)"
 BACKEND_URL="http://localhost:$BACKEND_PORT" \
   start_bg frontend "$ROOT/frontend" npx next dev --port "$FRONTEND_PORT"
 wait_port_up "$FRONTEND_PORT" 60 || fail "frontend did not open port $FRONTEND_PORT, see $LOGS/frontend.log"
-log "frontend up on $FRONTEND_PORT"
+log "frontend up on $(service_url frontend)"
 
 "$SCRIPTS/status.sh"
+
+log "links"
+for name in $(service_names); do
+  printf "%-14s %s\n" "$name" "$(service_url "$name")"
+done

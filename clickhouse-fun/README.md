@@ -169,7 +169,7 @@ All scripts live in `scripts/` and run from any directory of the repository.
 | Script | What it does |
 |---|---|
 | `./scripts/setup.sh` | Installs dependencies and prepares the app |
-| `./scripts/start-all.sh` | Starts every service and waits for its port |
+| `./scripts/start-all.sh` | Starts every service and prints the full link of each one |
 | `./scripts/status.sh` | Shows every service port as UP or DOWN |
 | `./scripts/test-all.sh` | Runs every test suite |
 | `./scripts/ui.sh` | Opens the UI in the browser |

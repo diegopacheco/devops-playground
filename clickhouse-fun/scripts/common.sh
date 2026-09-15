@@ -44,6 +44,15 @@ service_port() {
   printf "%s\n" "$SERVICES" | sed '/^$/d' | awk -F= -v n="$1" '$1==n{print $2; exit}'
 }
 
+service_url() {
+  local port
+  port="$(service_port "$1")"
+  case "$1" in
+    backend) printf "http://localhost:%s/api\n" "$port" ;;
+    *) printf "http://localhost:%s\n" "$port" ;;
+  esac
+}
+
 port_pid() {
   lsof -ti "tcp:$1" -sTCP:LISTEN 2>/dev/null | head -1 || true
 }
