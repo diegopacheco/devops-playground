@@ -1,0 +1,27 @@
+FROM docker.io/library/postgres:18-bookworm AS build
+
+ARG LEAD_COMMIT=bd95c7e51b6afce81396790852ee2f2c169570ad
+ARG PGRX_VERSION=0.19.1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      build-essential clang libclang-dev pkg-config curl ca-certificates git \
+      postgresql-server-dev-18 \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV RUSTUP_HOME=/opt/rustup CARGO_HOME=/opt/cargo PATH=/opt/cargo/bin:$PATH
+RUN curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain 1.96.0
+
+WORKDIR /src
+RUN git init -q lead && cd lead \
+    && git remote add origin https://github.com/planetscale/lead \
+    && git fetch -q --depth 1 origin "$LEAD_COMMIT" \
+    && git checkout -q FETCH_HEAD
+
+WORKDIR /src/lead
+RUN cargo install cargo-pgrx --version "$PGRX_VERSION" --locked
+RUN cargo pgrx init --pg18 /usr/lib/postgresql/18/bin/pg_config
+RUN cargo pgrx package --package tin --no-default-features --features pg18 \
+      --pg-config /usr/lib/postgresql/18/bin/pg_config
+
+FROM docker.io/library/postgres:18-bookworm
+COPY --from=build /src/lead/target/release/tin-pg18/usr/ /usr/

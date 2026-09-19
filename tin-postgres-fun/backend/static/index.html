@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TIN Search</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --card: #ffffff; --ink: #1d1d1f; --muted: #6b6b70; --line: #e4e4e0;
+    --accent: #3b5bdb; --accent-soft: #e7ecff; --mark: #ffe8a3; --bad: #c92a2a; --bad-soft: #fff0f0;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 -apple-system, system-ui, "Segoe UI", sans-serif; }
+  header { padding: 28px 16px 8px; max-width: 1040px; margin: 0 auto; }
+  header h1 { margin: 0; font-size: 26px; letter-spacing: -0.02em; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  main { max-width: 1040px; margin: 0 auto; padding: 8px 16px 40px; display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .card h2 { margin: 0 0 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  form.search { display: flex; gap: 8px; }
+  input, textarea { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); }
+  input.q { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  textarea { min-height: 90px; resize: vertical; }
+  button { font: inherit; padding: 10px 16px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; white-space: nowrap; }
+  button:hover { filter: brightness(1.08); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .chip { background: var(--accent-soft); color: var(--accent); padding: 5px 10px; font-size: 13px; border-radius: 999px; font-family: ui-monospace, Menlo, monospace; }
+  .chip span { color: var(--muted); font-family: -apple-system, system-ui, sans-serif; margin-left: 6px; }
+  .meta { margin: 14px 0 6px; color: var(--muted); font-size: 14px; }
+  .error { background: var(--bad-soft); color: var(--bad); padding: 10px 12px; border-radius: 8px; margin-top: 12px; font-family: ui-monospace, Menlo, monospace; font-size: 13px; white-space: pre-wrap; }
+  .result { border-top: 1px solid var(--line); padding: 12px 0; }
+  .result:first-of-type { border-top: 0; }
+  .result h3 { margin: 0; font-size: 16px; }
+  .result .tag { font-size: 12px; color: var(--muted); margin-left: 8px; font-weight: normal; }
+  .result p { margin: 6px 0; color: #3a3a3f; }
+  mark { background: var(--mark); padding: 0 2px; border-radius: 3px; }
+  .bar { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); font-family: ui-monospace, Menlo, monospace; }
+  .bar div { flex: 0 0 140px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar div i { display: block; height: 100%; background: var(--accent); }
+  aside { display: flex; flex-direction: column; gap: 20px; }
+  aside form { display: flex; flex-direction: column; gap: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th, td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); font-family: ui-monospace, Menlo, monospace; }
+  th { color: var(--muted); font-weight: normal; }
+  .ok { color: #2b8a3e; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>TIN Search</h1>
+  <p>Full-text search inside Postgres with the <code>tin</code> index and TINQL, served locally by PlanetScale Lead.</p>
+</header>
+<main>
+  <section class="card">
+    <form class="search" id="search">
+      <input class="q" id="q" autocomplete="off" value="java AND NOT [island coffee indonesia]">
+      <button>Search</button>
+    </form>
+    <div class="chips" id="chips"></div>
+    <div id="out"></div>
+  </section>
+  <aside>
+    <section class="card">
+      <h2>Tokenizer</h2>
+      <form id="tok">
+        <input id="tokText" value="Jalapeño Crème brûlée 😀">
+        <button>Tokenize</button>
+      </form>
+      <div id="tokOut"></div>
+    </section>
+    <section class="card">
+      <h2>Add article</h2>
+      <form id="add">
+        <input id="title" placeholder="Title">
+        <input id="category" placeholder="Category">
+        <textarea id="body" placeholder="Body text"></textarea>
+        <button>Add</button>
+      </form>
+      <div id="addOut"></div>
+    </section>
+  </aside>
+</main>
+<script>
+const presets = [
+  ['java AND NOT [island coffee indonesia]', 'boolean'],
+  ['"virtual threads"', 'phrase'],
+  ['hops NEAR/5 yeast', 'proximity'],
+  ['methods THEN/20 results', 'ordered'],
+  ['brew*', 'wildcard'],
+  ['vulnerabilty~2', 'fuzzy'],
+  ['jalapeno', 'accent folding'],
+  ['security NEAR/5 [threat vulnerability risk] NOT ENCLOSES [buy pricing discount]', 'span filter'],
+  ['AT LEAST 2 OF ["machine learning" "neural network" "training data" "model accuracy"]', 'coverage'],
+  ['😀', 'emoji']
+];
+
+const $ = id => document.getElementById(id);
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function marked(s) {
+  return esc(s).replace(/⟦/g, '<mark>').replace(/⟧/g, '</mark>');
+}
+
+async function call(url, opts) {
+  const res = await fetch(url, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+async function search(q) {
+  $('q').value = q;
+  const t0 = performance.now();
+  try {
+    const data = await call('/api/search?limit=10&q=' + encodeURIComponent(q));
+    const ms = (performance.now() - t0).toFixed(0);
+    const rows = data.results.map(r => `
+      <div class="result">
+        <h3>${esc(r.title)}<span class="tag">#${r.id} ${esc(r.category)}</span></h3>
+        <p>${marked(r.snippet)}</p>
+        <div class="bar"><div><i style="width:${(r.relative * 100).toFixed(0)}%"></i></div>bm25 ${r.score.toFixed(3)} / ${(r.relative * 100).toFixed(0)}%</div>
+      </div>`).join('');
+    $('out').innerHTML = `<div class="meta">${data.total} matching articles, top ${data.results.length} by BM25, ${ms} ms</div>` + rows;
+  } catch (e) {
+    $('out').innerHTML = `<div class="error">${esc(e.message)}</div>`;
+  }
+}
+
+$('chips').innerHTML = presets.map(([q, label], i) =>
+  `<button class="chip" data-i="${i}">${esc(q.length > 38 ? q.slice(0, 36) + '...' : q)}<span>${label}</span></button>`).join('');
+$('chips').addEventListener('click', e => {
+  const b = e.target.closest('.chip');
+  if (b) search(presets[b.dataset.i][0]);
+});
+
+$('search').addEventListener('submit', e => { e.preventDefault(); search($('q').value); });
+
+$('tok').addEventListener('submit', async e => {
+  e.preventDefault();
+  try {
+    const data = await call('/api/tokenize?text=' + encodeURIComponent($('tokText').value));
+    const cols = data.tokens.length ? Object.keys(data.tokens[0]) : [];
+    $('tokOut').innerHTML = `<table><tr>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr>` +
+      data.tokens.map(t => `<tr>${cols.map(c => `<td>${esc(t[c])}</td>`).join('')}</tr>`).join('') + '</table>';
+  } catch (err) {
+    $('tokOut').innerHTML = `<div class="error">${esc(err.message)}</div>`;
+  }
+});
+
+$('add').addEventListener('submit', async e => {
+  e.preventDefault();
+  try {
+    const data = await call('/api/articles', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({title: $('title').value, category: $('category').value, body: $('body').value})
+    });
+    $('addOut').innerHTML = `<p class="ok">Added article #${data.id}, it is searchable right away.</p>`;
+    $('add').reset();
+  } catch (err) {
+    $('addOut').innerHTML = `<div class="error">${esc(err.message)}</div>`;
+  }
+});
+
+search($('q').value);
+</script>
+</body>
+</html>

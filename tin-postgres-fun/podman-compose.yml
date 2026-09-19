@@ -1,0 +1,18 @@
+services:
+  postgres:
+    build:
+      context: ./postgres
+      dockerfile: Containerfile
+    image: localhost/tin-postgres-lead:18
+    container_name: tin-postgres-fun
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    environment:
+      POSTGRES_DB: search
+      POSTGRES_USER: tin
+      POSTGRES_PASSWORD: tin
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - tin-data:/var/lib/postgresql
+volumes:
+  tin-data:

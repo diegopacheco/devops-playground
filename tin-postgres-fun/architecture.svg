@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" width="1000" height="440">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;display=swap');
+      text { font-family: 'Caveat', 'Comic Sans MS', cursive; fill: #1e1e1e; }
+      .t { font-size: 28px; font-weight: 700; }
+      .s { font-size: 20px; }
+      .l { font-size: 19px; fill: #444; }
+    </style>
+    <filter id="wobble">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" scale="4"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1e1e1e"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="440" fill="#ffffff"/>
+
+  <g filter="url(#wobble)" stroke="#1e1e1e" stroke-width="2.2">
+    <rect x="30" y="150" width="190" height="120" rx="14" fill="#dbe4ff"/>
+    <rect x="310" y="150" width="220" height="120" rx="14" fill="#d3f9d8"/>
+    <rect x="620" y="60" width="350" height="340" rx="16" fill="#fff4e6" stroke-dasharray="8 6"/>
+    <rect x="650" y="110" width="290" height="80" rx="12" fill="#ffe3e3"/>
+    <rect x="650" y="215" width="290" height="70" rx="12" fill="#e5dbff"/>
+    <rect x="650" y="305" width="290" height="70" rx="12" fill="#fff9db"/>
+  </g>
+
+  <text class="t" x="125" y="200" text-anchor="middle">Browser</text>
+  <text class="s" x="125" y="228" text-anchor="middle">index.html</text>
+  <text class="s" x="125" y="252" text-anchor="middle">search, tokenize, add</text>
+
+  <text class="t" x="420" y="195" text-anchor="middle">Go backend :8095</text>
+  <text class="s" x="420" y="223" text-anchor="middle">net/http + pgx</text>
+  <text class="s" x="420" y="247" text-anchor="middle">/api/search /count /tokenize</text>
+
+  <text class="t" x="795" y="92" text-anchor="middle">Postgres 18 :5432 (podman)</text>
+  <text class="t" x="795" y="145" text-anchor="middle">tin extension (Lead)</text>
+  <text class="s" x="795" y="172" text-anchor="middle">==&gt; TINQL, tin.score, tin.highlight</text>
+  <text class="t" x="795" y="250" text-anchor="middle">articles_body_tin</text>
+  <text class="s" x="795" y="273" text-anchor="middle">USING tin (body)</text>
+  <text class="t" x="795" y="340" text-anchor="middle">articles heap</text>
+  <text class="s" x="795" y="363" text-anchor="middle">rechecked per visible row (MVCC)</text>
+
+  <g stroke="#1e1e1e" stroke-width="2.2" fill="none" marker-end="url(#arrow)">
+    <path d="M222,195 C255,188 280,188 306,195"/>
+    <path d="M306,230 C280,238 255,238 224,230"/>
+    <path d="M533,190 C580,170 610,155 646,150"/>
+    <path d="M795,192 L795,211"/>
+    <path d="M795,287 L795,301"/>
+  </g>
+  <text class="l" x="264" y="178" text-anchor="middle">GET /api</text>
+  <text class="l" x="264" y="262" text-anchor="middle">JSON</text>
+  <text class="l" x="585" y="148" text-anchor="middle">SQL</text>
+</svg>
