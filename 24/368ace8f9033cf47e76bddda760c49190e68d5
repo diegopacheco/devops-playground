@@ -1,0 +1,74 @@
+tin-postgres-fun/backend/api_test.go
+  s_a275c52b6507a0::t_0262b210b9e017 1-108
+tin-postgres-fun/postgres/init.sql
+  s_a275c52b6507a0::t_efe32e151339a1 30
+  s_a275c52b6507a0::t_36d94c34b24c75 1-29,31-42
+tin-postgres-fun/.run/logs/image-build.log
+  s_a275c52b6507a0::t_eb9ed1e4da2377 1144
+  s_a275c52b6507a0::t_c70cf8aeee1618 1141-1143
+  s_a275c52b6507a0::t_80b091eb931cb5 1145-1147
+  s_a275c52b6507a0::t_91a8218f31e4eb 1-1140,1148-1388
+tin-postgres-fun/backend/go.mod
+  s_a275c52b6507a0::t_0fdfb01c813c78 5-6,10-11
+  s_a275c52b6507a0::t_8fd530ebb64e4f 1-4,7-9,12-13
+tin-postgres-fun/scripts/status.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-14
+tin-postgres-fun/backend/main.go
+  s_a275c52b6507a0::t_5d75ef295d3035 1-35
+tin-postgres-fun/scripts/ports.env
+  s_a275c52b6507a0::t_8fd530ebb64e4f 1-2
+tin-postgres-fun/backend/api.go
+  s_a275c52b6507a0::t_eb9ed1e4da2377 20
+  s_a275c52b6507a0::t_d3fb52034920a8 1-19,21-154
+tin-postgres-fun/README.md
+  s_a275c52b6507a0::t_5aaeb12dbe5893 1-146
+tin-postgres-fun/podman-compose.yml
+  s_a275c52b6507a0::t_8fd530ebb64e4f 1-18
+tin-postgres-fun/scripts/setup.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-19
+tin-postgres-fun/scripts/ui.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-12
+tin-postgres-fun/scripts/stop-all.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-17
+tin-postgres-fun/.run/logs/backend.log
+  s_a275c52b6507a0::t_31c135aeef3e1b 1
+tin-postgres-fun/scripts/sql-console.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-7
+tin-postgres-fun/postgres/Containerfile
+  s_a275c52b6507a0::t_7ac8c1d9402327 1-27
+tin-postgres-fun/scripts/start-all.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-30
+tin-postgres-fun/scripts/common.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-141
+tin-postgres-fun/backend/store.go
+  s_a275c52b6507a0::t_eb9ed1e4da2377 64
+  s_a275c52b6507a0::t_c89716fb1760f6 1-30,36-43,45,47-48,56-63,65-83
+  s_a275c52b6507a0::t_31c135aeef3e1b 31-35,44,46,49-55
+tin-postgres-fun/backend/static/index.html
+  s_a275c52b6507a0::t_1f23299e41b871 1-172
+tin-postgres-fun/backend/store_test.go
+  s_a275c52b6507a0::t_696a64a4d7ce57 1-189
+  s_a275c52b6507a0::t_239d9e0e6b45c9 190-224
+tin-postgres-fun/architecture.svg
+  s_a275c52b6507a0::t_ecc5bd2cb476a5 1-54
+tin-postgres-fun/scripts/test-all.sh
+  s_a275c52b6507a0::t_45880b49a15b5f 1-29
+tin-postgres-fun/backend/go.sum
+  s_a275c52b6507a0::t_e46f29d960184c 1-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "24368ace8f9033cf47e76bddda760c49190e68d5",
+  "prompts": {},
+  "sessions": {
+    "s_a275c52b6507a0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20c03293-9740-47b3-bb2b-80741f79862c",
+        "model": "unknown"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
