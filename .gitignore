@@ -45,3 +45,23 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+*.jar
+*.war
+.gradle/
+.bsp/
+.metals/
+.bloop/
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+.pytest_cache/
+node_modules/
+*.o
+*.so
+*.dylib
+*.out
+!gradle-wrapper.jar
+!maven-wrapper.jar
+.scala-build/
